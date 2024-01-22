@@ -1,0 +1,13 @@
+-1 in binary system 11111111 in 1 byte
+-1 in char size (2 byte) 11111111_11111111
+when converting char to int, it is expanded without changing the value
+
+-1 to byte size 11111111
+in char size 11111111_11111111
+int contains size 2*char.size that why convert char to int no change  11111111_11111111
+
+(int)(char)(byte)-1=2^15 + 2^14 + 2^13 + 2^12 + 2^11 + 2^10 + 2^9 + 2^8 + 2^7 + 2^6 + 2^5 + 2^4 + 2^3 + 2^2 + 2^1 + 2^0=
+1 + 2 + 4 + 8 + 16 + 32 + 64 + 128 + 256 + 512 + 1024 + 2048 + 4096 + 8192 + 16384 + 32768 = 65535
+
+byte может принять в себя число -1, при приведении к типу char он будет равен символу с кодом 65535
+но так как char приводится к int , а int принимает только числовые значения , int принимает в себя номер символа 65535

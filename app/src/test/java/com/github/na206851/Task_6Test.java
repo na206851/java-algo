@@ -140,6 +140,27 @@ class Task_6Test {
     }
 
     @Test
+    public void expressionG() {
+        int a1 = Integer.parseInt("101111", 2);
+        int n1 = 3;
+        int expected1 = Integer.parseInt("111", 2);
+        int actual1 = new Task_6().expressionG(a1, n1);
+        Assertions.assertEquals(expected1, actual1);
+
+        int a2 = Integer.parseInt("101", 2);
+        int n2 = 2;
+        int expected2 = Integer.parseInt("01", 2);
+        int actual2 = new Task_6().expressionG(a2, n2);
+        Assertions.assertEquals(expected2, actual2);
+
+        int a3 = Integer.parseInt("0101", 2);
+        int n3 = 3;
+        int expected3 = Integer.parseInt("101", 2);
+        int actual3 = new Task_6().expressionG(a3, n3);
+        Assertions.assertEquals(expected3, actual3);
+    }
+
+    @Test
     public void expressionH() {
         int a1 = Integer.parseInt("101", 2);
         int n1 = 1;
@@ -157,6 +178,24 @@ class Task_6Test {
         int n3 = 1;
         int expected3 = Integer.parseInt("1", 2);
         int actual3 = new Task_6().expressionH(a3, n3);
+        Assertions.assertEquals(expected3, actual3);
+    }
+
+    @Test
+    public void expressionI() {
+        byte a1 = 4;
+        String expected1 = Integer.toBinaryString(a1);
+        String actual1 = new Task_6().expressionI(a1);
+        Assertions.assertEquals(expected1, actual1);
+
+        byte a2 = 127;
+        String expected2 = Integer.toBinaryString(a2);
+        String actual2 = new Task_6().expressionI(a2);
+        Assertions.assertEquals(expected2, actual2);
+
+        byte a3 = 1;
+        String expected3 = Integer.toBinaryString(a3);
+        String actual3 = new Task_6().expressionI(a3);
         Assertions.assertEquals(expected3, actual3);
     }
 }

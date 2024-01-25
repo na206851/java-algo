@@ -13,11 +13,8 @@ public class Task_6 {
     }
 
     public int expressionC(int a, int n) {
-        return a & createMask(n);
-    }
-
-    private int createMask(int n) {
-        return -1 << n;
+        int mask = -1 << n;
+        return a & mask;
     }
 
     public int expressionD(int a, int n) {

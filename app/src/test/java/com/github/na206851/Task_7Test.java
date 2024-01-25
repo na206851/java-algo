@@ -46,14 +46,19 @@ class Task_7Test {
         int n1 = Integer.parseInt("101", 2);
         int m1 = Integer.parseInt("111", 2);
         int[] expected1 = new int[]{Integer.parseInt("111", 2), Integer.parseInt("101", 2)};
-        int[] actual1 = new Task_7().binMethod1SwapDigits(n1, m1);
+        int[] actual1 = new Task_7().binMethodSwapDigits1(n1, m1);
         Assertions.assertArrayEquals(expected1, actual1);
 
         int n2 = Integer.parseInt("1011", 2);
         int m2 = Integer.parseInt("1101", 2);
         int[] expected2 = new int[]{Integer.parseInt("1101", 2), Integer.parseInt("1011", 2)};
-        int[] actual2 = new Task_7().binMethod1SwapDigits(n2, m2);
+        int[] actual2 = new Task_7().binMethodSwapDigits1(n2, m2);
         Assertions.assertArrayEquals(expected2, actual2);
-    }
 
+        int n3 = Integer.parseInt("111", 2);
+        int m3 = Integer.parseInt("000", 2);
+        int[] expected3 = new int[]{Integer.parseInt("000", 2), Integer.parseInt("111", 2)};
+        int[] actual3 = new Task_7().binMethodSwapDigits1(n3, m3);
+        Assertions.assertArrayEquals(expected3, actual3);
+    }
 }

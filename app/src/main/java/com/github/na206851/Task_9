@@ -1,4 +1,4 @@
-will next statements compile?
+Will next statements compile?
 1) byte b = 100 ?
 2) byte b = 100L ?
 3) int i = 100L ?

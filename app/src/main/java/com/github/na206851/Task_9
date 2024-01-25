@@ -1,0 +1,14 @@
+Will next statements compile?
+1) byte b = 100 ?
+2) byte b = 100L ?
+3) int i = 100L ?
+if not, write how to fix it
+
+Solution
+1) byte b=100; byte range -128..127 . byte contains 100
+
+2) byte b=100L; L - type long. long size 64 bit , byte size 8 bit.
+byte b = (byte) 100L; for correct record, need explicit type cast
+
+3) int i=100L; L - type long. long size 64 bit , int size 32 bit.
+int i = (int) 100L; for correct record, need explicit type cast

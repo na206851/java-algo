@@ -42,7 +42,7 @@ class Task_7Test {
     }
 
     @Test
-    public void binMethodSwapDigits() {
+    public void binMethodSwapDigits1() {
         int n1 = Integer.parseInt("101", 2);
         int m1 = Integer.parseInt("111", 2);
         int[] expected1 = new int[]{Integer.parseInt("111", 2), Integer.parseInt("101", 2)};
@@ -73,7 +73,7 @@ class Task_7Test {
         int n2 = Integer.parseInt("101", 2);
         int m2 = Integer.parseInt("011", 2);
         int[] expected2 = new int[]{m2, n2};
-        int[] actual2 = new Task_7().arithmeticMethodSwapDigits2(n2, m2);
+        int[] actual2 = new Task_7().binMethodSwapDigits2(n2, m2);
         Assertions.assertArrayEquals(expected2, actual2);
 
         int n3 = Integer.parseInt("001", 2);

@@ -1,10 +1,13 @@
--1 in binary system 11111111 in 1 byte
--1 in char size (2 byte) 11111111_11111111
-when converting char to int, it is expanded without changing the value
 
--1 to byte size 11111111
-in char size 11111111_11111111
-int contains size 2*char.size that why convert char to int no change  11111111_11111111
+-1 in binary system 11111111_11111111_11111111_11111111 (int) - implicit casting then
+casting to a byte type, the most significant bits are discarded because they out of 1 byte size. num negative
+
+11111111 in char size (2 byte) 11111111_11111111
+first char is cast to int 11111111_11111111_11111111_11111111 then the part that is not included in the size of
+2 bytes is discarded
+
+since сhar only accepts positive numbers it goes to int without changes. The result number
+00000000_00000000_11111111_11111111;
 
 (int)(char)(byte)-1=2^15 + 2^14 + 2^13 + 2^12 + 2^11 + 2^10 + 2^9 + 2^8 + 2^7 + 2^6 + 2^5 + 2^4 + 2^3 + 2^2 + 2^1 + 2^0=
 1 + 2 + 4 + 8 + 16 + 32 + 64 + 128 + 256 + 512 + 1024 + 2048 + 4096 + 8192 + 16384 + 32768 = 65535

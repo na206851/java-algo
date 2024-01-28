@@ -7,17 +7,15 @@ class Task_6Test {
 
     @Test
     public void expressionA() {
-        Task_6 test = new Task_6();
-
-        int actual1 = test.expressionA(2);
         int expected1 = 4;
+        int actual1 = new Task_6().expressionA(2);
         Assertions.assertEquals(expected1, actual1);
 
-        int actual2 = test.expressionA(0);
         int expected2 = 1;
+        int actual2 = new Task_6().expressionA(0);
         Assertions.assertEquals(expected2, actual2);
 
-        int actual3 = test.expressionA(1);
+        int actual3 = new Task_6().expressionA(1);
         int expected3 = 2;
         Assertions.assertEquals(expected3, actual3);
     }

@@ -1,12 +1,6 @@
 package com.github.na206851;
 
-import java.util.Arrays;
-
 public class Task_7 {
-    public static void main(String[] args) {
-        Task_7 test = new Task_7();
-        System.out.println(Arrays.toString(test.binMethodSwapDigits2(Integer.parseInt("111", 2), Integer.parseInt("001", 2))));
-    }
 
     public int[] arithmeticMethodSwapDigits1(int n, int m) {
         n = n + m;
@@ -30,9 +24,14 @@ public class Task_7 {
     }
 
     public int[] binMethodSwapDigits2(int n, int m) {
-        n = (n & m) + (n | m);
-        m = n + (~m) + 1;
-        n = n + (~m) + 1;
+        n = xor(n, m);
+        m = xor(n, m);
+        n = xor(n, m);
         return new int[]{n, m};
+    }
+
+    private int xor(int n, int m) {
+        return (n & ~m) | (~n & m);
+
     }
 }

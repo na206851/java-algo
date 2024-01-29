@@ -6,4 +6,4 @@ Type cast less to more happens implicity because the smaller lies within the ran
     example: byte 00000101(2) -> short 00000000_00000101(2)
 
 When casting from higher to lower types, the most significant bits are discarded, so the number is lost
-    example: int 1_00000000_00000000(2) -> short 00000000_00000000(2)
+    example: int 1_00000000_00000001(2) -> short 00000000_00000001(2)

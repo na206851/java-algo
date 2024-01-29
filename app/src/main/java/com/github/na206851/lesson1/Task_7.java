@@ -1,4 +1,4 @@
-package com.github.na206851;
+package com.github.na206851.lesson1;
 
 public class Task_7 {
 
@@ -32,6 +32,5 @@ public class Task_7 {
 
     private int xor(int n, int m) {
         return (n & ~m) | (~n & m);
-
     }
 }

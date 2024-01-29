@@ -1,4 +1,4 @@
-package com.github.na206851;
+package com.github.na206851.lesson1;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

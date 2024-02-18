@@ -27,14 +27,14 @@ public class DynamicArrayTest {
     }
 
 
-//    @Test
-//    void getFromEmptyList() {
-//        List<Integer> jdkList = new ArrayList<>();
-//        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> jdkList.get(0));
-//
-//        List<Integer> myList = new DynamicArray<>();
-//        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> myList.get(0));
-//    }
+    @Test
+    void getFromEmptyList() { //не работает посмотреть свой метод
+        List<Integer> jdkList = new ArrayList<>();
+        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> jdkList.get(0));
+
+        List<Integer> myList = new DynamicArray<>();
+        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> myList.get(0));
+    }
 
     @Test
     void getFromNonEmptyList() {        //работает !

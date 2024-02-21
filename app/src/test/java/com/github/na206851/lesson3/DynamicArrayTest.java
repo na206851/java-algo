@@ -52,6 +52,14 @@ public class DynamicArrayTest {
         Assertions.assertEquals(2, myList.get(1));
     }
 
+    @Test
+    void testForToArrayMethod() {
+        List<Integer> jdkList = new ArrayList<>();
+        List<Integer> myList = new DynamicArray<>();
+
+        Assertions.assertArrayEquals(jdkList.toArray(), myList.toArray());
+    }
+
 //    @Test
 //    void concuredArrayTest() {      //иттерируемся и удаляем элементы , почитать про исключение concurrent nodification exception
 //        List<String> jdkList = new ArrayList<>();

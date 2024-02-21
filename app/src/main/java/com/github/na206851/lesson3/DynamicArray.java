@@ -12,12 +12,12 @@ public class DynamicArray<E> implements List<E> {
 
     @Override
     public int size() {
-        return point;
+        return this.point;
     }
 
     @Override
     public boolean isEmpty() {
-        return size() == 0;
+        return this.size() == 0;
     }
 
     @Override
@@ -99,15 +99,12 @@ public class DynamicArray<E> implements List<E> {
     }
 
     @Override
-    public E get(int index) {                   //пересмотреть метод, добавить правильную работу исключения
-        try {
-            if (index < size()) {
-                return (E) ArrList[index];
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println(e);
+    public E get(int index) {
+        if (index >= point || index < 0) {
+            throw new IndexOutOfBoundsException();
         }
-        return null;
+
+        return (E) ArrList[index];
     }
 
     @Override
@@ -117,14 +114,15 @@ public class DynamicArray<E> implements List<E> {
 
     @Override
     public void add(int index, E element) { //сделать так чтобы все работало через исключения блоки try catch
-        if (point == ArrList.length) {
-            increaseInSize();
-        } else if (index > size()) {
-            System.out.println("IndexOutOfBoundsException");
-            return;
+        try {
+            if (point == ArrList.length) {
+                increaseInSize();
+            }
+        } catch (RuntimeException E) {
+            throw new RuntimeException("runtime exception");
+        } finally {
+            ArrList[index] = element;
         }
-        ArrList[index] = element;
-
     }
 
     @Override

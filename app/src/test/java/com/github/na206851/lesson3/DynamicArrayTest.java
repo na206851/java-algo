@@ -28,7 +28,7 @@ public class DynamicArrayTest {
 
 
     @Test
-    void getFromEmptyList() { //не работает посмотреть свой метод
+    void getFromEmptyList() {
         List<Integer> jdkList = new ArrayList<>();
         Assertions.assertThrows(IndexOutOfBoundsException.class, () -> jdkList.get(0));
 
@@ -37,7 +37,7 @@ public class DynamicArrayTest {
     }
 
     @Test
-    void getFromNonEmptyList() {        //работает !
+    void getFromNonEmptyList() {
         List<Integer> jdkList = new ArrayList<>();
         jdkList.add(1);
         Assertions.assertEquals(1, jdkList.get(0));

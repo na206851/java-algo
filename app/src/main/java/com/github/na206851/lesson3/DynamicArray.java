@@ -47,10 +47,15 @@ public class DynamicArray<E> implements List<E> {
 
     @Override
     public boolean add(E e) {           //здесь посмотреть чек лист , если нужно добавить исключение
-        if (point > 0 && size() == ArrList.length) {
-            increaseInSize();
+        try {
+            if (point > 0 && size() == ArrList.length) {
+                increaseInSize();
+            }
+        } catch (RuntimeException E) {
+            throw new IndexOutOfBoundsException();
+        } finally {
+            ArrList[point++] = e;
         }
-        ArrList[point++] = e;
         return true;
     }
 

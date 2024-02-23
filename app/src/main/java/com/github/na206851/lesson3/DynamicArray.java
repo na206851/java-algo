@@ -5,7 +5,8 @@ import java.util.*;
 
 public class DynamicArray<E> implements List<E> {
 
-    private int defaultSize = 10;
+    private final static int defaultSize = 10;
+
     private Object[] ArrList = new Object[defaultSize];
     private int point = 0;
 

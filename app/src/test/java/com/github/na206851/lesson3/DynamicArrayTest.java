@@ -23,12 +23,15 @@ public class DynamicArrayTest {
 
 
     @Test
-    void getFromEmptyList() {
-        List<Integer> jdkList = new ArrayList<>();
-        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> jdkList.get(0));
-
-        List<Integer> myList = new DynamicArray<>();
-        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> myList.get(0));
+    void sizeTest() {
+        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
+            list.add(1);
+            assertEquals(1, list.size());
+            list.add(2);
+            assertEquals(2, list.size());
+        };
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
     }
 
     @Test

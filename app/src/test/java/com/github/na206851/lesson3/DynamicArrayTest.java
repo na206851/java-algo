@@ -10,20 +10,15 @@ import java.util.List;
 public class DynamicArrayTest {
 
     @Test
-    public void exampleTestGetMethod() {
-        List<Integer> jdkList = new ArrayList<>();
-        jdkList.add(1);
-        Assertions.assertEquals(1, jdkList.get(0));
-
-        jdkList.add(2);
-        Assertions.assertEquals(1, jdkList.get(0));
-
-        List<String> jdkList1 = new ArrayList<>();
-        jdkList1.add("first");
-        Assertions.assertEquals("first", jdkList1.get(0));
-
-        jdkList1.add("first");
-        Assertions.assertEquals("first", jdkList1.get(0));
+    void getFromNonEmptyList() {
+        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
+            list.add(1);
+            assertEquals(1, list.get(0));
+            list.add(2);
+            assertEquals(2, list.get(1));
+        };
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
     }
 
 

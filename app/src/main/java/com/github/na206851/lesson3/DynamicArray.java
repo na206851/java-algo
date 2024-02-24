@@ -126,6 +126,9 @@ public class DynamicArray<E> implements List<E> {
 
     @Override
     public E set(int index, E element) {
+        if (index < ArrList.length && index >= 0) {
+            ArrList[index] = element;
+        }
         return null;
     }
 

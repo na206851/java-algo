@@ -132,11 +132,23 @@ public class DynamicArray<E> implements List<E> {
 
     @Override
     public E remove(int index) {
-        for (int i = index; i < size() - 1; i++) {
-            ArrList[i] = ArrList[i + 1];
+        Object[] tmp = new Object[ArrList.length];
+        int i = 0;
+        int j = index + 1;
+        int count = 0;
+        while (i < index) {
+            tmp[count++] = ArrList[i];
+            i++;
         }
-        ArrList[index - 1] = null;
-        return (E) ArrList;
+        while (j < ArrList.length - 1) {
+            tmp[count++] = ArrList[j];
+            j++;
+        }
+        ArrList[size() - 1] = null;
+        System.arraycopy(tmp, 0, ArrList, 0, point - 1);
+        point = point - 1;
+        return (E) ArrList[index];
+
     }
 
     @Override

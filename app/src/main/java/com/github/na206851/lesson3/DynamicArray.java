@@ -68,7 +68,12 @@ public class DynamicArray<E> implements List<E> {
 
     @Override
     public boolean remove(Object o) {
-
+        for (int i = 0; i < ArrList.length; i++) {
+            if (ArrList[i].equals(o)) {
+                remove(i);
+                return true;
+            }
+        }
         return false;
     }
 

@@ -195,4 +195,10 @@ public class DynamicArray<E> implements List<E> {
     public List<E> subList(int fromIndex, int toIndex) {
         return null;
     }
+
+    @Override
+    public String toString() {
+        ArrList = Arrays.copyOf(ArrList, point);
+        return Arrays.toString(ArrList);
+    }
 }

@@ -126,10 +126,13 @@ public class DynamicArray<E> implements List<E> {
 
     @Override
     public E set(int index, E element) {
-        if (index < ArrList.length && index >= 0) {
+        if (index >= point || index < 0) {
+            throw new IndexOutOfBoundsException();
+        }
+        if (index < ArrList.length) {
             ArrList[index] = element;
         }
-        return null;
+        return (E) ArrList[index];
     }
 
     @Override

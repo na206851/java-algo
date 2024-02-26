@@ -124,6 +124,9 @@ public class DynamicArrayTest {
             assertEquals(0, list.get(5));
             list.set(3, 0);
             assertEquals(0, list.get(3));
+            assertThrows(IndexOutOfBoundsException.class, () -> list.set(10, -1));
+            assertThrows(IndexOutOfBoundsException.class, () -> list.set(-1, -1));
+
         };
         listConsumer.accept(new ArrayList<>());
         listConsumer.accept(new DynamicArray<>());

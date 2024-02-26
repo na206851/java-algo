@@ -85,12 +85,12 @@ public class DynamicArray<E> implements List<E> {
     @Override
     public boolean addAll(Collection<? extends E> c) {
         Object[] o = c.toArray();
-        int newLeng = o.length;
-        if (newLeng + size() > point) {
+        int newLength = o.length;
+        if (newLength + size() > point) {
             increaseInSize();
         }
-        System.arraycopy(o, 0, ArrList, point, newLeng);
-        point += newLeng;
+        System.arraycopy(o, 0, ArrList, point, newLength);
+        point += newLength;
         return true;
     }
 

@@ -178,7 +178,12 @@ public class DynamicArray<E> implements List<E> {
 
     @Override
     public int lastIndexOf(Object o) {
-        return 1;
+        for (int i = ArrList.length - 1; i >= 0; i--) {
+            if (ArrList[i].equals(o)) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     @Override

@@ -162,6 +162,21 @@ public class DynamicArrayTest {
         listConsumer.accept(new ArrayList<>());
         listConsumer.accept(new DynamicArray<>());
     }
+
+    @Test
+    void lastIndexOfMethodTest() {
+        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
+            list.add(1);
+            list.add(2);
+            list.add(3);
+
+            assertEquals(2, list.lastIndexOf(3));
+            assertEquals(-1, list.lastIndexOf(5));
+            assertEquals(0, list.lastIndexOf(1));
+        };
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
+    }
 }
 
 //    @Test

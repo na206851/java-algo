@@ -136,23 +136,39 @@ public class DynamicArrayTest {
         listConsumer.accept(new ArrayList<>());
         listConsumer.accept(new DynamicArray<>());
     }
-}
-//
-//    @Test
-//    void getFromNonEmptyList() {
-//        List<Integer> jdkList = new ArrayList<>();
-//        jdkList.add(1);
-//        assertEquals(1, jdkList.get(0));
-//        jdkList.add(2);
-//        assertEquals(2, jdkList.get(1));
-//
-//
-//        List<Integer> myList = new DynamicArray<>();
-//        myList.add(1);
-//        assertEquals(1, myList.get(0));
-//        myList.add(2);
-//        assertEquals(2, myList.get(1));
-//    }
+
+    @Test
+    void testGetMethod() {
+        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
+            list.add(1);
+            list.add(3);
+            list.add(5);
+            assertEquals(1, list.get(0));
+            assertEquals(3, list.get(1));
+            assertEquals(5, list.get(2));
+            assertThrows(IndexOutOfBoundsException.class, () -> list.get(9));
+        };
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
+    }
+
+    @Test
+    void AddAllForIndexTestMethod() {       //нужно написать на этот тест реализацию метода , сам тест нужно изменить
+        //чтобы было сравнение по каждому элементу, метод который я написал работает
+        //некорректно тк возвращает массив в котором null элементы
+        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
+            List<Integer> example = new ArrayList<>();
+            int j = -1;
+            for (int i = 0; i < 5; i++) {
+                example.add(j);
+                list.add(i);
+            }
+            list.addAll(0, example);
+            assertEquals(10, list.size());
+        };
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
+    }
 
     @Test
     void indexOfMethodTest() {

@@ -95,6 +95,55 @@ public class DynamicArrayTest {
         Assertions.assertArrayEquals(jdkList.toArray(), myList.toArray());
     }
 
+    @Test
+    void removeTestMethod2() {
+        Consumer<List<Integer>> listConsumer1 = (List<Integer> list1) -> {
+            for (int i = 0; i < 6; i++) {
+                list1.add(i);
+            }
+            list1.remove(5);
+            list1.remove(0);
+            assertEquals(4, list1.size());
+        };
+        listConsumer1.accept(new ArrayList<>());
+        listConsumer1.accept(new DynamicArray<>());
+    }
+
+    @Test
+    void setTestMethod() {
+        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
+            for (int i = 0; i < 6; i++) {
+                list.add(i);
+            }
+            list.set(0, 9);
+            assertEquals(9, list.get(0));
+            list.set(5, 0);
+            assertEquals(0, list.get(5));
+            list.set(3, 0);
+            assertEquals(0, list.get(3));
+        };
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
+    }
+}
+//
+//    @Test
+//    void getFromNonEmptyList() {
+//        List<Integer> jdkList = new ArrayList<>();
+//        jdkList.add(1);
+//        assertEquals(1, jdkList.get(0));
+//        jdkList.add(2);
+//        assertEquals(2, jdkList.get(1));
+//
+//
+//        List<Integer> myList = new DynamicArray<>();
+//        myList.add(1);
+//        assertEquals(1, myList.get(0));
+//        myList.add(2);
+//        assertEquals(2, myList.get(1));
+//    }
+
+
 //    @Test
 //    void concuredArrayTest() {      //иттерируемся и удаляем элементы , почитать про исключение concurrent nodification exception
 //        List<String> jdkList = new ArrayList<>();

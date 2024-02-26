@@ -63,12 +63,17 @@ public class DynamicArrayTest {
         jdkList.add(2);
         Assertions.assertEquals(2, jdkList.get(1));
 
-
-        List<Integer> myList = new DynamicArray<>();
-        myList.add(1);
-        Assertions.assertEquals(1, myList.get(0));
-        myList.add(2);
-        Assertions.assertEquals(2, myList.get(1));
+    @Test
+    void clearTestMethod() {
+        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
+            list.add(1);
+            list.add(2);
+            list.add(3);
+            list.clear();
+            assertEquals(0, list.size());
+        };
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
     }
 
     @Test

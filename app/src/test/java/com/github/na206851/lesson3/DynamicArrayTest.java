@@ -35,7 +35,7 @@ public class DynamicArrayTest {
 
 
     @Test
-    void getFromEmptyList() {
+    void getFromEmptyListExeption() {
         Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
             assertThrows(IndexOutOfBoundsException.class, () -> list.get(1));
         };

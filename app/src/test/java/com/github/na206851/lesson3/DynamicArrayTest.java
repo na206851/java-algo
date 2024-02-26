@@ -56,12 +56,16 @@ public class DynamicArrayTest {
     }
 
     @Test
-    void getFromNonEmptyList() {
-        List<Integer> jdkList = new ArrayList<>();
-        jdkList.add(1);
-        Assertions.assertEquals(1, jdkList.get(0));
-        jdkList.add(2);
-        Assertions.assertEquals(2, jdkList.get(1));
+    void testWithContains() {
+        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
+            list.add(1);
+            assertTrue(list.contains(1));
+            list.add(2);
+            assertTrue(list.contains(2));
+        };
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
+    }
 
     @Test
     void clearTestMethod() {

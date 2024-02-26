@@ -88,6 +88,9 @@ public class DynamicArrayTest {
             }
             list.remove(0);
             assertEquals(4, list.size());
+            list.remove(3);
+            assertEquals(3, list.size());
+            assertThrows(IndexOutOfBoundsException.class, () -> list.remove(5));
         };
         listConsumer.accept(new ArrayList<>());
         listConsumer.accept(new DynamicArray<>());
@@ -154,36 +157,3 @@ public class DynamicArrayTest {
 //        for (String i : jdkList) {
 //            jdkList.remove(i);
 //        }
-//    }
-//    @Test
-//    public void exapmleTestAddMethod() {
-//        ArrayList<Integer> expected1 = new ArrayList<>();
-//        expected1.add(1);
-//        ArrayList<Object> actual1 = new ArrayList<>().exampleIntegerAdd(1);
-//        Assertions.assertArrayEquals(expected1.toArray(), actual1.toArray());
-//
-//        ArrayList<Object> expected2 = new ArrayList<>();
-//        expected2.add(2);
-//        ArrayList<Object> actual2 = new ArrayList<>().exampleIntegerAdd(2);
-//        Assertions.assertArrayEquals(expected2.toArray(), actual2.toArray());
-//
-//        ArrayList<Object> expected3 = new ArrayList<>();
-//        expected3.add("first");
-//        ArrayList<Object> actual3 = new ArrayList<>().exampleIntegerAdd("second");
-//        Assertions.assertFalse(Arrays.equals(expected3.toArray(), actual3.toArray()));
-//    }
-//
-//    @Test
-//    public void exampleRemoveMethodTest() {
-//        ArrayList<Object> expected = new ArrayList<>();
-//        for (int i = 0; i < 5; i++) {
-//            expected.add(i);
-//        }
-//
-//    }
-//
-//    @Test
-//    public void exampleClearMethodTest() {
-//
-//    }
-}

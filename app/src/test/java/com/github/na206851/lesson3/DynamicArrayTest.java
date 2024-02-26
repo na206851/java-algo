@@ -35,6 +35,15 @@ public class DynamicArrayTest {
 
 
     @Test
+    void getFromEmptyList() {
+        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
+            assertThrows(IndexOutOfBoundsException.class, () -> list.get(1));
+        };
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
+    }
+
+    @Test
     void sizeTest() {
         Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
             list.add(1);

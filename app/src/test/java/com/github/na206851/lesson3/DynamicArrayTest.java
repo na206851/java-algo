@@ -149,6 +149,20 @@ public class DynamicArrayTest {
 //        assertEquals(2, myList.get(1));
 //    }
 
+    @Test
+    void indexOfMethodTest() {
+        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
+            list.add(1);
+            list.add(1);
+            list.add(1);
+            list.indexOf(1);
+            assertEquals(0, list.indexOf(1));
+            assertEquals(-1, list.indexOf(2));
+        };
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
+    }
+}
 
 //    @Test
 //    void concuredArrayTest() {      //иттерируемся и удаляем элементы , почитать про исключение concurrent nodification exception

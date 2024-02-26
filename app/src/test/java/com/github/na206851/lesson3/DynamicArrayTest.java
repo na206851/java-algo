@@ -106,7 +106,12 @@ public class DynamicArrayTest {
             }
             list1.remove(5);
             list1.remove(0);
-            assertEquals(4, list1.size());
+            assertEquals(1, list1.get(0));
+            assertEquals(2, list1.get(1));
+            assertEquals(3, list1.get(2));
+            list1.remove(1);
+            assertEquals(3, list1.get(1));
+            assertEquals(3, list1.size());
         };
         listConsumer1.accept(new ArrayList<>());
         listConsumer1.accept(new DynamicArray<>());

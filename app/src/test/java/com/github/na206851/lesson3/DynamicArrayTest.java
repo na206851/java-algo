@@ -63,9 +63,16 @@ public class DynamicArrayTest {
     }
 
     @Test
-    void testForToArrayMethod() {
-        List<Integer> jdkList = new ArrayList<>();
-        List<Integer> myList = new DynamicArray<>();
+    void removeTestMethod1() {
+        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
+            for (int i = 0; i < 5; i++) {
+                list.add(i);
+            }
+            list.remove(0);
+            assertEquals(4, list.size());
+        };
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
 
         Assertions.assertArrayEquals(jdkList.toArray(), myList.toArray());
     }

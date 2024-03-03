@@ -106,8 +106,8 @@ public class DynamicArray<E> implements List<E> {
             increaseInSize();
         }
         Object[] in = c.toArray();
-        Object[] src = ArrList;
-        Object[] result = new Object[point + in.length];
+        Object[] src = Arrays.copyOfRange(ArrList, 0, point);
+        Object[] result = new Object[point + in.length + 1];
         int j = 0;
         int count = 0;
         while (count < in.length + point) {

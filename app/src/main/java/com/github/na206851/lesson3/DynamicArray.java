@@ -154,6 +154,15 @@ public class DynamicArray<E> implements List<E> {
 
     @Override
     public boolean removeAll(Collection<?> c) {
+        Object[] in = c.toArray();
+        for (int i = 0; i < ArrList.length; i++) {
+            for (int j = 0; j < in.length; j++) {
+                if (ArrList[i].equals(in[j])) {
+                    remove(j);
+                    break;
+                }
+            }
+        }
         return false;
     }
 

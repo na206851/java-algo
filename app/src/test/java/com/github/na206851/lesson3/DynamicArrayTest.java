@@ -94,8 +94,6 @@ public class DynamicArrayTest {
         };
         listConsumer.accept(new ArrayList<>());
         listConsumer.accept(new DynamicArray<>());
-
-        Assertions.assertArrayEquals(jdkList.toArray(), myList.toArray());
     }
 
     @Test

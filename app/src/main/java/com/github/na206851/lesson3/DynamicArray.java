@@ -79,7 +79,23 @@ public class DynamicArray<E> implements List<E> {
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        return false;
+        Object[] in = c.toArray();
+
+        if (in.length > ArrList.length) {
+            return false;
+        }
+        int i = 0;
+        int j = 0;
+        int count = 0;
+        while (i < point) {
+            while (j < in.length) {
+                if (ArrList[i].equals(in[j])) {
+                    count++;
+                    break;
+                }
+            }
+        }
+        return count == in.length;
     }
 
     @Override

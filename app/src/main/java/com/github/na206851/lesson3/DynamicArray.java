@@ -79,23 +79,19 @@ public class DynamicArray<E> implements List<E> {
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        Object[] in = c.toArray();
-
-        if (in.length > ArrList.length) {
+        if (c.size() > ArrList.length || c.size() == 0) {
             return false;
         }
-        int i = 0;
-        int j = 0;
         int count = 0;
-        while (i < point) {
-            while (j < in.length) {
-                if (ArrList[i].equals(in[j])) {
+        for (int i = 0; i < pointer; i++) {
+            for (Object o : c) {
+                if (ArrList[i].equals(o)) {
                     count++;
                     break;
                 }
             }
         }
-        return count == in.length;
+        return count == c.size();
     }
 
     @Override
@@ -182,7 +178,6 @@ public class DynamicArray<E> implements List<E> {
         if (index >= pointer || index < 0) {
             throw new IndexOutOfBoundsException();
         }
-
         return (E) ArrList[index];
     }
 

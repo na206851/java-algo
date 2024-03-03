@@ -151,9 +151,7 @@ public class DynamicArrayTest {
     }
 
     @Test
-    void AddAllForIndexTestMethod() {       //нужно написать на этот тест реализацию метода , сам тест нужно изменить
-        //чтобы было сравнение по каждому элементу, метод который я написал работает
-        //некорректно тк возвращает массив в котором null элементы
+    void AddAllForIndexTestMethod() {
         Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
             List<Integer> example = new ArrayList<>();
             int j = -1;

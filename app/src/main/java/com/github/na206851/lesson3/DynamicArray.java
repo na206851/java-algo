@@ -212,6 +212,9 @@ public class DynamicArray<E> implements List<E> {
 
     @Override
     public E remove(int index) {
+        if (index > size() || index < 0) {
+            throw new IndexOutOfBoundsException();
+        }
         Object[] tmp = new Object[ArrList.length];
         int i = 0;
         int j = index + 1;

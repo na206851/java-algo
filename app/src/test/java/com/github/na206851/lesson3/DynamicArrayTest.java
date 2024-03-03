@@ -169,6 +169,26 @@ public class DynamicArrayTest {
     }
 
     @Test
+    void AddAllFforIndexTestMethod2() {
+        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
+            List<Integer> example = new ArrayList<>();
+            int j = 0;
+            example.add(0);
+
+            for (int i = 0; i < 3; i++) {
+                list.add(i);
+            }
+            list.addAll(0, example);
+            assertEquals(0, list.get(0));
+            assertEquals(0, list.get(1));
+            assertEquals(1, list.get(2));
+            assertEquals(2, list.get(3));
+        };
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
+    }
+
+    @Test
     void indexOfMethodTest() {
         Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
             list.add(1);

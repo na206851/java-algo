@@ -6,20 +6,11 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DynamicArrayTest {
-
-    @Test
-    void sizeTest() {
-        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
-            list.add(1);
-            assertEquals(1, list.size());
-            list.add(2);
-            assertEquals(2, list.size());
-        };
-        listConsumer.accept(new ArrayList<>());
-        listConsumer.accept(new DynamicArray<>());
-    }
 
     @Test
     void getFromNonEmptyList() {

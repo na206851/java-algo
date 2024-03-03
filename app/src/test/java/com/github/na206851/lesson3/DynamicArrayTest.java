@@ -216,6 +216,23 @@ public class DynamicArrayTest {
         listConsumer.accept(new ArrayList<>());
         listConsumer.accept(new DynamicArray<>());
     }
+
+    @Test
+    void containsAllMethodTest() {
+        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
+            List example = new ArrayList<>();
+            example.add(2);
+            example.add(1);
+            example.add(3);
+            list.add(1);
+            list.add(2);
+            list.add(3);
+            list.add(4);
+            assertTrue(list.containsAll(example));
+        };
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
+    }
 }
 
 //    @Test

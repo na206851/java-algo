@@ -96,7 +96,44 @@ public class DynamicArray<E> implements List<E> {
 
     @Override
     public boolean addAll(int index, Collection<? extends E> c) {
-        return false;
+        if (index < 0 || index > size()) {
+            throw new IndexOutOfBoundsException();
+        }
+        if (c.toArray().length == 0) {
+            return false;
+        }
+        if (c.toArray().length + point < size()) {
+            increaseInSize();
+        }
+        Object[] in = c.toArray();
+        Object[] src = ArrList;
+        Object[] result = new Object[point + in.length];
+        int j = 0;
+        int count = 0;
+        while (count < in.length + point) {
+            if (index > 0) {
+                for (int i = 0; i < index; i++) {
+                    result[count++] = src[i];
+                    j++;
+                }
+                for (int i = 0; i < in.length; i++) {
+                    result[count++] = in[i];
+                }
+                for (int i = index + in.length; i < src.length + in.length; i++) {
+                    result[count++] = src[j++];
+                }
+            } else {
+                for (int i = 0; i < in.length; i++) {
+                    result[count++] = in[i];
+                }
+                for (int i = 0; i < src.length; i++) {
+                    result[count++] = src[i];
+                }
+            }
+        }
+        point = count;
+        ArrList = result;
+        return true;
     }
 
     @Override

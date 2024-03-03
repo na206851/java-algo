@@ -127,7 +127,7 @@ public class DynamicArray<E> implements List<E> {
                     result[count++] = in[i];
                 }
                 for (int i = 0; i < src.length; i++) {
-                    result[count++] = src[i];
+                    result[count++] = src[j++];
                 }
             }
         }

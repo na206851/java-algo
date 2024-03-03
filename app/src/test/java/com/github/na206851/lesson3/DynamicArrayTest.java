@@ -167,7 +167,7 @@ public class DynamicArrayTest {
             assertEquals(10, list.size());
         };
         listConsumer.accept(new ArrayList<>());
-        listConsumer.accept(new DynamicArray<>());
+         listConsumer.accept(new DynamicArray<>());
     }
 
     @Test

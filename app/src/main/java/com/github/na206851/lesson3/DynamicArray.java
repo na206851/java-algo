@@ -8,12 +8,12 @@ public class DynamicArray<E> implements List<E> {
     private final static int defaultSize = 10;
 
     private Object[] ArrList = new Object[defaultSize];
-    private int point = 0;
+    private int pointer = 0;
 
 
     @Override
     public int size() {
-        return this.point;
+        return this.pointer;
     }
 
     @Override
@@ -49,13 +49,13 @@ public class DynamicArray<E> implements List<E> {
     @Override
     public boolean add(E e) {           //здесь посмотреть чек лист , если нужно добавить исключение
         try {
-            if (point > 0 && size() == ArrList.length) {
+            if (pointer > 0 && size() == ArrList.length) {
                 increaseInSize();
             }
         } catch (RuntimeException E) {
             throw new IndexOutOfBoundsException();
         } finally {
-            ArrList[point++] = e;
+            ArrList[pointer++] = e;
         }
         return true;
     }
@@ -102,11 +102,11 @@ public class DynamicArray<E> implements List<E> {
     public boolean addAll(Collection<? extends E> c) {
         Object[] o = c.toArray();
         int newLength = o.length;
-        if (newLength + size() > point) {
+        if (newLength + size() > pointer) {
             increaseInSize();
         }
-        System.arraycopy(o, 0, ArrList, point, newLength);
-        point += newLength;
+        System.arraycopy(o, 0, ArrList, pointer, newLength);
+        pointer += newLength;
         return true;
     }
 
@@ -118,15 +118,15 @@ public class DynamicArray<E> implements List<E> {
         if (c.toArray().length == 0) {
             return false;
         }
-        if (c.toArray().length + size() > point) {
+        if (c.toArray().length + size() > pointer) {
             increaseInSize();
         }
         Object[] in = c.toArray();
-        Object[] src = Arrays.copyOfRange(ArrList, 0, point);
-        Object[] result = new Object[point + in.length + 1];
+        Object[] src = Arrays.copyOfRange(ArrList, 0, pointer);
+        Object[] result = new Object[pointer + in.length + 1];
         int j = 0;
         int count = 0;
-        while (count < in.length + point) {
+        while (count < in.length + pointer) {
             if (index > 0) {
                 for (int i = 0; i < index; i++) {
                     result[count++] = src[i];
@@ -147,7 +147,7 @@ public class DynamicArray<E> implements List<E> {
                 }
             }
         }
-        point = count;
+        pointer = count;
         ArrList = result;
         return true;
     }
@@ -174,12 +174,12 @@ public class DynamicArray<E> implements List<E> {
     @Override
     public void clear() {
         ArrList = new Object[defaultSize];
-        point = 0;
+        pointer = 0;
     }
 
     @Override
     public E get(int index) {
-        if (index >= point || index < 0) {
+        if (index >= pointer || index < 0) {
             throw new IndexOutOfBoundsException();
         }
 
@@ -188,7 +188,7 @@ public class DynamicArray<E> implements List<E> {
 
     @Override
     public E set(int index, E element) {
-        if (index >= point || index < 0) {
+        if (index >= pointer || index < 0) {
             throw new IndexOutOfBoundsException();
         }
         if (index < ArrList.length) {
@@ -200,7 +200,7 @@ public class DynamicArray<E> implements List<E> {
     @Override
     public void add(int index, E element) {
         try {
-            if (point == ArrList.length) {
+            if (pointer == ArrList.length) {
                 increaseInSize();
             }
         } catch (RuntimeException E) {
@@ -225,8 +225,8 @@ public class DynamicArray<E> implements List<E> {
             j++;
         }
         ArrList[size() - 1] = null;
-        System.arraycopy(tmp, 0, ArrList, 0, point - 1);
-        point = point - 1;
+        System.arraycopy(tmp, 0, ArrList, 0, pointer - 1);
+        pointer = pointer - 1;
         return (E) ArrList[index];
 
     }
@@ -238,12 +238,12 @@ public class DynamicArray<E> implements List<E> {
                 return i;
             }
         }
-        return 0;
+        return -1;
     }
 
     @Override
     public int lastIndexOf(Object o) {
-        for (int i = point - 1; i >= 0; i--) {
+        for (int i = pointer - 1; i >= 0; i--) {
             if (ArrList[i].equals(o)) {
                 return i;
             }
@@ -268,7 +268,7 @@ public class DynamicArray<E> implements List<E> {
 
     @Override
     public String toString() {
-        ArrList = Arrays.copyOf(ArrList, point);
+        ArrList = Arrays.copyOf(ArrList, pointer);
         return Arrays.toString(ArrList);
     }
 }

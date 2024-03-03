@@ -189,13 +189,13 @@ public class DynamicArray<E> implements List<E> {
     }
 
     @Override
-    public void add(int index, E element) { //сделать так чтобы все работало через исключения блоки try catch
+    public void add(int index, E element) {
         try {
             if (point == ArrList.length) {
                 increaseInSize();
             }
         } catch (RuntimeException E) {
-            throw new RuntimeException("runtime exception");
+            throw new RuntimeException();
         } finally {
             ArrList[index] = element;
         }

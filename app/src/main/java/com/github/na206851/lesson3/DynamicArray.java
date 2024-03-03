@@ -102,7 +102,7 @@ public class DynamicArray<E> implements List<E> {
         if (c.toArray().length == 0) {
             return false;
         }
-        if (c.toArray().length + point < size()) {
+        if (c.toArray().length + size() > point) {
             increaseInSize();
         }
         Object[] in = c.toArray();

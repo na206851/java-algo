@@ -47,7 +47,7 @@ public class DynamicArray<E> implements List<E> {
     }
 
     @Override
-    public boolean add(E e) {           //здесь посмотреть чек лист , если нужно добавить исключение
+    public boolean add(E e) {
         try {
             if (pointer > 0 && size() == ArrList.length) {
                 increaseInSize();
@@ -273,8 +273,13 @@ public class DynamicArray<E> implements List<E> {
     }
 
     @Override
-    public List<E> subList(int fromIndex, int toIndex) {
-        return null;
+    public List<E> subList(int fromIndex, int toIndex) { //todo test
+        Object[] sublist = Arrays.copyOfRange(ArrList, fromIndex, toIndex);
+        List<E> result = new ArrayList();
+        for (Object o : sublist) {
+            result.add((E) o);
+        }
+        return result;
     }
 
     @Override

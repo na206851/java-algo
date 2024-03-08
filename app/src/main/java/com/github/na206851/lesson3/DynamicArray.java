@@ -164,7 +164,20 @@ public class DynamicArray<E> implements List<E> {
 
     @Override
     public boolean retainAll(Collection<?> c) {
-        return false;
+        int count = 0;
+        Object[] o = c.toArray();
+        Object[] src = ArrList;
+        for (int i = 0; i < src.length; i++) {
+            for (Object object : o) {
+                if (src[i].equals(object)) {
+                    src[i] = object;
+                    count++;
+                    break;
+                }
+            }
+        }
+        pointer = count;
+        return count == c.size();
     }
 
     @Override

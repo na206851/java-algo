@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -222,6 +223,41 @@ public class DynamicArrayTest {
         listConsumer.accept(new ArrayList<>());
         listConsumer.accept(new DynamicArray<>());
     }
+
+    @Test
+    void sublistTestMethod() {
+        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
+            list.add(1);
+            list.add(2);
+            list.add(3);
+            list.add(4);
+            list.add(5);
+            list.subList(0, 3);
+
+        };
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
+    }
+
+    @Test
+    void retainAllTest() {
+        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
+            ArrayList example = new ArrayList();
+            example.addAll(Arrays.asList(1, 2, 3));
+            list.addAll(Arrays.asList(1, 2, 3, 4, 5));
+            list.retainAll(example);
+
+            assertEquals(3, list.size());
+            assertEquals(example.get(0), list.get(0));
+            assertEquals(1, list.get(0));
+            assertEquals(2, list.get(1));
+            assertEquals(3, list.get(2));
+            assertEquals(3, example.size());
+        };
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
+    }
+
 }
 
 //    @Test

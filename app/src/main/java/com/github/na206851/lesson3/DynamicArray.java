@@ -79,7 +79,7 @@ public class DynamicArray<E> implements List<E> {
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        if (c.size() > ArrList.length || c.size() == 0) {
+        if (c.size() > ArrList.length || c.isEmpty()) {
             return false;
         }
         int count = 0;

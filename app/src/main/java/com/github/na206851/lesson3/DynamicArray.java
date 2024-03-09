@@ -167,7 +167,7 @@ public class DynamicArray<E> implements List<E> {
         int count = 0;
         Object[] o = c.toArray();
         Object[] src = ArrList;
-        for (int i = 0; i < src.length; i++) {
+        for (int i = 0; i < pointer; i++) {
             for (Object object : o) {
                 if (src[i].equals(object)) {
                     src[i] = object;

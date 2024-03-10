@@ -284,10 +284,9 @@ public class DynamicArray<E> implements List<E> {
 
     @Override
     public List<E> subList(int fromIndex, int toIndex) { //todo test
-        Object[] sublist = Arrays.copyOfRange(ArrList, fromIndex, toIndex);
         List<E> result = new ArrayList<E>();
-        for (Object o : sublist) {
-            result.add((E) o);
+        for (; fromIndex < toIndex; fromIndex++) {
+            result.add((E) ArrList[fromIndex]);
         }
         return result;
     }

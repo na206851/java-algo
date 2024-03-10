@@ -43,7 +43,12 @@ public class DynamicArray<E> implements List<E> {
 
     @Override
     public <T> T[] toArray(T[] a) {
-        return null;
+        int i = 0;
+        for (Object o : a) {
+            ArrList[i++] = o;
+        }
+        System.arraycopy(a, 0, ArrList, 0, a.length);
+        return a;
     }
 
     @Override

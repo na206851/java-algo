@@ -225,15 +225,19 @@ public class DynamicArrayTest {
     }
 
     @Test
-    void sublistTestMethod() {
+    void sublist() {
         Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
             list.add(1);
             list.add(2);
             list.add(3);
             list.add(4);
             list.add(5);
-            list.subList(0, 3);
-
+            List<Integer> sublist = list.subList(0, 3);
+            assertEquals(list.get(0), sublist.get(0));
+            assertEquals(list.get(1), sublist.get(1));
+            assertEquals(list.get(2), sublist.get(2));
+            assertEquals(3, sublist.size());
+            assertThrows(IndexOutOfBoundsException.class, () -> sublist.get(3));
         };
         listConsumer.accept(new ArrayList<>());
         listConsumer.accept(new DynamicArray<>());

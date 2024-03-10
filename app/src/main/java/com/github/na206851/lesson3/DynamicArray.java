@@ -268,6 +268,11 @@ public class DynamicArray<E> implements List<E> {
     }
 
     @Override
+    public Iterator<E> iterator() {
+        return null;
+    }
+
+    @Override
     public ListIterator<E> listIterator() {
         return null;
     }
@@ -280,7 +285,7 @@ public class DynamicArray<E> implements List<E> {
     @Override
     public List<E> subList(int fromIndex, int toIndex) { //todo test
         Object[] sublist = Arrays.copyOfRange(ArrList, fromIndex, toIndex);
-        List<E> result = new ArrayList();
+        List<E> result = new ArrayList<E>();
         for (Object o : sublist) {
             result.add((E) o);
         }

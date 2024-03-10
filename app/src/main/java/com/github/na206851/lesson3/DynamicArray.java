@@ -212,15 +212,18 @@ public class DynamicArray<E> implements List<E> {
 
     @Override
     public void add(int index, E element) {
-        try {
-            if (pointer == ArrList.length) {
-                increaseInSize();
-            }
-        } catch (RuntimeException E) {
-            throw new RuntimeException();
-        } finally {
-            ArrList[index] = element;
+        if (index < 0 || index > size()) {
+            throw new IndexOutOfBoundsException();
         }
+        if (pointer==ArrList.length){
+            increaseInSize();
+        }
+
+        for (int i = pointer; i > index; i--) {
+            ArrList[i] = ArrList[i - 1];
+        }
+        ArrList[index] = element;
+        pointer++;
     }
 
     @Override

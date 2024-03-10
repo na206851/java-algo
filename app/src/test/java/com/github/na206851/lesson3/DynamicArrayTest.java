@@ -210,7 +210,7 @@ public class DynamicArrayTest {
     @Test
     void containsAllMethodTest() {
         Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
-            List example = new ArrayList<>();
+            List<Integer> example = new ArrayList<>();
             example.add(2);
             example.add(1);
             example.add(3);
@@ -246,8 +246,7 @@ public class DynamicArrayTest {
     @Test
     void retainAllTest() {
         Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
-            ArrayList example = new ArrayList();
-            example.addAll(Arrays.asList(1, 2, 3));
+            ArrayList<Integer> example = new ArrayList<>(Arrays.asList(1, 2, 3));
             list.addAll(Arrays.asList(1, 2, 3, 4, 5));
             list.retainAll(example);
 

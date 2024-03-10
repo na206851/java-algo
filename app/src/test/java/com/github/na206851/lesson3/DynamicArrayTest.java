@@ -261,6 +261,17 @@ public class DynamicArrayTest {
         listConsumer.accept(new DynamicArray<>());
     }
 
+    @Test
+    void addToEmptyList2() {
+        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
+            list.add(1);
+            list.add(0, 2);
+            assertEquals(2, list.get(0));
+            assertEquals(1, list.get(1));
+        };
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
+    }
 }
 
 //    @Test

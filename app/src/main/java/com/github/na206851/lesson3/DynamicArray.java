@@ -46,8 +46,10 @@ public class DynamicArray<E> implements List<E> {
         int i = 0;
         for (Object o : a) {
             ArrList[i++] = o;
+        if (a.length < size()) {
+            return (T[]) Arrays.copyOf(ArrList, size(), a.getClass());
         }
-        System.arraycopy(a, 0, ArrList, 0, a.length);
+        System.arraycopy(ArrList, 0, a, 0, size());
         return a;
     }
 

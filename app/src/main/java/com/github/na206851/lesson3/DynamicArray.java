@@ -281,12 +281,17 @@ public class DynamicArray<E> implements List<E> {
 
         @Override
         public boolean hasNext() {
-            return false;
+            return index != size();
         }
 
         @Override
         public E next() {
-            return null;
+            currentIndex = index;
+            if (index >= size()) {
+                throw new NoSuchElementException();
+            }
+            index++;
+            return (E) ArrList[currentIndex];
         }
 
         @Override

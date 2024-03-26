@@ -4,9 +4,7 @@ package com.github.na206851.lesson3;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.function.Consumer;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -268,6 +266,22 @@ public class DynamicArrayTest {
             list.add(0, 2);
             assertEquals(2, list.get(0));
             assertEquals(1, list.get(1));
+        };
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
+    }
+    @Test
+    void testIterator() {
+        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
+            list.add(1);
+            list.add(2);
+            list.add(3);
+
+            Iterator<Integer> test = list.listIterator();
+            assertEquals(1, test.next());
+            assertEquals(2, test.next());
+            assertEquals(3, test.next());
+            assertFalse(test.hasNext());
         };
         listConsumer.accept(new ArrayList<>());
         listConsumer.accept(new DynamicArray<>());

@@ -274,7 +274,17 @@ public class DynamicArray<E> implements List<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return null;
+        return new myItr();
+    }
+
+    @Override
+    public ListIterator<E> listIterator() {
+        return new myIterator(0);
+    }
+
+    @Override
+    public ListIterator<E> listIterator(int index) {
+        return new myIterator(index);
     }
 
     private class myIterator implements ListIterator<E> {

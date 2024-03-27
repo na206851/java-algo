@@ -270,6 +270,24 @@ public class DynamicArrayTest {
         listConsumer.accept(new ArrayList<>());
         listConsumer.accept(new DynamicArray<>());
     }
+
+    @Test
+    void testModCount() {
+        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
+            list.add(1);
+            list.add(2);
+
+            for (int i : list) {
+                list.add(-1);
+            }
+            assertThrows(ConcurrentModificationException.class, () -> list.add(-1));
+//            assertEquals(2, list.get(0));
+//            assertEquals(1, list.get(1));
+        };
+        listConsumer.accept(new ArrayList<>());
+        // listConsumer.accept(new DynamicArray<>());
+    }
+
     @Test
     void testIterator() {
         Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
@@ -286,6 +304,41 @@ public class DynamicArrayTest {
         listConsumer.accept(new ArrayList<>());
         listConsumer.accept(new DynamicArray<>());
     }
+
+    @Test
+    void testPreviousMethodWithIterator() {
+        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
+            list.add(1);
+            list.add(2);
+            list.add(3);
+
+            ListIterator<Integer> test = list.listIterator();
+            ListIterator<Integer> testForIndex = list.listIterator(2);
+
+            assertFalse(test.hasPrevious());
+
+            assertTrue(testForIndex.hasPrevious());
+            assertEquals(2, testForIndex.previous());
+            assertEquals(1, testForIndex.previous());
+
+        };
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
+    }
+
+//    @Test
+//    void testToArrayWithType() {
+//        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
+//            list.add(1);
+//            list.add(2);
+//            list.add(3);
+//            String[] list2 = new String[0];
+//            String[] example = new String[1];
+//            Assertions.assertInstanceOf(list2.getClass(), list.toArray(example));
+//        };
+//        listConsumer.accept(new ArrayList<>());
+//        //listConsumer.accept(new DynamicArray<>());
+//    }
 }
 
 //    @Test

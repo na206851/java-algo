@@ -313,12 +313,16 @@ public class DynamicArray<E> implements List<E> {
 
         @Override
         public boolean hasPrevious() {
-            return false;
+            return currentIndex != 0;
         }
 
         @Override
         public E previous() {
-            return null;
+            currentIndex -= 1;
+            if (currentIndex >= size() || currentIndex < 0) {
+                throw new NoSuchElementException();
+            }
+            return (E) ArrList[currentIndex];
         }
 
         @Override

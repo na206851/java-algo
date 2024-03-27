@@ -287,7 +287,14 @@ public class DynamicArray<E> implements List<E> {
         return new myIterator(index);
     }
 
-    private class myIterator implements ListIterator<E> {
+    private class myIterator extends myItr implements ListIterator<E> {
+        private int index;
+        private int modCount;
+        private int currentIndex;
+
+        private myIterator(int index) {
+            currentIndex = index;
+        }
 
         @Override
         public boolean hasNext() {

@@ -325,6 +325,29 @@ public class DynamicArrayTest {
         listConsumer.accept(new ArrayList<>());
         listConsumer.accept(new DynamicArray<>());
     }
+
+    @Test
+    void testNextAndPreviousIndex() {
+        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
+            list.add(1);
+            list.add(2);
+            list.add(3);
+
+            ListIterator<Integer> test = list.listIterator();
+            assertEquals(0, test.nextIndex());
+            assertEquals(1, test.next());
+            assertEquals(1, test.nextIndex());
+            assertEquals(2, test.next());
+            assertEquals(2, test.nextIndex());
+
+            ListIterator<Integer> testPrevious = list.listIterator(2);
+            assertEquals(1, testPrevious.previousIndex());
+
+        };
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
+    }
+
     @Test
     void testWithSetIterator() {
         Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
@@ -334,6 +357,7 @@ public class DynamicArrayTest {
 
             ListIterator<Integer> test = list.listIterator();
             ListIterator<Integer> testWithIndex = list.listIterator(0);
+            //ListIterator<Integer> testNotZeroIndexIn = list.listIterator(2);
 
             assertThrows(IllegalStateException.class, () -> test.set(-1));
 
@@ -344,6 +368,62 @@ public class DynamicArrayTest {
         };
         listConsumer.accept(new ArrayList<>());
         listConsumer.accept(new DynamicArray<>());
+    }
+
+    @Test
+    void testAdd() {
+        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
+            list.add(1);
+            list.add(2);
+            list.add(3);
+
+            ListIterator<Integer> testAddJdkIt = list.listIterator();
+
+            testAddJdkIt.add(-1);
+            assertEquals(-1, list.get(0));
+            assertEquals(4, list.size());
+
+
+        };
+        listConsumer.accept(new ArrayList<>());
+        //listConsumer.accept(new DynamicArray<>());
+    }
+
+    @Test
+    void testAdd2() {
+        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
+            list.add(1);
+            list.add(2);
+            list.add(3);
+
+            ListIterator<Integer> test2 = list.listIterator();
+
+            test2.next();
+            test2.add(-1);
+            assertEquals(4, list.size());
+            assertEquals(-1, list.get(1));
+        };
+        listConsumer.accept(new ArrayList<>());
+        //listConsumer.accept(new DynamicArray<>());
+    }
+
+    @Test
+    void testAdd3() {
+        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
+            list.add(1);
+            list.add(2);
+            list.add(3);
+
+            ListIterator<Integer> test3 = list.listIterator(1);
+            test3.add(-1);
+            assertEquals(4, list.size());
+            assertEquals(-1, list.get(1));
+            System.out.println(list);
+            assertEquals(2, test3.next());
+        };
+        listConsumer.accept((new ArrayList<>()));
+        //listConsumer.accept((new DynamicArray<>()));
+
     }
 
 //    @Test

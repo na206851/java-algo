@@ -325,6 +325,26 @@ public class DynamicArrayTest {
         listConsumer.accept(new ArrayList<>());
         listConsumer.accept(new DynamicArray<>());
     }
+    @Test
+    void testWithSetIterator() {
+        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
+            list.add(1);
+            list.add(2);
+            list.add(3);
+
+            ListIterator<Integer> test = list.listIterator();
+            ListIterator<Integer> testWithIndex = list.listIterator(0);
+
+            assertThrows(IllegalStateException.class, () -> test.set(-1));
+
+            testWithIndex.next();
+            testWithIndex.set(0);
+            assertEquals(0, list.get(0));
+            //todo спросить как протестировать метод с ненулевым индексом
+        };
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
+    }
 
 //    @Test
 //    void testToArrayWithType() {

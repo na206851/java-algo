@@ -294,6 +294,7 @@ public class DynamicArray<E> implements List<E> {
 
         private int index;
         private int modCount;
+        private int index = 0;
         private int currentIndex = -1;
         private int lastIndex = -1;
 
@@ -307,7 +308,7 @@ public class DynamicArray<E> implements List<E> {
         @Override
         public E next() {
             lastIndex++;
-            currentIndex = index;
+            currentIndex = index++;
             if (currentIndex >= size()) {
                 throw new NoSuchElementException();
             }

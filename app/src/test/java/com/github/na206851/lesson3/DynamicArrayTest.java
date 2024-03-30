@@ -289,7 +289,7 @@ public class DynamicArrayTest {
     }
 
     @Test
-    void testIterator() {
+    void testMethodNextWithIterator() {
         Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
             list.add(1);
             list.add(2);

@@ -214,10 +214,10 @@ public class DynamicArray<E> implements List<E> {
 
     @Override
     public void add(int index, E element) {
-        if (index < 0 || index > size()) {
+        if (index > size()) {
             throw new IndexOutOfBoundsException();
         }
-        if (pointer==ArrList.length){
+        if (pointer == size()) {
             increaseInSize();
         }
 

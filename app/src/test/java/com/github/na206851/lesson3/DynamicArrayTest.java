@@ -386,7 +386,7 @@ public class DynamicArrayTest {
 
         };
         listConsumer.accept(new ArrayList<>());
-        //listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new DynamicArray<>());
     }
 
     @Test
@@ -404,7 +404,7 @@ public class DynamicArrayTest {
             assertEquals(-1, list.get(1));
         };
         listConsumer.accept(new ArrayList<>());
-        //listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new DynamicArray<>());
     }
 
     @Test
@@ -422,7 +422,7 @@ public class DynamicArrayTest {
             assertEquals(2, test3.next());
         };
         listConsumer.accept((new ArrayList<>()));
-        //listConsumer.accept((new DynamicArray<>()));
+        listConsumer.accept((new DynamicArray<>()));
 
     }
 

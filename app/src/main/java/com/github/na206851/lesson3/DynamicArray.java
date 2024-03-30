@@ -352,14 +352,10 @@ public class DynamicArray<E> implements List<E> {
 
         @Override
         public void set(E e) {
-            System.out.println(lastIndex);
-            currentIndex = lastIndex;
-            if (currentIndex < 0) {
+            if (lastIndex < 0) {
                 throw new IllegalStateException();
             }
-            if (currentIndex < size()) {
-                ArrList[currentIndex] = e;
-            }
+            DynamicArray.this.set(lastIndex, e);
         }
 
         @Override

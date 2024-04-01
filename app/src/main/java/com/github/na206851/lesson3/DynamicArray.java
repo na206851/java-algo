@@ -347,7 +347,9 @@ public class DynamicArray<E> implements List<E> {
 
         @Override
         public void remove() {
-
+            concurrentModEx(currentIndex);
+            currentIndex = lastIndex + 1;
+            DynamicArray.this.remove(lastIndex);
         }
 
         @Override

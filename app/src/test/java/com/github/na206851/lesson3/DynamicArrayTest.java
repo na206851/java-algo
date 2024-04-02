@@ -423,7 +423,90 @@ public class DynamicArrayTest {
         };
         listConsumer.accept((new ArrayList<>()));
         listConsumer.accept((new DynamicArray<>()));
+    }
 
+    @Test
+    public void testIteratorRemoveMethod() {    //
+        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
+            list.add(1);
+            list.add(2);
+            list.add(3);
+
+            ListIterator<Integer> test1 = list.listIterator();
+            list.remove(0);
+
+            assertEquals(2, list.size());
+            assertEquals(2, list.get(0));
+            assertEquals(3, list.get(1));
+            assertTrue(test1.hasNext());
+
+            ListIterator<Integer> newIterator = list.listIterator();
+            assertEquals(2, newIterator.next());
+        };
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
+    }
+
+    @Test
+    public void testIteratorRemoveMethodSecondElementRemove() {
+        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
+            list.add(1);
+            list.add(2);
+            list.add(3);
+
+            ListIterator<Integer> test2 = list.listIterator();
+            list.remove(1);
+
+            assertEquals(2, list.size());
+            assertEquals(1, list.get(0));
+            assertEquals(3, list.get(1));
+            assertTrue(test2.hasNext());
+        };
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
+    }
+
+    @Test
+    public void testIteratorRemoveMethodLastElementRemove() {
+        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
+            list.add(1);
+            list.add(2);
+            list.add(3);
+
+            ListIterator<Integer> test2 = list.listIterator();
+            test2.next();
+            test2.next();
+            test2.next();
+            test2.remove();
+
+            assertEquals(2, list.size());
+            assertEquals(1, list.get(0));
+            assertEquals(2, list.get(1));
+        };
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
+    }
+
+    @Test
+    public void testIteratorRemoveMethodMiddleElementRemove() {
+        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
+            list.add(1);
+            list.add(2);
+            list.add(3);
+
+            ListIterator<Integer> test2 = list.listIterator();
+            test2.next();
+            test2.next();
+            test2.remove();
+            test2.next();
+
+            assertEquals(2, list.size());
+            assertEquals(1, list.get(0));
+            assertEquals(3, list.get(1));
+            assertFalse(test2.hasNext());
+        };
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
     }
 
     @Test

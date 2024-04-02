@@ -526,6 +526,29 @@ public class DynamicArrayTest {
         listConsumer.accept(new ArrayList<>());
         listConsumer.accept(new DynamicArray<>());
     }
+
+    @Test
+    void testToArrayWithType2() {
+        Consumer<List<Employee>> listConsumer = (List<Employee> list) -> {
+            Employee employee = new Employee("peter");
+            Employee employee1 = new Employee("pasha");
+            Employee employee2 = new Employee("julia");
+
+            list.add(employee);
+            list.add(employee1);
+            list.add(employee2);
+
+            Employee[] typeEmployee = new Employee[list.size()];
+            list.toArray(typeEmployee);
+
+            System.out.println(employee1);
+            assertEquals(employee.toString(), list.get(0).toString());
+            assertEquals(employee1.toString(), typeEmployee[1].toString());
+            assertEquals(list.get(2).toString(), typeEmployee[2].toString());
+        };
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
+    }
 }
 
 //    @Test

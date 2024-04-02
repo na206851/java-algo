@@ -300,7 +300,7 @@ public class DynamicArray<E> implements List<E> {
 
         @Override
         public boolean hasNext() {
-            currentIndex = index;
+            currentIndex = index - 1;
             return currentIndex != size();
         }
 

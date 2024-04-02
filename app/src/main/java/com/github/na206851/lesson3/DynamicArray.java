@@ -43,13 +43,12 @@ public class DynamicArray<E> implements List<E> {
 
     @Override
     public <T> T[] toArray(T[] a) {
-        int i = 0;
-        for (Object o : a) {
-            ArrList[i++] = o;
         if (a.length < size()) {
             return (T[]) Arrays.copyOf(ArrList, size(), a.getClass());
         }
         System.arraycopy(ArrList, 0, a, 0, size());
+        if (a.length > size())
+            a[size()] = null;
         return a;
     }
 

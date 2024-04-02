@@ -426,19 +426,23 @@ public class DynamicArrayTest {
 
     }
 
-//    @Test
-//    void testToArrayWithType() {
-//        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
-//            list.add(1);
-//            list.add(2);
-//            list.add(3);
-//            String[] list2 = new String[0];
-//            String[] example = new String[1];
-//            Assertions.assertInstanceOf(list2.getClass(), list.toArray(example));
-//        };
-//        listConsumer.accept(new ArrayList<>());
-//        //listConsumer.accept(new DynamicArray<>());
-//    }
+    @Test
+    void testToArrayWithType() {
+        Consumer<List<String>> listConsumer = (List<String> list) -> {
+            list.add("1");
+            list.add("2");
+            list.add("3");
+
+            String[] typeString = new String[list.size()];
+            list.toArray(typeString);
+
+            assertEquals("1", typeString[0]);
+            assertEquals(3, typeString.length);
+            assertEquals("3", typeString[2]);
+        };
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
+    }
 }
 
 //    @Test

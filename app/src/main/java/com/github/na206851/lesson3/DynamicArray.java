@@ -374,14 +374,25 @@ public class DynamicArray<E> implements List<E> {
         }
     }
 
-    @Override
-    public ListIterator<E> listIterator() {
-        return null;
-    }
+    private class myItr implements Iterator<E> {
+        int index;
+        int currentIndex = index;
+        int lastIndex = currentIndex;
 
-    @Override
-    public ListIterator<E> listIterator(int index) {
-        return null;
+        @Override
+        public boolean hasNext() {
+            return index != size();
+        }
+
+        @Override
+        public E next() {
+            currentIndex = index;
+            if (index >= size()) {
+                throw new NoSuchElementException();
+            }
+            index++;
+            return (E) ArrList[currentIndex];
+        }
     }
 
     @Override

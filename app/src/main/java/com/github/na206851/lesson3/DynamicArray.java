@@ -382,22 +382,24 @@ public class DynamicArray<E> implements List<E> {
 
     private class myItr implements Iterator<E> {
         int index;
-        int currentIndex = index;
+        int currentIndex = -1;
         int lastIndex = currentIndex;
 
         @Override
         public boolean hasNext() {
-            return index != size();
+            int i = lastIndex;
+            return i != size();
         }
 
         @Override
         public E next() {
-            currentIndex = index;
-            if (index >= size()) {
+            int i = index;
+            if (i >= size())
                 throw new NoSuchElementException();
-            }
-            index++;
-            return (E) ArrList[currentIndex];
+            if (i >= ArrList.length)
+                throw new ConcurrentModificationException();
+            currentIndex++;
+            return (E) ArrList[++lastIndex];
         }
     }
 

@@ -350,11 +350,17 @@ public class DynamicArray<E> implements List<E> {
 
         @Override
         public void remove() {
-            concurrentModEx(currentIndex);
-            currentIndex = lastIndex + 1;
-            DynamicArray.this.remove(lastIndex);
-            index--;
-            lastIndex--; //потенциально опасное место
+            if (lastIndex < 0) {
+                throw new IllegalStateException();
+            }
+            try {
+                currentIndex = lastIndex + 1;
+                DynamicArray.this.remove(lastIndex);
+                index--;
+                lastIndex--; //потенциально опасное место
+            } catch (IndexOutOfBoundsException ex) {
+                throw new ConcurrentModificationException();
+            }
         }
 
         @Override

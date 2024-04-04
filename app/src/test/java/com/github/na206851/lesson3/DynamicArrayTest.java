@@ -531,6 +531,17 @@ public class DynamicArrayTest {
     }
 
     @Test
+    void testThrowsInRemoveMethod() {
+        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
+
+            ListIterator<Integer> iterator = list.listIterator();
+            assertThrows(IllegalStateException.class, () -> iterator.remove());
+        };
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
+    }
+
+    @Test
     void testToArrayWithType() {
         Consumer<List<String>> listConsumer = (List<String> list) -> {
             list.add("1");

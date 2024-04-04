@@ -377,16 +377,20 @@ public class DynamicArray<E> implements List<E> {
 
         @Override
         public void add(E e) {
-            if (lastIndex == -1) {
-                lastIndex = currentIndex;
-                DynamicArray.this.add(currentIndex, e);
-                currentIndex += 1;
-            } else {
-                lastIndex = currentIndex;
-                DynamicArray.this.add(lastIndex, e);
-                currentIndex += 1;
+            try {
+                if (lastIndex == -1) {
+                    lastIndex = currentIndex;
+                    DynamicArray.this.add(currentIndex, e);
+                    currentIndex += 1;
+                } else {
+                    lastIndex = currentIndex;
+                    DynamicArray.this.add(lastIndex, e);
+                    currentIndex += 1;
+                }
+                index = currentIndex;
+            } catch (IndexOutOfBoundsException ex) {
+                throw new ConcurrentModificationException();
             }
-            index = currentIndex;
         }
     }
 

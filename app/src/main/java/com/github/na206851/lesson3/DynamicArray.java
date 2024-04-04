@@ -373,7 +373,7 @@ public class DynamicArray<E> implements List<E> {
                 currentIndex += 1;
             } else {
                 lastIndex = currentIndex;
-                DynamicArray.this.add(currentIndex + 1, e);
+                DynamicArray.this.add(lastIndex, e);
                 currentIndex += 1;
             }
             index = currentIndex;

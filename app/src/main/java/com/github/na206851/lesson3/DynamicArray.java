@@ -368,7 +368,11 @@ public class DynamicArray<E> implements List<E> {
             if (lastIndex < 0) {
                 throw new IllegalStateException();
             }
-            DynamicArray.this.set(lastIndex, e);
+            try {
+                DynamicArray.this.set(lastIndex, e);
+            } catch (IndexOutOfBoundsException ex) {
+                throw new ConcurrentModificationException();
+            }
         }
 
         @Override

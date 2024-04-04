@@ -273,7 +273,7 @@ public class DynamicArray<E> implements List<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return new myItr();
+        return new myIterator(0);
     }
 
     @Override
@@ -291,7 +291,6 @@ public class DynamicArray<E> implements List<E> {
             currentIndex = index;
         }
 
-        private int index;
         private int modCount;
         private int index = 0;
         private int currentIndex = -1;
@@ -300,19 +299,26 @@ public class DynamicArray<E> implements List<E> {
 
         @Override
         public boolean hasNext() {
-            currentIndex = index - 1;
-            return currentIndex != size();
+            int i = lastIndex;
+            return ++i < size();
         }
 
         @Override
         public E next() {
-            lastIndex++;
-            currentIndex = index++;
-            if (currentIndex >= size()) {
+            int i = index;
+            if (i >= size())
                 throw new NoSuchElementException();
+            if (i >= ArrList.length)
+                throw new ConcurrentModificationException();
+            currentIndex++;
+//            lastIndex++;
+            return (E) ArrList[++lastIndex];
+        }
+
+        private void concurrentModEx(int currentIndex) {
+            if (currentIndex > ArrList.length) {
+                throw new ConcurrentModificationException();
             }
-            index++;
-            return (E) ArrList[currentIndex];
         }
 
         @Override

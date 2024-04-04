@@ -353,6 +353,8 @@ public class DynamicArray<E> implements List<E> {
             concurrentModEx(currentIndex);
             currentIndex = lastIndex + 1;
             DynamicArray.this.remove(lastIndex);
+            index--;
+            lastIndex--; //потенциально опасное место
         }
 
         @Override

@@ -336,11 +336,9 @@ public class DynamicArray<E> implements List<E> {
         }
 
         @Override
-        public int nextIndex() {//внесено изменение в строку 338 (минус единица)
-            lastIndex++;
-            currentIndex = index - 1;
-            int i = currentIndex;
-            return i;
+        public int nextIndex() {
+            int i = lastIndex;
+            return ++i;
         }
 
         @Override

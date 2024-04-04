@@ -350,6 +350,28 @@ public class DynamicArrayTest {
     }
 
     @Test
+    void testNextIndexAfterDelete() {
+        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
+            list.add(1);
+            list.add(2);
+            list.add(3);
+
+            ListIterator<Integer> iterator = list.listIterator();
+
+            iterator.next();
+            iterator.remove();
+
+            assertEquals(0, iterator.nextIndex());
+            assertEquals(2, iterator.next());
+            assertTrue(iterator.hasPrevious());
+            assertTrue(iterator.hasNext());
+
+        };
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
+    }
+
+    @Test
     void testWithSetIterator() {
         Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
             list.add(1);

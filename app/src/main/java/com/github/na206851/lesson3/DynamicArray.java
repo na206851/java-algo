@@ -278,25 +278,25 @@ public class DynamicArray<E> implements List<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return new myIterator(0);
+        return new MyIterator(0);
     }
 
     @Override
     public ListIterator<E> listIterator() {
-        return new myIterator(0);
+        return new MyIterator(0);
     }
 
     @Override
     public ListIterator<E> listIterator(int index) {
-        return new myIterator(index);
+        return new MyIterator(index);
     }
 
-    private class myIterator extends myItr implements ListIterator<E> {
-        private myIterator(int index) {
+    private class MyIterator extends MyItr implements ListIterator<E> {
+        private MyIterator(int index) {
             currentIndex = index;
         }
 
-        private int modCount;
+        private int expectedModCount = modCount;
         private int index = 0;
         private int currentIndex = -1;
         private int lastIndex = -1;
@@ -411,7 +411,7 @@ public class DynamicArray<E> implements List<E> {
         }
     }
 
-    private class myItr implements Iterator<E> {
+    private class MyItr implements Iterator<E> {
         int index;
         int currentIndex = -1;
         int lastIndex = currentIndex;

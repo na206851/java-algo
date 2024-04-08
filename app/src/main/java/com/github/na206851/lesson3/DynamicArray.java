@@ -9,7 +9,7 @@ public class DynamicArray<E> implements List<E> {
 
     private Object[] ArrList = new Object[defaultSize];
     private int pointer = 0;
-
+    private int modCount = 0;
 
     @Override
     public int size() {
@@ -54,15 +54,11 @@ public class DynamicArray<E> implements List<E> {
 
     @Override
     public boolean add(E e) {
-        try {
-            if (pointer > 0 && size() == ArrList.length) {
-                increaseInSize();
-            }
-        } catch (RuntimeException E) {
-            throw new IndexOutOfBoundsException();
-        } finally {
-            ArrList[pointer++] = e;
+        modCount++;
+        if (pointer > 0 && size() == ArrList.length) {
+            increaseInSize();
         }
+        ArrList[pointer++] = e;
         return true;
     }
 

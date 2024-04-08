@@ -23,7 +23,6 @@ public class DynamicArrayTest {
         listConsumer.accept(new DynamicArray<>());
     }
 
-
     @Test
     void getFromEmptyListExeption() {
         Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {

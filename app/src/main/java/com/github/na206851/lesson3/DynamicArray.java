@@ -32,11 +32,6 @@ public class DynamicArray<E> implements List<E> {
     }
 
     @Override
-    public Iterator<E> iterator() {
-        return null;
-    }
-
-    @Override
     public Object[] toArray() {
         return Arrays.copyOfRange(ArrList, 0, size());
     }
@@ -253,7 +248,6 @@ public class DynamicArray<E> implements List<E> {
         pointer = pointer - 1;
 
         return (E) ArrList[index];
-
     }
 
     @Override
@@ -354,7 +348,6 @@ public class DynamicArray<E> implements List<E> {
 
         @Override
         public int previousIndex() {
-            lastIndex--;
             int i = currentIndex - 1;
             return i;
         }

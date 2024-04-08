@@ -392,7 +392,7 @@ public class DynamicArrayTest {
     }
 
     @Test
-    void testAdd() {
+    void testListIteratorAdd() {
         Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
             list.add(1);
             list.add(2);
@@ -411,7 +411,7 @@ public class DynamicArrayTest {
     }
 
     @Test
-    void testAdd2() {
+    void testListIteratorAdd2() {
         Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
             list.add(1);
             list.add(2);
@@ -429,7 +429,7 @@ public class DynamicArrayTest {
     }
 
     @Test
-    void testAdd3() {
+    void testListIteratorAdd3() {
         Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
             list.add(1);
             list.add(2);
@@ -562,9 +562,9 @@ public class DynamicArrayTest {
     @Test
     void testToArrayWithType2() {
         Consumer<List<Employee>> listConsumer = (List<Employee> list) -> {
-            Employee employee = new Employee("peter");
-            Employee employee1 = new Employee("pasha");
-            Employee employee2 = new Employee("julia");
+            Employee employee1 = new Employee("peter");
+            Employee employee2 = new Employee("pasha");
+            Employee employee3 = new Employee("julia");
 
             list.add(employee);
             list.add(employee1);
@@ -573,9 +573,8 @@ public class DynamicArrayTest {
             Employee[] typeEmployee = new Employee[list.size()];
             list.toArray(typeEmployee);
 
-            System.out.println(employee1);
-            assertEquals(employee.toString(), list.get(0).toString());
-            assertEquals(employee1.toString(), typeEmployee[1].toString());
+            assertEquals(employee1.toString(), list.get(0).toString());
+            assertEquals(employee2.toString(), typeEmployee[1].toString());
             assertEquals(list.get(2).toString(), typeEmployee[2].toString());
         };
         listConsumer.accept(new ArrayList<>());

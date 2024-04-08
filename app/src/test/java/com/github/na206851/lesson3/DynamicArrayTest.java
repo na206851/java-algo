@@ -73,9 +73,12 @@ public class DynamicArrayTest {
     @Test
     void removeTestMethod1() {
         Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
-            for (int i = 0; i < 5; i++) {
-                list.add(i);
-            }
+            list.add(1);
+            list.add(2);
+            list.add(3);
+            list.add(4);
+            list.add(5);
+
             list.remove(0);
             assertEquals(4, list.size());
             list.remove(3);
@@ -94,6 +97,7 @@ public class DynamicArrayTest {
             }
             list1.remove(5);
             list1.remove(0);
+
             assertEquals(1, list1.get(0));
             assertEquals(2, list1.get(1));
             assertEquals(3, list1.get(2));
@@ -111,6 +115,7 @@ public class DynamicArrayTest {
             for (int i = 0; i < 6; i++) {
                 list.add(i);
             }
+
             list.set(0, 9);
             assertEquals(9, list.get(0));
             list.set(5, 0);
@@ -230,6 +235,7 @@ public class DynamicArrayTest {
             list.add(3);
             list.add(4);
             list.add(5);
+
             List<Integer> sublist = list.subList(0, 3);
             assertEquals(list.get(0), sublist.get(0));
             assertEquals(list.get(1), sublist.get(1));
@@ -264,28 +270,12 @@ public class DynamicArrayTest {
         Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
             list.add(1);
             list.add(0, 2);
+
             assertEquals(2, list.get(0));
             assertEquals(1, list.get(1));
         };
         listConsumer.accept(new ArrayList<>());
         listConsumer.accept(new DynamicArray<>());
-    }
-
-    @Test
-    void testModCount() {
-        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
-            list.add(1);
-            list.add(2);
-
-            for (int i : list) {
-                list.add(-1);
-            }
-            assertThrows(ConcurrentModificationException.class, () -> list.add(-1));
-//            assertEquals(2, list.get(0));
-//            assertEquals(1, list.get(1));
-        };
-        listConsumer.accept(new ArrayList<>());
-        // listConsumer.accept(new DynamicArray<>());
     }
 
     @Test
@@ -321,7 +311,6 @@ public class DynamicArrayTest {
             assertTrue(testForIndex.hasPrevious());
             assertEquals(2, testForIndex.previous());
             assertEquals(1, testForIndex.previous());
-
         };
         listConsumer.accept(new ArrayList<>());
         listConsumer.accept(new DynamicArray<>());
@@ -335,6 +324,7 @@ public class DynamicArrayTest {
             list.add(3);
 
             ListIterator<Integer> test = list.listIterator();
+
             assertEquals(0, test.nextIndex());
             assertEquals(1, test.next());
             assertEquals(1, test.nextIndex());
@@ -439,7 +429,6 @@ public class DynamicArrayTest {
             test3.add(-1);
             assertEquals(4, list.size());
             assertEquals(-1, list.get(1));
-            System.out.println(list);
             assertEquals(2, test3.next());
         };
         listConsumer.accept((new ArrayList<>()));
@@ -554,6 +543,7 @@ public class DynamicArrayTest {
             assertEquals("1", typeString[0]);
             assertEquals(3, typeString.length);
             assertEquals("3", typeString[2]);
+            assertEquals(3, list.size());
         };
         listConsumer.accept(new ArrayList<>());
         listConsumer.accept(new DynamicArray<>());
@@ -566,9 +556,9 @@ public class DynamicArrayTest {
             Employee employee2 = new Employee("pasha");
             Employee employee3 = new Employee("julia");
 
-            list.add(employee);
             list.add(employee1);
             list.add(employee2);
+            list.add(employee3);
 
             Employee[] typeEmployee = new Employee[list.size()];
             list.toArray(typeEmployee);

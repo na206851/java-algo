@@ -67,7 +67,6 @@ public class DynamicArray<E> implements List<E> {
         ArrList = Arrays.copyOf(ArrList, newCapacity);
     }
 
-
     @Override
     public boolean remove(Object o) {
         for (int i = 0; i < ArrList.length; i++) {
@@ -98,6 +97,7 @@ public class DynamicArray<E> implements List<E> {
 
     @Override
     public boolean addAll(Collection<? extends E> c) {
+        modCount++;
         Object[] o = c.toArray();
         int newLength = o.length;
         if (newLength + size() > pointer) {
@@ -110,6 +110,7 @@ public class DynamicArray<E> implements List<E> {
 
     @Override
     public boolean addAll(int index, Collection<? extends E> c) {
+        modCount++;
         if (index < 0 || index > size()) {
             throw new IndexOutOfBoundsException();
         }
@@ -152,6 +153,7 @@ public class DynamicArray<E> implements List<E> {
 
     @Override
     public boolean removeAll(Collection<?> c) {
+        modCount++;
         Object[] in = c.toArray();
         for (int i = 0; i < ArrList.length; i++) {
             for (int j = 0; j < in.length; j++) {
@@ -166,6 +168,7 @@ public class DynamicArray<E> implements List<E> {
 
     @Override
     public boolean retainAll(Collection<?> c) {
+        modCount++;
         int count = 0;
         Object[] o = c.toArray();
         Object[] src = ArrList;
@@ -184,6 +187,7 @@ public class DynamicArray<E> implements List<E> {
 
     @Override
     public void clear() {
+        modCount++;
         ArrList = new Object[defaultSize];
         pointer = 0;
     }
@@ -198,6 +202,7 @@ public class DynamicArray<E> implements List<E> {
 
     @Override
     public E set(int index, E element) {
+        modCount++;
         if (index >= pointer || index < 0) {
             throw new IndexOutOfBoundsException();
         }
@@ -209,9 +214,11 @@ public class DynamicArray<E> implements List<E> {
 
     @Override
     public void add(int index, E element) {
+        modCount++;
         if (index > size()) {
             throw new IndexOutOfBoundsException();
         }
+
         if (pointer == size()) {
             increaseInSize();
         }
@@ -225,9 +232,10 @@ public class DynamicArray<E> implements List<E> {
 
     @Override
     public E remove(int index) {
-        if (index > size() || index < 0) {
+        if (index > size()) {
             throw new IndexOutOfBoundsException();
         }
+        modCount++;
         Object[] tmp = new Object[ArrList.length];
         int i = 0;
         int j = index + 1;
@@ -243,6 +251,7 @@ public class DynamicArray<E> implements List<E> {
         ArrList[size() - 1] = null;
         System.arraycopy(tmp, 0, ArrList, 0, pointer - 1);
         pointer = pointer - 1;
+
         return (E) ArrList[index];
 
     }
@@ -292,6 +301,11 @@ public class DynamicArray<E> implements List<E> {
         private int currentIndex = -1;
         private int lastIndex = -1;
 
+        private void checkForMod() {
+            if (expectedModCount != modCount) {
+                throw new ConcurrentModificationException();
+            }
+        }
 
         @Override
         public boolean hasNext() {
@@ -324,6 +338,7 @@ public class DynamicArray<E> implements List<E> {
 
         @Override
         public E previous() {
+            concurrentModEx(lastIndex);
             currentIndex -= 1;
             if (currentIndex >= size() || currentIndex < 0) {
                 throw new NoSuchElementException();
@@ -349,11 +364,13 @@ public class DynamicArray<E> implements List<E> {
             if (lastIndex < 0) {
                 throw new IllegalStateException();
             }
+            checkForMod();
             try {
                 currentIndex = lastIndex + 1;
                 DynamicArray.this.remove(lastIndex);
                 index--;
-                lastIndex--; //потенциально опасное место
+                lastIndex--;
+                expectedModCount = modCount;
             } catch (IndexOutOfBoundsException ex) {
                 throw new ConcurrentModificationException();
             }
@@ -364,8 +381,10 @@ public class DynamicArray<E> implements List<E> {
             if (lastIndex < 0) {
                 throw new IllegalStateException();
             }
+            checkForMod();
             try {
                 DynamicArray.this.set(lastIndex, e);
+                expectedModCount = modCount;
             } catch (IndexOutOfBoundsException ex) {
                 throw new ConcurrentModificationException();
             }
@@ -373,6 +392,7 @@ public class DynamicArray<E> implements List<E> {
 
         @Override
         public void add(E e) {
+            checkForMod();
             try {
                 if (lastIndex == -1) {
                     lastIndex = currentIndex;
@@ -382,6 +402,7 @@ public class DynamicArray<E> implements List<E> {
                     lastIndex = currentIndex;
                     DynamicArray.this.add(lastIndex, e);
                     currentIndex += 1;
+                    expectedModCount = modCount;
                 }
                 index = currentIndex;
             } catch (IndexOutOfBoundsException ex) {

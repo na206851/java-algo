@@ -333,11 +333,14 @@ public class DynamicArray<E> implements List<E> {
 
         @Override
         public E previous() {
-            concurrentModEx(lastIndex);
+            checkForMod();
             currentIndex -= 1;
-            if (currentIndex >= size() || currentIndex < 0) {
+            if (index < 0) {
                 throw new NoSuchElementException();
             }
+            if (index >= ArrList.length)
+                throw new ConcurrentModificationException();
+
             return (E) ArrList[currentIndex];
         }
 

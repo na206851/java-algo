@@ -361,13 +361,13 @@ public class DynamicArray<E> implements List<E> {
         public void remove() {
             if (lastIndex < 0) {
                 throw new IllegalStateException();
-            }
             checkForMod();
             try {
+                DynamicArray.this.remove(lastIndex);
                 currentIndex = lastIndex + 1;
                 DynamicArray.this.remove(lastIndex);
                 index--;
-                lastIndex--;
+                lastIndex -= 1;
                 expectedModCount = modCount;
             } catch (IndexOutOfBoundsException ex) {
                 throw new ConcurrentModificationException();

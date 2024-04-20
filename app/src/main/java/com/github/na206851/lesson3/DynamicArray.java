@@ -1,6 +1,9 @@
 package com.github.na206851.lesson3;
 
+import com.google.common.collect.ArrayListMultimap;
+
 import java.util.*;
+import java.util.function.Consumer;
 
 
 public class DynamicArray<E> implements List<E> {
@@ -64,7 +67,7 @@ public class DynamicArray<E> implements List<E> {
 
     @Override
     public boolean remove(Object o) {
-        for (int i = 0; i < ArrList.length; i++) {
+        for (int i = 0; i < size(); i++) {
             if (ArrList[i].equals(o)) {
                 remove(i);
                 return true;
@@ -150,10 +153,10 @@ public class DynamicArray<E> implements List<E> {
     public boolean removeAll(Collection<?> c) {
         modCount++;
         Object[] in = c.toArray();
-        for (int i = 0; i < ArrList.length; i++) {
+        for (int i = 0; i < size(); i++) {
             for (int j = 0; j < in.length; j++) {
                 if (ArrList[i].equals(in[j])) {
-                    remove(j);
+                    remove(i);
                     break;
                 }
             }

@@ -211,7 +211,7 @@ public class DynamicArray<E> implements List<E> {
     @Override
     public void add(int index, E element) {
         modCount++;
-        if (index > size()) {
+        if (index < 0 || index > pointer) {
             throw new IndexOutOfBoundsException();
         }
 

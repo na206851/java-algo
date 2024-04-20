@@ -435,7 +435,7 @@ public class DynamicArrayTest {
     }
 
     @Test
-    public void testIteratorRemoveMethod() {    //
+    public void testIteratorRemoveMethod() {
         Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
             list.add(1);
             list.add(2);
@@ -530,7 +530,7 @@ public class DynamicArrayTest {
     }
 
     @Test
-    void testToArrayWithType() {
+    void testToArrayWithType1() {
         Consumer<List<String>> listConsumer = (List<String> list) -> {
             list.add("1");
             list.add("2");
@@ -554,10 +554,12 @@ public class DynamicArrayTest {
             Employee employee1 = new Employee("peter");
             Employee employee2 = new Employee("pasha");
             Employee employee3 = new Employee("julia");
+            Employee employee4 = new Employee("amur");
 
             list.add(employee1);
             list.add(employee2);
             list.add(employee3);
+            list.add(employee4);
 
             Employee[] typeEmployee = new Employee[list.size()];
             list.toArray(typeEmployee);
@@ -565,6 +567,7 @@ public class DynamicArrayTest {
             assertEquals(employee1.toString(), list.get(0).toString());
             assertEquals(employee2.toString(), typeEmployee[1].toString());
             assertEquals(list.get(2).toString(), typeEmployee[2].toString());
+            assertEquals(4, list.size());
         };
         listConsumer.accept(new ArrayList<>());
         listConsumer.accept(new DynamicArray<>());

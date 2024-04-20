@@ -310,6 +310,7 @@ public class DynamicArray<E> implements List<E> {
 
         @Override
         public E next() {
+            checkForMod();
             int i = index;
             if (i >= size())
                 throw new NoSuchElementException();

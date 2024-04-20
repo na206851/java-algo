@@ -396,6 +396,7 @@ public class DynamicArray<E> implements List<E> {
                     lastIndex = currentIndex;
                     DynamicArray.this.add(currentIndex, e);
                     currentIndex += 1;
+                    expectedModCount = modCount;
                 } else {
                     lastIndex = currentIndex;
                     DynamicArray.this.add(lastIndex, e);
@@ -413,6 +414,7 @@ public class DynamicArray<E> implements List<E> {
         int index;
         int currentIndex = -1;
         int lastIndex = currentIndex;
+        int expectedModCount = modCount;
 
         @Override
         public boolean hasNext() {
@@ -422,13 +424,22 @@ public class DynamicArray<E> implements List<E> {
 
         @Override
         public E next() {
+            checkForMod();
             int i = index;
             if (i >= size())
                 throw new NoSuchElementException();
+
             if (i >= ArrList.length)
                 throw new ConcurrentModificationException();
+
             currentIndex++;
             return (E) ArrList[++lastIndex];
+        }
+
+        void checkForMod() {
+            if (modCount != expectedModCount) {
+                throw new ConcurrentModificationException();
+            }
         }
     }
 

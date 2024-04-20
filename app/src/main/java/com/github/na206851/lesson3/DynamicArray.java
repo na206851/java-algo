@@ -201,12 +201,10 @@ public class DynamicArray<E> implements List<E> {
     @Override
     public E set(int index, E element) {
         modCount++;
-        if (index >= pointer || index < 0) {
+        if (index >= pointer) {
             throw new IndexOutOfBoundsException();
         }
-        if (index < ArrList.length) {
-            ArrList[index] = element;
-        }
+        ArrList[index] = element;
         return (E) ArrList[index];
     }
 

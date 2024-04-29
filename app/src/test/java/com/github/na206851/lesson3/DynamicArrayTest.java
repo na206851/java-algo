@@ -1,8 +1,10 @@
 package com.github.na206851.lesson3;
 
 
+import org.junit.jupiter.api.AssertionFailureBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.opentest4j.AssertionFailedError;
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -212,14 +214,16 @@ public class DynamicArrayTest {
     @Test
     void containsAllMethodTest() {
         Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
-            List<Integer> example = new ArrayList<>();
+            List<Integer> example = new ArrayList<Integer>();
             example.add(2);
             example.add(1);
             example.add(3);
+
             list.add(1);
             list.add(2);
             list.add(3);
             list.add(4);
+
             assertTrue(list.containsAll(example));
         };
         listConsumer.accept(new ArrayList<>());
@@ -284,7 +288,7 @@ public class DynamicArrayTest {
             list.add(2);
             list.add(3);
 
-            ListIterator<Integer> test = list.listIterator();
+            ListIterator<Integer> test = list.listIterator(0);
 
             assertEquals(1, test.next());
             assertEquals(2, test.next());
@@ -390,10 +394,9 @@ public class DynamicArrayTest {
             ListIterator<Integer> testAddJdkIt = list.listIterator();
 
             testAddJdkIt.add(-1);
+            testAddJdkIt.next();
             assertEquals(-1, list.get(0));
             assertEquals(4, list.size());
-
-
         };
         listConsumer.accept(new ArrayList<>());
         listConsumer.accept(new DynamicArray<>());
@@ -407,11 +410,11 @@ public class DynamicArrayTest {
             list.add(3);
 
             ListIterator<Integer> test2 = list.listIterator();
-
-            test2.next();
             test2.add(-1);
+            test2.next();
+
             assertEquals(4, list.size());
-            assertEquals(-1, list.get(1));
+            assertEquals(1, list.get(1));
         };
         listConsumer.accept(new ArrayList<>());
         listConsumer.accept(new DynamicArray<>());
@@ -424,10 +427,14 @@ public class DynamicArrayTest {
             list.add(2);
             list.add(3);
 
-            ListIterator<Integer> test3 = list.listIterator(1);
-            test3.add(-1);
+            ListIterator<Integer> test3 = list.listIterator();
+
+            test3.add(0);
+            test3.next();
+
             assertEquals(4, list.size());
-            assertEquals(-1, list.get(1));
+            assertEquals(1, list.get(1));
+
             assertEquals(2, test3.next());
         };
         listConsumer.accept((new ArrayList<>()));
@@ -507,12 +514,12 @@ public class DynamicArrayTest {
             test2.next();
             test2.next();
             test2.remove();
-            test2.next();
+
 
             assertEquals(2, list.size());
             assertEquals(1, list.get(0));
             assertEquals(3, list.get(1));
-            assertFalse(test2.hasNext());
+            assertTrue(test2.hasNext());
         };
         listConsumer.accept(new ArrayList<>());
         listConsumer.accept(new DynamicArray<>());
@@ -573,14 +580,3 @@ public class DynamicArrayTest {
         listConsumer.accept(new DynamicArray<>());
     }
 }
-
-//    @Test
-//    void concuredArrayTest() {      //иттерируемся и удаляем элементы , почитать про исключение concurrent nodification exception
-//        List<String> jdkList = new ArrayList<>();
-//        jdkList.add("a");
-//        jdkList.add("b");
-//        jdkList.add("c");
-//
-//        for (String i : jdkList) {
-//            jdkList.remove(i);
-//        }

@@ -1,27 +1,23 @@
 package com.github.na206851.lesson3;
 
-import com.google.common.collect.ArrayListMultimap;
-
 import java.util.*;
-import java.util.function.Consumer;
 
 
 public class DynamicArray<E> implements List<E> {
 
     private final static int defaultSize = 10;
-
     private Object[] ArrList = new Object[defaultSize];
     private int pointer = 0;
-    private int modCount = 0;
+    protected transient int modCount = 0;
 
     @Override
     public int size() {
-        return this.pointer;
+        return pointer;
     }
 
     @Override
     public boolean isEmpty() {
-        return this.size() == 0;
+        return size() == 0;
     }
 
     @Override
@@ -232,20 +228,7 @@ public class DynamicArray<E> implements List<E> {
             throw new IndexOutOfBoundsException();
         }
         modCount++;
-        Object[] tmp = new Object[ArrList.length];
-        int i = 0;
-        int j = index + 1;
-        int count = 0;
-        while (i < index) {
-            tmp[count++] = ArrList[i];
-            i++;
-        }
-        while (j < ArrList.length - 1) {
-            tmp[count++] = ArrList[j];
-            j++;
-        }
-        ArrList[size() - 1] = null;
-        System.arraycopy(tmp, 0, ArrList, 0, pointer - 1);
+        System.arraycopy(ArrList, index + 1, ArrList, index, size() - index - 1);
         pointer = pointer - 1;
 
         return (E) ArrList[index];
@@ -286,18 +269,21 @@ public class DynamicArray<E> implements List<E> {
         return new MyIterator(index);
     }
 
+
     private class MyIterator extends MyItr implements ListIterator<E> {
-        private MyIterator(int index) {
+        MyIterator(int index) {
+            super();
             currentIndex = index;
+
         }
 
-        private int expectedModCount = modCount;
+        int expectedModCount = modCount;
         private int index = 0;
         private int currentIndex = -1;
-        private int lastIndex = -1;
+        int lastIndex = -1;
 
-        private void checkForMod() {
-            if (expectedModCount != modCount) {
+        void checkForMod() {
+            if (DynamicArray.this.modCount != expectedModCount) {
                 throw new ConcurrentModificationException();
             }
         }
@@ -314,18 +300,13 @@ public class DynamicArray<E> implements List<E> {
             int i = index;
             if (i >= size())
                 throw new NoSuchElementException();
+            Object[] ArrList = DynamicArray.this.ArrList;
             if (i >= ArrList.length)
                 throw new ConcurrentModificationException();
             currentIndex++;
-//            lastIndex++;
             return (E) ArrList[++lastIndex];
         }
 
-        private void concurrentModEx(int currentIndex) {
-            if (currentIndex > ArrList.length) {
-                throw new ConcurrentModificationException();
-            }
-        }
 
         @Override
         public boolean hasPrevious() {
@@ -361,11 +342,11 @@ public class DynamicArray<E> implements List<E> {
         public void remove() {
             if (lastIndex < 0) {
                 throw new IllegalStateException();
+            }
             checkForMod();
             try {
                 DynamicArray.this.remove(lastIndex);
                 currentIndex = lastIndex + 1;
-                DynamicArray.this.remove(lastIndex);
                 index--;
                 lastIndex -= 1;
                 expectedModCount = modCount;
@@ -373,6 +354,7 @@ public class DynamicArray<E> implements List<E> {
                 throw new ConcurrentModificationException();
             }
         }
+
 
         @Override
         public void set(E e) {
@@ -393,12 +375,12 @@ public class DynamicArray<E> implements List<E> {
             checkForMod();
             try {
                 if (lastIndex == -1) {
-                    lastIndex = currentIndex;
+                    lastIndex = index;
                     DynamicArray.this.add(currentIndex, e);
                     currentIndex += 1;
                     expectedModCount = modCount;
                 } else {
-                    lastIndex = currentIndex;
+                    lastIndex = index;
                     DynamicArray.this.add(lastIndex, e);
                     currentIndex += 1;
                     expectedModCount = modCount;
@@ -410,11 +392,15 @@ public class DynamicArray<E> implements List<E> {
         }
     }
 
+
     private class MyItr implements Iterator<E> {
         int index;
         int currentIndex = -1;
         int lastIndex = currentIndex;
         int expectedModCount = modCount;
+
+        MyItr() {
+        }
 
         @Override
         public boolean hasNext() {
@@ -428,10 +414,8 @@ public class DynamicArray<E> implements List<E> {
             int i = index;
             if (i >= size())
                 throw new NoSuchElementException();
-
             if (i >= ArrList.length)
                 throw new ConcurrentModificationException();
-
             currentIndex++;
             return (E) ArrList[++lastIndex];
         }

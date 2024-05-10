@@ -210,14 +210,11 @@ public class DynamicArray<E> implements List<E> {
         if (index < 0 || index > pointer) {
             throw new IndexOutOfBoundsException();
         }
-
-        if (pointer == size()) {
+        if (pointer + 1 >= ArrList.length) {
             increaseInSize();
         }
 
-        for (int i = pointer; i > index; i--) {
-            ArrList[i] = ArrList[i - 1];
-        }
+        System.arraycopy(ArrList, index, ArrList, index + 1, size() - index);
         ArrList[index] = element;
         pointer++;
     }

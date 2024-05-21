@@ -1,7 +1,6 @@
 package com.github.na206851.lesson3;
 
 import org.junit.jupiter.api.Test;
-import org.opentest4j.AssertionFailedError;
 
 import java.util.*;
 import java.util.function.Consumer;

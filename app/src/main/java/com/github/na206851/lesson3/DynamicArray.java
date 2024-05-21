@@ -89,6 +89,11 @@ public class DynamicArray<E> implements List<E> {
         return count == c.size();
     }
 
+    private void grow(int inListLength) {
+        Object[] tmp = new Object[size() + inListLength];
+        System.arraycopy(ArrList, 0, tmp, 0, size());
+    }
+
     @Override
     public boolean addAll(Collection<? extends E> c) {
         modCount++;
@@ -111,37 +116,15 @@ public class DynamicArray<E> implements List<E> {
         if (c.toArray().length == 0) {
             return false;
         }
-        if (c.toArray().length + size() > pointer) {
-            increaseInSize();
+        if (c.toArray().length + size() >= pointer) {
+//            increaseInSize();
+            grow(c.toArray().length);
         }
         Object[] in = c.toArray();
-        Object[] src = Arrays.copyOfRange(ArrList, 0, pointer);
-        Object[] result = new Object[pointer + in.length + 1];
-        int j = 0;
-        int count = 0;
-        while (count < in.length + pointer) {
-            if (index > 0) {
-                for (int i = 0; i < index; i++) {
-                    result[count++] = src[i];
-                    j++;
-                }
-                for (int i = 0; i < in.length; i++) {
-                    result[count++] = in[i];
-                }
-                for (int i = index + in.length; i < src.length + in.length; i++) {
-                    result[count++] = src[j++];
-                }
-            } else {
-                for (int i = 0; i < in.length; i++) {
-                    result[count++] = in[i];
-                }
-                for (int i = 0; i < src.length; i++) {
-                    result[count++] = src[j++];
-                }
-            }
-        }
-        pointer = count;
-        ArrList = result;
+        System.arraycopy(ArrList, index, ArrList, index + in.length, size() - index);
+        System.arraycopy(in, 0, ArrList, index, in.length);
+        pointer = pointer + in.length;
+
         return true;
     }
 
@@ -271,9 +254,7 @@ public class DynamicArray<E> implements List<E> {
         MyIterator(int index) {
             super();
             currentIndex = index;
-
         }
-
         int expectedModCount = modCount;
         private int index = 0;
         private int currentIndex = -1;
@@ -303,7 +284,6 @@ public class DynamicArray<E> implements List<E> {
             currentIndex++;
             return (E) ArrList[++lastIndex];
         }
-
 
         @Override
         public boolean hasPrevious() {
@@ -351,7 +331,6 @@ public class DynamicArray<E> implements List<E> {
                 throw new ConcurrentModificationException();
             }
         }
-
 
         @Override
         public void set(E e) {

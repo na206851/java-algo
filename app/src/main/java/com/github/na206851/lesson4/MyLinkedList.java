@@ -290,7 +290,21 @@ public class MyLinkedList<E>
 
     @Override
     public E set(int index, E element) {
-        return null;
+        Node node = this.head;
+        int count = 0;
+        if (index > size) {
+            throw new IllegalStateException();
+        }
+        while (count <= index) {
+            if (count == index) {
+                break;
+            }
+            count++;
+            node = node.next;
+        }
+        Object oldValue = node.item;
+        node.item = element;
+        return (E) oldValue;
     }
 
     @Override

@@ -276,7 +276,7 @@ public class MyLinkedList<E>
         Node node = this.head;
         int count = 0;
         if (index > size) {
-            throw new IllegalStateException("invalid index");
+            throw new IndexOutOfBoundsException();
         }
         while (count <= index || node.next != null) {
             if (count == index) {
@@ -292,8 +292,8 @@ public class MyLinkedList<E>
     public E set(int index, E element) {
         Node node = this.head;
         int count = 0;
-        if (index > size) {
-            throw new IllegalStateException();
+        if (index > size || index < 0) {
+            throw new IndexOutOfBoundsException();
         }
         while (count <= index) {
             if (count == index) {

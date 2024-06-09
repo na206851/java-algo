@@ -177,6 +177,15 @@ public class MyLinkedList<E>
 
     @Override
     public boolean contains(Object o) {
+        Node node = head;
+        int count = 0;
+        while (count < size) {
+            if (node.item.equals(o)) {
+                return true;
+            }
+            count++;
+            node = node.next;
+        }
         return false;
     }
 

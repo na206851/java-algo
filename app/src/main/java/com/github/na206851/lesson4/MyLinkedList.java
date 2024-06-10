@@ -156,12 +156,15 @@ public class MyLinkedList<E>
 
     @Override
     public E peek() {
+        if (size != 0) {
+            return getFirst();
+        }
         return null;
     }
 
     @Override
     public void push(E e) {
-
+        addFirst(e);
     }
 
     @Override

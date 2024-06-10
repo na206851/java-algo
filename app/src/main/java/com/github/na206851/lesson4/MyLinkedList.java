@@ -132,6 +132,10 @@ public class MyLinkedList<E>
 
     @Override
     public boolean offer(E e) {
+        if (size != 0) {
+            addLast(e);
+            return true;
+        }
         return false;
     }
 

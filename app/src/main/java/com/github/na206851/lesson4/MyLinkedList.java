@@ -325,7 +325,30 @@ public class MyLinkedList<E>
 
     @Override
     public void add(int index, E element) {
-
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException();
+        }
+        if (index == size - 1) {
+            addLast(element);
+        } else if (index == 0) {
+            addFirst(element);
+        } else if (index > 0 && index < size) {
+            Node inNode = new Node(null, element, null);
+            Node currentNode = head;
+            int count = 0;
+            while (count < size) {
+                if (count == index) {
+                    inNode.next = currentNode;
+                    inNode.prev = currentNode.prev;
+                    currentNode.prev.next = inNode;
+                    currentNode.prev = inNode;
+                    break;
+                }
+                count++;
+                currentNode = currentNode.next;
+            }
+            size++;
+        }
     }
 
     @Override

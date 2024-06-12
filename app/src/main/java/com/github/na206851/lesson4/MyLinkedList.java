@@ -356,7 +356,16 @@ public class MyLinkedList<E>
 
     @Override
     public int indexOf(Object o) {
-        return 0;
+        int count = 0;
+        Node node = head;
+        while (count < size) {
+            if (node.item.equals(o)) {
+                return count;
+            }
+            node = node.next;
+            count++;
+        }
+        return -1;
     }
 
     @Override

@@ -218,7 +218,7 @@ public class MyLinkedList<E>
             addFirst(e);
             return true;
         } else if (size != 0) {
-            addLast(e);
+            add(size() - 1, e);
             return true;
         }
         return false;
@@ -328,9 +328,7 @@ public class MyLinkedList<E>
         if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException();
         }
-        if (index == size - 1) {
-            addLast(element);
-        } else if (index == 0) {
+        if (index == 0 || index == size - 1) {
             addFirst(element);
         } else if (index > 0 && index < size) {
             Node inNode = new Node(null, element, null);

@@ -370,7 +370,21 @@ public class MyLinkedList<E>
 
     @Override
     public int lastIndexOf(Object o) {
-        return 0;
+        Node currentNode = head;
+        int count = 0;
+
+        if (tail.item.equals(o)) {
+            return 0;
+        }
+
+        while (currentNode != null) {
+            if (currentNode.item.equals(o)) {
+                return size - count - 1;
+            }
+            count++;
+            currentNode = currentNode.prev;
+        }
+        return -1;
     }
 
     @Override

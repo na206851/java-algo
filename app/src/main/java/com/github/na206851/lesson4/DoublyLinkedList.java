@@ -82,7 +82,11 @@ public class DoublyLinkedList<E>
 
     @Override
     public E removeFirst() {
-        return null;
+        Node removeNode = headd;
+        headd = headd.next;
+        Object removeElement = removeNode.item;
+        size -= 1;
+        return (E) removeElement;
     }
 
     @Override

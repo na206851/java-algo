@@ -49,17 +49,18 @@ public class DoublyLinkedList<E>
             headd.prev = newNode;
 
         }
+        headd = newNode;
         size++;
     }
 
     @Override
     public void addLast(E e) {
-        Node node = new Node(null, e, null);        //создаем ноду кладем в нее нужный обьект
-        if (tail == null) {                                     //если хвост пустой
-            this.head = node;                                        //зацикливаем список
+        Node node = new Node(null, e, null);
+        if (tail == null) {
+            this.headd = node;                                        //зацикливаем список
             tail = node;
         } else {
-            tail.next = node;                               //если нет то новый хвост равен созданной ноде
+            tail.next = node;
             node.prev = tail;                               //предыдущий узел равен старому хвосту
             tail = node;                                    //новый хвост равен новой ноду
         }

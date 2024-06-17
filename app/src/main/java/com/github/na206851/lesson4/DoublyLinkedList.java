@@ -184,7 +184,7 @@ public class DoublyLinkedList<E>
 
     @Override
     public boolean contains(Object o) {
-        Node node = head;
+        Node node = headd;
         int count = 0;
         while (count < size) {
             if (node.item.equals(o)) {
@@ -217,8 +217,8 @@ public class DoublyLinkedList<E>
         if (size == 0) {
             addFirst(e);
             return true;
-        } else if (size != 0) {
-            add(size() - 1, e);
+        } else if (size > 0) {
+            addLast(e);
             return true;
         }
         return false;

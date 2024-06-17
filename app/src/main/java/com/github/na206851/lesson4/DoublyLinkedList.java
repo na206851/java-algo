@@ -328,11 +328,14 @@ public class DoublyLinkedList<E>
         if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException();
         }
-        if (index == 0 || index == size - 1) {
+        if (index == 0) {
             addFirst(element);
-        } else if (index > 0 && index < size) {
+
+        } else if (index == size) {
+            addLast(element);
+        } else if (index < size) {
             Node inNode = new Node(null, element, null);
-            Node currentNode = head;
+            Node currentNode = headd;
             int count = 0;
             while (count < size) {
                 if (count == index) {
@@ -357,7 +360,7 @@ public class DoublyLinkedList<E>
     @Override
     public int indexOf(Object o) {
         int count = 0;
-        Node node = head;
+        Node node = headd;
         while (count < size) {
             if (node.item.equals(o)) {
                 return count;
@@ -370,7 +373,7 @@ public class DoublyLinkedList<E>
 
     @Override
     public int lastIndexOf(Object o) {
-        Node currentNode = head;
+        Node currentNode = headd;
         int count = 0;
 
         if (tail.item.equals(o)) {

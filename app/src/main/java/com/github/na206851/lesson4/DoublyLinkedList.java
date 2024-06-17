@@ -2,19 +2,18 @@ package com.github.na206851.lesson4;
 
 import java.util.*;
 
-public class MyLinkedList<E>
+public class DoublyLinkedList<E>
         extends AbstractSequentialList<E>
         implements List<E>, Deque<E> {
-    Node<E> head;//голова списка нулевой элемент
-
-    Node<E> tail;//хвост списка последний элемент
-    private int size = 0;//размер списка
+    Node headd;//должно быть tail
+    Node<E> tail;
+    private int size = 0;
 
 
     private class Node<E> {
         Node<E> next;
         E item;
-        Node prev;
+        Node<E> prev;
 
         Node(Node<E> next, E element, Node<E> prev) {
             this.item = element;
@@ -27,7 +26,7 @@ public class MyLinkedList<E>
     public String toString() {
         StringBuilder result = new StringBuilder();
         result.append("[");
-        Node currentNode = head;
+        Node currentNode = headd;
         while (currentNode != null) {
             result.append(currentNode.item);
             currentNode = currentNode.next;

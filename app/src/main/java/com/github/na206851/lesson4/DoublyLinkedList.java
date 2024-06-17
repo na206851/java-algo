@@ -101,7 +101,7 @@ public class DoublyLinkedList<E>
 
     @Override
     public E getFirst() {
-        return head.item;
+        return (E) headd.item;
     }
 
     @Override

@@ -232,7 +232,7 @@ public class DoublyLinkedList<E>
     public int searchItem(E item) {
         Object o = (Object) item;
         for (int i = 0; i < size(); i++) {
-            if (MyLinkedList.this.get(i).equals(o)) {
+            if (DoublyLinkedList.this.get(i).equals(o)) {
                 return i;
             }
         }
@@ -267,7 +267,7 @@ public class DoublyLinkedList<E>
 
     @Override
     public void clear() {
-        head = null;
+        headd = null;
         tail = null;
         size = 0;
     }
@@ -289,7 +289,7 @@ public class DoublyLinkedList<E>
 
     @Override
     public E get(int index) {
-        Node node = this.head;
+        Node node = this.headd;
         int count = 0;
         if (index > size) {
             throw new IndexOutOfBoundsException();
@@ -306,7 +306,7 @@ public class DoublyLinkedList<E>
 
     @Override
     public E set(int index, E element) {
-        Node node = this.head;
+        Node node = this.headd;
         int count = 0;
         if (index > size || index < 0) {
             throw new IndexOutOfBoundsException();

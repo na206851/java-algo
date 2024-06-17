@@ -368,6 +368,21 @@ public class DoublyLinkedList<E>
     @Override
     public E remove(int index) {
         return null;
+    public E remove(int index) { //удаляет элемент в нулевом индексе , работает
+        Node removeNode = tail;
+        Object o = null;
+        Node currentNode = headd;
+        int count = 0;
+        while (count < size) {
+            if (index == 0) {
+                removeFirst();
+                break;
+            }
+            if (index == size - 1) {
+                removeLast();
+                break;
+            }
+        return (E) o;
     }
 
     @Override

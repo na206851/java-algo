@@ -91,7 +91,16 @@ public class DoublyLinkedList<E>
 
     @Override
     public E removeLast() {
-        return null;
+        Node removeNode = tail;
+        Object removeElement = removeNode.item;
+        if (size == 1) {
+            clear();
+        } else {
+            tail = tail.prev;
+            tail.next = null;
+            size--;
+        }
+        return (E) removeElement;
     }
 
     @Override

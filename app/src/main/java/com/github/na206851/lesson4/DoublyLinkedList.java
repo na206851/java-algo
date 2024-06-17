@@ -41,13 +41,13 @@ public class DoublyLinkedList<E>
     @Override
     public void addFirst(E e) {
         Node newNode = new Node(null, e, null);
-        if (head == null) {
-            head = newNode;
-            tail = newNode;
+        if (headd == null) {
+            headd = newNode;
+            tail = headd;
         } else {
-            head.prev = newNode;
-            newNode.next = head;
-            head = newNode;
+            newNode.next = headd;
+            headd.prev = newNode;
+
         }
         size++;
     }

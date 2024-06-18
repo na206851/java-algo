@@ -382,6 +382,15 @@ public class DoublyLinkedList<E>
                 removeLast();
                 break;
             }
+            if (count == index) {
+                currentNode.prev.next = currentNode.next;
+                currentNode.next.prev = currentNode.prev;
+                size--;
+                break;
+            }
+            currentNode = currentNode.next;
+            count++;
+        }
         return (E) o;
     }
 

@@ -135,6 +135,16 @@ public class DoublyLinkedList<E>
 
     @Override
     public boolean removeFirstOccurrence(Object o) {
+        Node currentNode = headd;
+        int count = 0;
+        while (count < size) {
+            if (currentNode.item.equals(o)) {
+                remove(o);
+                return true;
+            }
+            count++;
+            currentNode = currentNode.next;
+        }
         return false;
     }
 

@@ -150,6 +150,16 @@ public class DoublyLinkedList<E>
 
     @Override
     public boolean removeLastOccurrence(Object o) {
+        Node currentNode = tail;
+        int count = 0;
+        while (count < size) {
+            if (currentNode.item.equals(o)) {
+                remove(size - count - 1);
+                return true;
+            }
+            count++;
+            currentNode = currentNode.prev;
+        }
         return false;
     }
 

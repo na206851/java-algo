@@ -105,12 +105,12 @@ public class DoublyLinkedList<E>
 
     @Override
     public E pollFirst() {
-        return null;
+        return size == 0 ? null : removeFirst();
     }
 
     @Override
     public E pollLast() {
-        return null;
+        return size == 0 ? null : removeLast();
     }
 
     @Override
@@ -174,12 +174,12 @@ public class DoublyLinkedList<E>
 
     @Override
     public E remove() {
-        return null;
+        return removeFirst();
     }
 
     @Override
     public E poll() {
-        return null;
+        return size == 0 ? null : removeFirst();
     }
 
     @Override

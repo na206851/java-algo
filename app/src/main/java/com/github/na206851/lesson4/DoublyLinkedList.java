@@ -259,6 +259,16 @@ public class DoublyLinkedList<E>
 
     @Override
     public boolean remove(Object o) {
+        Node removeNode = headd;
+        int count = 0;
+        while (count < size) {
+            if (removeNode.item.equals(o)) {
+                remove(count);
+                return true;
+            }
+            count++;
+            removeNode = removeNode.next;
+        }
         return false;
     }
 

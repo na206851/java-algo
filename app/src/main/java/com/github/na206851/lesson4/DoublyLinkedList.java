@@ -57,14 +57,14 @@ public class DoublyLinkedList<E>
     public void addLast(E e) {
         Node node = new Node(null, e, null);
         if (tail == null) {
-            this.headd = node;                                        //зацикливаем список
+            this.headd = node;
             tail = node;
         } else {
             tail.next = node;
-            node.prev = tail;                               //предыдущий узел равен старому хвосту
-            tail = node;                                    //новый хвост равен новой ноду
+            node.prev = tail;
+            tail = node;
         }
-        size++;                                             //увеличиваем размер списка
+        size++;
     }
 
 

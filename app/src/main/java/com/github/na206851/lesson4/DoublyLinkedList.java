@@ -298,7 +298,13 @@ public class DoublyLinkedList<E>
 
     @Override
     public boolean addAll(Collection<? extends E> c) {
-        return false;
+        int count = 0;
+        Object[] in = c.toArray();
+        while (count < in.length) {
+            DoublyLinkedList.this.add((E) in[count]);
+            count++;
+        }
+        return count == in.length - 1;
     }
 
     @Override

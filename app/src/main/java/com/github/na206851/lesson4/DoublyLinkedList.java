@@ -47,7 +47,6 @@ public class DoublyLinkedList<E>
         } else {
             newNode.next = headd;
             headd.prev = newNode;
-
         }
         headd = newNode;
         size++;
@@ -66,7 +65,6 @@ public class DoublyLinkedList<E>
         }
         size++;
     }
-
 
     @Override
     public boolean offerFirst(E e) {
@@ -202,7 +200,10 @@ public class DoublyLinkedList<E>
 
     @Override
     public E pop() {
-        return null;
+        if (size == 0) {
+            throw new NoSuchElementException();
+        }
+        return removeFirst();
     }
 
     @Override
@@ -254,7 +255,6 @@ public class DoublyLinkedList<E>
 
     @Override
     public boolean add(E e) {
-        Node node;
         if (size == 0) {
             addFirst(e);
             return true;
@@ -328,15 +328,6 @@ public class DoublyLinkedList<E>
         return null;
     }
 
-    private int numberNode(int index) {
-        if (index < (size - 1)) {
-
-            for (int i = 0; i < index; i++) {
-
-            }
-        }
-        return 1;//посмотреть метод , нужно чтобы он возвращал порядковый номер ноды
-    }
 
     @Override
     public E get(int index) {
@@ -405,9 +396,6 @@ public class DoublyLinkedList<E>
 
     @Override
     public E remove(int index) {
-        return null;
-    public E remove(int index) { //удаляет элемент в нулевом индексе , работает
-        Node removeNode = tail;
         Object o = null;
         Node currentNode = headd;
         int count = 0;

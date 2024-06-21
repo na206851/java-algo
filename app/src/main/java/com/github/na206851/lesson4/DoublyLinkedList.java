@@ -236,7 +236,15 @@ public class DoublyLinkedList<E>
 
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        Object[] result = new Object[size];
+        Node currentNode = headd;
+        int count = 0;
+        while (count < size) {
+            result[count] = currentNode.item;
+            count++;
+            currentNode = currentNode.next;
+        }
+        return result;
     }
 
     @Override

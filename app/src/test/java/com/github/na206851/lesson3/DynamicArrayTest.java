@@ -227,6 +227,29 @@ public class DynamicArrayTest {
     }
 
     @Test
+    void containsAll() { //negative example
+        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
+            List<Integer> in = new ArrayList<>();
+            in.add(1);
+            in.add(3);
+            in.add(2);
+            in.add(2);
+            in.add(-1);
+
+            list.add(1);
+            list.add(2);
+            list.add(3);
+            list.add(4);
+
+            assertFalse(list.containsAll(in));
+        };
+//        listConsumer.accept(new ArrayList<>());
+//        listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new LinkedList<>());
+        listConsumer.accept(new DoublyLinkedList<>());
+    }
+
+    @Test
     void sublist() {
         Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
             list.add(1);

@@ -293,7 +293,19 @@ public class DoublyLinkedList<E>
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        return false;
+        int i = 0;
+        int count = 0;
+        Object[] in = c.toArray();
+        if (in.length > size) {
+            return false;
+        }
+
+        while (i != in.length - 1) {
+            DoublyLinkedList.this.contains(in[i]);
+            i++;
+            count++;
+        }
+        return count == in.length - 1;
     }
 
     @Override

@@ -219,13 +219,18 @@ public class DoublyLinkedList<E>
     @Override
     public boolean contains(Object o) {
         Node node = headd;
+        Node nodeTail = tail;
         int count = 0;
         while (count < size) {
             if (node.item.equals(o)) {
                 return true;
+            } else if (nodeTail.item.equals(o)) {
+                return true;
+            } else {
+                count++;
+                node = node.next;
+                nodeTail = nodeTail.prev;
             }
-            count++;
-            node = node.next;
         }
         return false;
     }
@@ -465,11 +470,15 @@ public class DoublyLinkedList<E>
     public int indexOf(Object o) {
         int count = 0;
         Node node = headd;
+        Node nodeTail = tail;
         while (count < size) {
             if (node.item.equals(o)) {
                 return count;
+            } else if (nodeTail.item.equals(o)) {
+                return size - count - 1;
             }
             node = node.next;
+            nodeTail = nodeTail.prev;
             count++;
         }
         return -1;

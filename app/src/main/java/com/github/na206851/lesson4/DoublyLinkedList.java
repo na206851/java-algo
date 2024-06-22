@@ -336,7 +336,20 @@ public class DoublyLinkedList<E>
 
     @Override
     public boolean removeAll(Collection<?> c) {
-        return false;
+        if (size == 0) return false;
+
+        Object[] in = c.toArray();
+        int i = 0;
+        int count = 0;
+        while (i < in.length) {
+            if (DoublyLinkedList.this.contains(in[i])) {
+                DoublyLinkedList.this.remove(in[i]);
+                count++;
+            } else {
+                i++;
+            }
+        }
+        return count != 0;
     }
 
     @Override

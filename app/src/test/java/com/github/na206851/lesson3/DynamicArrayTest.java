@@ -575,4 +575,47 @@ public class DynamicArrayTest {
         listConsumer.accept(new ArrayList<>());
         listConsumer.accept(new DynamicArray<>());
     }
+
+    @Test
+    public void removeAll() {
+        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
+            list.add(1);
+            list.add(2);
+            list.add(3);
+
+            List<Integer> in = new LinkedList<>(Arrays.asList(1, 2, 3, 4));
+            assertTrue(list.removeAll(in));
+            assertEquals(0, list.size());
+        };
+        listConsumer.accept(new LinkedList<>());
+        listConsumer.accept(new DoublyLinkedList<>());
+    }
+
+    @Test
+    public void removeAllNegativeExampe() {
+        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
+
+            List<Integer> in = new LinkedList<>(Arrays.asList(1, 2, 3, 4));
+
+            assertFalse(list.removeAll(in));
+        };
+        listConsumer.accept(new LinkedList<>());
+        listConsumer.accept(new DoublyLinkedList<>());
+    }
+
+    @Test
+    public void removeAllNegativeTest() {
+        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
+            list.add(1);
+            list.add(2);
+            list.add(3);
+
+            List<Integer> in = new LinkedList<>(Arrays.asList(4, 5, 6));
+
+            assertFalse(list.removeAll(in));
+            assertEquals(3, list.size());
+        };
+        listConsumer.accept(new LinkedList<>());
+        listConsumer.accept(new DoublyLinkedList<>());
+    }
 }

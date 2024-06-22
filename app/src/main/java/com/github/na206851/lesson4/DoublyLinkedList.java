@@ -309,7 +309,17 @@ public class DoublyLinkedList<E>
 
     @Override
     public boolean addAll(int index, Collection<? extends E> c) {
-        return false;
+        int count = 0;
+        Object[] in = c.toArray();
+        if (index > size || index < 0) {
+            return false;
+        }
+        while (count < in.length) {
+            DoublyLinkedList.this.add(index, (E) in[count]);
+            index++;
+            count++;
+        }
+        return true;
     }
 
     @Override

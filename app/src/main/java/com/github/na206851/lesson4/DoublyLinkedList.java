@@ -486,19 +486,8 @@ public class DoublyLinkedList<E>
 
     @Override
     public int lastIndexOf(Object o) {
-        Node currentNode = headd;
-        int count = 0;
-
-        if (tail.item.equals(o)) {
-            return 0;
-        }
-
-        while (currentNode != null) {
-            if (currentNode.item.equals(o)) {
-                return size - count - 1;
-            }
-            count++;
-            currentNode = currentNode.prev;
+        if (DoublyLinkedList.this.contains(o)) {
+            return DoublyLinkedList.this.indexOf(o);
         }
         return -1;
     }

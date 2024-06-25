@@ -255,7 +255,13 @@ public class DoublyLinkedList<E>
 
     @Override
     public <T> T[] toArray(T[] a) {
-        return null;
+        if (a.length < size) {
+            a = (T[]) java.lang.reflect.Array.newInstance(a.getClass().componentType(), size);
+        }
+        for (int i = 0; i < size; i++) {
+            a[i] = (T) DoublyLinkedList.this.get(i);
+        }
+        return a;
     }
 
     @Override

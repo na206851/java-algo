@@ -253,6 +253,86 @@ public class DoublyLinkedList<E>
         return null;
     }
 
+    private class MyListIterator implements java.util.ListIterator<E> {
+        private Node<E> currentNode;
+        private Node<E> nextNode;
+        private int nextIndex;
+        int expectedModCount;
+
+        public MyListIterator(int index) {
+
+            nextNode = (nextIndex == size) ? null : searchNode(index);// посмотреть как настроить корректное переключение на следующий узел
+            nextIndex = index;
+        }
+
+        void checkForModification() {
+            if (expectedModCount != DoublyLinkedList.this.modCount) {
+                throw new ConcurrentModificationException();
+            }
+        }
+
+        @Override
+        public boolean hasNext() {
+            return nextIndex < size;
+        }
+
+        @Override
+        public E next() {
+            currentNode = nextNode;
+            nextNode = nextNode.next;
+            nextIndex++;
+            return currentNode.item;
+        }
+
+        @Override
+        public boolean hasPrevious() {
+            return nextIndex != 0;
+        }
+
+        @Override
+        public E previous() {
+            if (nextIndex < 0) {
+                throw new NoSuchElementException();
+            }
+            nextNode = nextNode.prev;
+            currentNode = nextNode;
+            nextIndex--;
+            return currentNode.item;
+        }
+
+        @Override
+        public int nextIndex() {
+            return nextIndex;
+        }
+
+        @Override
+        public int previousIndex() {
+            int prevIndex = nextIndex - 1;
+            return prevIndex;
+        }
+
+        @Override
+        public void remove() {
+            checkForModification();
+
+            DoublyLinkedList.this.remove(nextIndex ); //todo посмотреть как правильно переиспользовать методы , возможно добавить
+            // новые переменные для отслеживания текущего индекса узла
+        }
+
+        @Override
+        public void set(E e) {
+            checkForModification();
+            DoublyLinkedList.this.set(nextIndex, e);
+        }
+
+        @Override
+        public void add(E e) {
+            checkForModification();
+
+            DoublyLinkedList.this.add(nextIndex, e);
+        }
+    }
+
     @Override
     public Object[] toArray() {
         Object[] result = new Object[size];

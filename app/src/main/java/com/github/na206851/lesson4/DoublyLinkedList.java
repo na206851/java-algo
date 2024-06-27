@@ -235,6 +235,19 @@ public class DoublyLinkedList<E>
         return false;
     }
 
+    public Node<E> searchNode(int index) {
+        if (index >= size) {
+            throw new IndexOutOfBoundsException();
+        }
+        Node<E> node = headd;
+        int count = 0;
+        while (count != index) {
+            node = node.next;
+            count++;
+        }
+        return node;
+    }
+
     @Override
     public Iterator<E> iterator() {
         return null;

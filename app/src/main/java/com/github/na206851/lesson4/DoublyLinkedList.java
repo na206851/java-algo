@@ -5,7 +5,7 @@ import java.util.*;
 public class DoublyLinkedList<E>
         extends AbstractSequentialList<E>
         implements List<E>, Deque<E> {
-    Node headd;//должно быть tail
+    Node<E> head;
     Node<E> tail;
     private int size = 0;
 
@@ -14,6 +14,7 @@ public class DoublyLinkedList<E>
         Node<E> next;
         E item;
         Node<E> prev;
+        int modcount;
 
         Node(Node<E> next, E element, Node<E> prev) {
             this.item = element;
@@ -26,7 +27,7 @@ public class DoublyLinkedList<E>
     public String toString() {
         StringBuilder result = new StringBuilder();
         result.append("[");
-        Node currentNode = headd;
+        Node currentNode = head;
         while (currentNode != null) {
             result.append(currentNode.item);
             currentNode = currentNode.next;
@@ -41,14 +42,14 @@ public class DoublyLinkedList<E>
     @Override
     public void addFirst(E e) {
         Node newNode = new Node(null, e, null);
-        if (headd == null) {
-            headd = newNode;
-            tail = headd;
+        if (head == null) {
+            head = newNode;
+            tail = head;
         } else {
-            newNode.next = headd;
-            headd.prev = newNode;
+            newNode.next = head;
+            head.prev = newNode;
         }
-        headd = newNode;
+        head = newNode;
         size++;
     }
 
@@ -56,7 +57,7 @@ public class DoublyLinkedList<E>
     public void addLast(E e) {
         Node node = new Node(null, e, null);
         if (tail == null) {
-            this.headd = node;
+            this.head = node;
             tail = node;
         } else {
             tail.next = node;
@@ -80,8 +81,8 @@ public class DoublyLinkedList<E>
 
     @Override
     public E removeFirst() {
-        Node removeNode = headd;
-        headd = headd.next;
+        Node removeNode = head;
+        head = head.next;
         Object removeElement = removeNode.item;
         size -= 1;
         return (E) removeElement;
@@ -113,7 +114,7 @@ public class DoublyLinkedList<E>
 
     @Override
     public E getFirst() {
-        return (E) headd.item;
+        return (E) head.item;
     }
 
     @Override
@@ -133,7 +134,7 @@ public class DoublyLinkedList<E>
 
     @Override
     public boolean removeFirstOccurrence(Object o) {
-        Node currentNode = headd;
+        Node currentNode = head;
         int count = 0;
         while (count < size) {
             if (currentNode.item.equals(o)) {
@@ -218,7 +219,7 @@ public class DoublyLinkedList<E>
 
     @Override
     public boolean contains(Object o) {
-        Node node = headd;
+        Node node = head;
         Node nodeTail = tail;
         int count = 0;
         while (count < size) {
@@ -493,7 +494,7 @@ public class DoublyLinkedList<E>
 
     @Override
     public E set(int index, E element) {
-        Node node = this.headd;
+        Node node = head;
         int count = 0;
         if (index > size || index < 0) {
             throw new IndexOutOfBoundsException();
@@ -522,7 +523,7 @@ public class DoublyLinkedList<E>
             addLast(element);
         } else if (index < size) {
             Node inNode = new Node(null, element, null);
-            Node currentNode = headd;
+            Node currentNode = head;
             int count = 0;
             while (count < size) {
                 if (count == index) {
@@ -542,20 +543,25 @@ public class DoublyLinkedList<E>
     @Override
     public E remove(int index) {
         Object o = null;
-        Node currentNode = headd;
+        Node currentNode = head;
         int count = 0;
         while (count < size) {
             if (index == 0) {
-                removeFirst();
+                o = removeFirst();
                 break;
             }
             if (index == size - 1) {
-                removeLast();
+                o = removeLast();
                 break;
             }
             if (count == index) {
-                currentNode.prev.next = currentNode.next;
-                currentNode.next.prev = currentNode.prev;
+                o = currentNode.item;
+                if (currentNode.prev != null) {
+                    currentNode.prev.next = currentNode.next;
+                }
+                if (currentNode.next != null) {
+                    currentNode.next.prev = currentNode.prev;
+                }
                 size--;
                 break;
             }
@@ -568,7 +574,7 @@ public class DoublyLinkedList<E>
     @Override
     public int indexOf(Object o) {
         int count = 0;
-        Node node = headd;
+        Node node = head;
         Node nodeTail = tail;
         while (count < size) {
             if (node.item.equals(o)) {
@@ -605,5 +611,4 @@ public class DoublyLinkedList<E>
     public List<E> subList(int fromIndex, int toIndex) {
         return null;
     }
-
 }

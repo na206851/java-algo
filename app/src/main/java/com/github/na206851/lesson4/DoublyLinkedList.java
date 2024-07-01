@@ -283,9 +283,17 @@ public class DoublyLinkedList<E>
 
         @Override
         public E next() {
+            checkForModification();
+            if (nextNode == null) {
+                throw new NoSuchElementException();
+            }
+            if (nextIndex > size()) {
+                throw new IndexOutOfBoundsException();
+            }
             currentNode = nextNode;
             nextNode = nextNode.next;
             nextIndex++;
+            lastIndex++;
             return currentNode.item;
         }
 

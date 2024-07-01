@@ -241,10 +241,10 @@ public class DoublyLinkedList<E>
     }
 
     public Node<E> searchNode(int index) {
-        if (index >= size) {
+        if (index >= size) {        //возможно не нужна здесь проверка
             throw new IndexOutOfBoundsException();
         }
-        Node<E> node = headd;
+        Node<E> node = head;
         int count = 0;
         while (count != index) {
             node = node.next;
@@ -255,12 +255,13 @@ public class DoublyLinkedList<E>
 
     @Override
     public Iterator<E> iterator() {
-        return null;
+        return new MyListIterator(0);
     }
 
     private class MyListIterator implements java.util.ListIterator<E> {
         private Node<E> currentNode;
         private Node<E> nextNode;
+        private Node<E> lastReturned;
         private int nextIndex;
         private int expectedModCount = modCount;
         int lastIndex = -1;
@@ -307,9 +308,11 @@ public class DoublyLinkedList<E>
             if (nextIndex < 0) {
                 throw new NoSuchElementException();
             }
+            lastReturned = nextNode.prev;
             nextNode = nextNode.prev;
             currentNode = nextNode;
             nextIndex--;
+            lastIndex--;
             return currentNode.item;
         }
 
@@ -327,6 +330,9 @@ public class DoublyLinkedList<E>
         @Override
         public void remove() {
             checkForModification();
+            if (lastIndex == -1) {
+                throw new IllegalStateException();
+            }
 
             DoublyLinkedList.this.remove(lastIndex);
             lastIndex--;

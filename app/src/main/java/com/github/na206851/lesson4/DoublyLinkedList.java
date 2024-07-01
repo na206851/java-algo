@@ -51,6 +51,7 @@ public class DoublyLinkedList<E>
         }
         head = newNode;
         size++;
+        modCount++;
     }
 
     @Override
@@ -65,6 +66,7 @@ public class DoublyLinkedList<E>
             tail = node;
         }
         size++;
+        modCount++;
     }
 
     @Override
@@ -85,6 +87,7 @@ public class DoublyLinkedList<E>
         head = head.next;
         Object removeElement = removeNode.item;
         size -= 1;
+        modCount++;
         return (E) removeElement;
     }
 
@@ -99,6 +102,7 @@ public class DoublyLinkedList<E>
             tail.next = null;
             size--;
         }
+        modCount++;
         return (E) removeElement;
     }
 
@@ -258,16 +262,16 @@ public class DoublyLinkedList<E>
         private Node<E> currentNode;
         private Node<E> nextNode;
         private int nextIndex;
-        int expectedModCount;
+        private int expectedModCount = modCount;
+        int lastIndex = -1;
 
         public MyListIterator(int index) {
-
-            nextNode = (nextIndex == size) ? null : searchNode(index);// посмотреть как настроить корректное переключение на следующий узел
+            nextNode = (nextIndex == size) ? null : searchNode(index);
             nextIndex = index;
         }
 
         void checkForModification() {
-            if (expectedModCount != DoublyLinkedList.this.modCount) {
+            if (modCount != expectedModCount) {
                 throw new ConcurrentModificationException();
             }
         }
@@ -316,8 +320,11 @@ public class DoublyLinkedList<E>
         public void remove() {
             checkForModification();
 
-            DoublyLinkedList.this.remove(nextIndex ); //todo посмотреть как правильно переиспользовать методы , возможно добавить
-            // новые переменные для отслеживания текущего индекса узла
+            DoublyLinkedList.this.remove(lastIndex);
+            lastIndex--;
+            nextIndex--;
+            expectedModCount++;
+            checkForModification();
         }
 
         @Override
@@ -331,13 +338,14 @@ public class DoublyLinkedList<E>
             checkForModification();
 
             DoublyLinkedList.this.add(nextIndex, e);
+            expectedModCount++;
         }
     }
 
     @Override
     public Object[] toArray() {
         Object[] result = new Object[size];
-        Node currentNode = headd;
+        Node currentNode = head;
         int count = 0;
         while (count < size) {
             result[count] = currentNode.item;
@@ -464,20 +472,20 @@ public class DoublyLinkedList<E>
 
     @Override
     public void clear() {
-        headd = null;
+        head = null;
         tail = null;
         size = 0;
     }
 
     @Override
     public Iterator<E> descendingIterator() {
-        return null;
+        return new MyListIterator(0);
     }
 
 
     @Override
     public E get(int index) {
-        Node node = this.headd;
+        Node node = this.head;
         int count = 0;
         if (index > size) {
             throw new IndexOutOfBoundsException();
@@ -563,6 +571,7 @@ public class DoublyLinkedList<E>
                     currentNode.next.prev = currentNode.prev;
                 }
                 size--;
+                modCount++;
                 break;
             }
             currentNode = currentNode.next;
@@ -599,12 +608,12 @@ public class DoublyLinkedList<E>
 
     @Override
     public ListIterator<E> listIterator() {
-        return null;
+        return new MyListIterator(0);
     }
 
     @Override
     public ListIterator<E> listIterator(int index) {
-        return null;
+        return new MyListIterator(index);
     }
 
     @Override

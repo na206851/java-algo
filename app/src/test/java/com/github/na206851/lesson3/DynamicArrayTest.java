@@ -29,8 +29,10 @@ public class DynamicArrayTest {
         Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
             assertThrows(IndexOutOfBoundsException.class, () -> list.get(1));
         };
-        listConsumer.accept(new ArrayList<>());
-        listConsumer.accept(new DynamicArray<>());
+        //listConsumer.accept(new ArrayList<>());
+        // listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new LinkedList<>());
+        listConsumer.accept(new DoublyLinkedList<>());
     }
 
     @Test
@@ -222,6 +224,9 @@ public class DynamicArrayTest {
                 list.add(i);
             }
             list.addAll(0, example);
+
+            assertEquals(0, list.get(5));
+            assertEquals(-1, list.get(2));
             assertEquals(10, list.size());
         };
 //        listConsumer.accept(new ArrayList<>());
@@ -319,8 +324,9 @@ public class DynamicArrayTest {
             list.add(1);
             list.add(2);
             list.add(3);
+            list.add(3);
 
-            assertEquals(2, list.lastIndexOf(3));
+            assertEquals(3, list.lastIndexOf(3));
             assertEquals(-1, list.lastIndexOf(5));
             assertEquals(0, list.lastIndexOf(1));
         };
@@ -333,10 +339,10 @@ public class DynamicArrayTest {
     @Test
     void containsAllMethodTest() {
         Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
-            List<Integer> example = new ArrayList<Integer>();
-            example.add(2);
+            List<Integer> example = new ArrayList<>();
             example.add(1);
             example.add(3);
+            example.add(2);
 
             list.add(1);
             list.add(2);
@@ -467,8 +473,10 @@ public class DynamicArrayTest {
             assertEquals(2, testForIndex.previous());
             assertEquals(1, testForIndex.previous());
         };
-        listConsumer.accept(new ArrayList<>());
-        listConsumer.accept(new DynamicArray<>());
+        // listConsumer.accept(new ArrayList<>());
+        //listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new DoublyLinkedList<>());
+        listConsumer.accept(new LinkedList<>());
     }
 
     @Test
@@ -490,8 +498,10 @@ public class DynamicArrayTest {
             assertEquals(1, testPrevious.previousIndex());
 
         };
-        listConsumer.accept(new ArrayList<>());
-        listConsumer.accept(new DynamicArray<>());
+        //listConsumer.accept(new ArrayList<>());
+        //listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new DoublyLinkedList<>());
+        listConsumer.accept(new LinkedList<>());
     }
 
     @Test

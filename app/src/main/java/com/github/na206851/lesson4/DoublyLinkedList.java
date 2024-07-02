@@ -344,7 +344,14 @@ public class DoublyLinkedList<E>
         @Override
         public void set(E e) {
             checkForModification();
-            DoublyLinkedList.this.set(nextIndex, e);
+            if (lastIndex < 0) {
+                throw new IllegalStateException();
+            }
+            try {
+                DoublyLinkedList.this.set(lastIndex, e);
+            } catch (IllegalStateException exception) {
+                throw new ConcurrentModificationException();
+            }
         }
 
         @Override

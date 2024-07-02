@@ -274,6 +274,28 @@ public class DynamicArrayTest {
         listConsumer.accept(new DoublyLinkedList<>());
     }
 
+    @Test
+    void addAllNotIndexNegative() {
+        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
+            List<Integer> example = new ArrayList<>();
+
+            list.add(1);
+            list.add(2);
+            list.add(3);
+
+            list.addAll(example);
+            assertEquals(1, list.get(0));
+            assertEquals(2, list.get(1));
+            assertEquals(3, list.get(2));
+            assertFalse(list.addAll(example));
+//            assertEquals(0, list.get(3));
+        };
+//        listConsumer.accept(new ArrayList<>());
+//        listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new LinkedList<>());
+        listConsumer.accept(new DoublyLinkedList<>());
+    }
+
 
     @Test
     void indexOfMethodTest() {

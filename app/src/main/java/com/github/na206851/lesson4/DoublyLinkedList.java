@@ -394,15 +394,21 @@ public class DoublyLinkedList<E>
 
     @Override
     public boolean remove(Object o) {
-        Node removeNode = headd;
+        Node removeNodeHeadd = head;
+        Node removeNodeTail = tail;
         int count = 0;
         while (count < size) {
-            if (removeNode.item.equals(o)) {
+            if (removeNodeHeadd.item.equals(o)) {
                 remove(count);
                 return true;
+            } else if (removeNodeTail.item.equals(o)) {
+                remove(size - count - 1);
+                return true;
+            } else {
+                count++;
+                removeNodeHeadd = removeNodeHeadd.next;
+                removeNodeTail = removeNodeTail.prev;
             }
-            count++;
-            removeNode = removeNode.next;
         }
         return false;
     }
@@ -465,9 +471,9 @@ public class DoublyLinkedList<E>
         Object[] in = c.toArray();
         int i = 0;
         int count = 0;
-        while (i < in.length) {
-            if (DoublyLinkedList.this.contains(in[i])) {
-                DoublyLinkedList.this.remove(in[i]);
+        for (Object o : c) {
+            if (DoublyLinkedList.this.contains(o)) {
+                DoublyLinkedList.this.remove(o);
                 count++;
             } else {
                 i++;
@@ -561,6 +567,12 @@ public class DoublyLinkedList<E>
 
     @Override
     public E remove(int index) {
+        if (index > size) {
+            throw new IndexOutOfBoundsException();
+        }
+        if (size == 0) {
+            throw new NullPointerException();
+        }
         Object o = null;
         Node currentNode = head;
         int count = 0;

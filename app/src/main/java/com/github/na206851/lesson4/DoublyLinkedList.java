@@ -640,7 +640,19 @@ public class DoublyLinkedList<E>
     }
 
     @Override
-    public List<E> subList(int fromIndex, int toIndex) {
-        return null;
+    public List<E> subList(int fromIndex, int toIndex) {    //доработать
+        if (fromIndex < 0 || fromIndex > size || toIndex < 0 || toIndex > size) {
+            throw new RuntimeException();
+        }
+        DoublyLinkedList sub = new DoublyLinkedList();
+        for (int i = fromIndex; i < toIndex; i++) {
+            if (DoublyLinkedList.this.get(i) == null) {
+                break;
+            } else
+                sub.add(DoublyLinkedList.this.get(i));
+        }
+        sub.size = toIndex - fromIndex;
+        return sub;
+
     }
 }

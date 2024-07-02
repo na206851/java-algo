@@ -496,6 +496,7 @@ public class DoublyLinkedList<E>
 
     @Override
     public void clear() {
+
         head = null;
         tail = null;
         size = 0;

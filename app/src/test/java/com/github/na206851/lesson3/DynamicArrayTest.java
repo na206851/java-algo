@@ -119,6 +119,60 @@ public class DynamicArrayTest {
     }
 
     @Test
+    void removeObject() {
+        Consumer<List<String>> listConsumer1 = (List<String> list1) -> {
+            list1.add("1");
+            list1.add("2");
+            list1.add("3");
+
+            assertEquals(3, list1.size());
+            list1.remove("1");
+            assertEquals(2, list1.size());
+            assertEquals("2", list1.get(0));
+
+
+        };
+        //listConsumer1.accept(new ArrayList<>());
+        //listConsumer1.accept(new DynamicArray<>());
+        listConsumer1.accept(new LinkedList<>());
+        listConsumer1.accept(new DoublyLinkedList<>());
+    }
+
+    @Test
+    void removeObject2() {
+        Consumer<List<String>> listConsumer = (List<String> list) -> {
+            list.add("pasha");
+            list.add("julia");
+            list.add("peter");
+
+            list.remove("");
+            System.out.println(list);
+        };
+        //listConsumer1.accept(new ArrayList<>());
+        //listConsumer1.accept(new DynamicArray<>());
+        listConsumer.accept(new LinkedList<>());
+        listConsumer.accept(new DoublyLinkedList<>());
+    }
+
+
+    @Test
+    void removeObjectNegative() {
+        Consumer<List<String>> listConsumer1 = (List<String> list1) -> {
+            list1.add("1");
+            list1.add("2");
+            list1.add("3");
+
+            assertEquals(3, list1.size());
+            assertFalse(list1.remove("-1"));
+
+        };
+        //listConsumer1.accept(new ArrayList<>());
+        //listConsumer1.accept(new DynamicArray<>());
+        listConsumer1.accept(new LinkedList<>());
+        listConsumer1.accept(new DoublyLinkedList<>());
+    }
+
+    @Test
     void setTestMethod() {
         Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
             for (int i = 0; i < 6; i++) {

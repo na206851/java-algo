@@ -463,9 +463,7 @@ public class DoublyLinkedList<E>
             return false;
         }
         while (count < in.length) {
-            DoublyLinkedList.this.add(index, (E) in[count]);
-            index++;
-            count++;
+            DoublyLinkedList.this.add(index, (E) in[count++]);
         }
         return true;
     }
@@ -522,16 +520,24 @@ public class DoublyLinkedList<E>
     @Override
     public E get(int index) {
         Node node = this.head;
-        int count = 0;
-        if (index > size) {
+        Node nodeTail = this.tail;
+        int countHead = 0;
+        int countTail = size - 1;
+        if (index > size || index < 0) {
             throw new IndexOutOfBoundsException();
         }
-        while (count <= index || node.next != null) {
-            if (count == index) {
-                return (E) node.item;
+        if (index < size / 2) {
+            while (index != countHead) {
+                node = node.next;
+                countHead++;
             }
-            count++;
-            node = node.next;
+            return (E) node.item;
+        } else {
+            while (index != countTail) {
+                nodeTail = nodeTail.prev;
+                countTail--;
+            }
+            return (E) nodeTail.item;
         }
         return (E) null;
     }

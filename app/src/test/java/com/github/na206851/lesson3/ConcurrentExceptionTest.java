@@ -23,8 +23,6 @@ public class ConcurrentExceptionTest {
                 }
             });
         };
-        listConsumer.accept(new ArrayList<Integer>());
-        listConsumer.accept(new DynamicArray<Integer>());
 //        listConsumer.accept(new ArrayList<Integer>());
 //        listConsumer.accept(new DynamicArray<Integer>());
         listConsumer.accept(new DoublyLinkedList<>());

@@ -83,7 +83,7 @@ public class DoublyLinkedList<E>
 
     @Override
     public E removeFirst() {
-        Node removeNode = head;
+        Object removeElement = head.item;
         head = head.next;
         Object removeElement = removeNode.item;
         size -= 1;
@@ -241,7 +241,7 @@ public class DoublyLinkedList<E>
     }
 
     public Node<E> searchNode(int index) {
-        if (index >= size) {        //возможно не нужна здесь проверка
+        if (index >= size) {
             throw new IndexOutOfBoundsException();
         }
         Node<E> node = head;
@@ -366,11 +366,10 @@ public class DoublyLinkedList<E>
     @Override
     public Object[] toArray() {
         Object[] result = new Object[size];
-        Node currentNode = head;
+        Node<E> currentNode = head;
         int count = 0;
-        while (count < size) {
-            result[count] = currentNode.item;
-            count++;
+        while (currentNode != null) {
+            result[count++] = currentNode.item;
             currentNode = currentNode.next;
         }
         return result;

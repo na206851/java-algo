@@ -1,5 +1,6 @@
 package com.github.na206851.lesson3;
 
+import com.github.na206851.lesson4.DoublyLinkedList;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -24,6 +25,10 @@ public class ConcurrentExceptionTest {
         };
         listConsumer.accept(new ArrayList<Integer>());
         listConsumer.accept(new DynamicArray<Integer>());
+//        listConsumer.accept(new ArrayList<Integer>());
+//        listConsumer.accept(new DynamicArray<Integer>());
+        listConsumer.accept(new DoublyLinkedList<>());
+        listConsumer.accept(new LinkedList<>());
     }
 
     @Test
@@ -41,8 +46,10 @@ public class ConcurrentExceptionTest {
                 }
             });
         };
-        listConsumer.accept(new ArrayList<Integer>());
-        listConsumer.accept(new DynamicArray<Integer>());
+        //listConsumer.accept(new ArrayList<Integer>());
+        //listConsumer.accept(new DynamicArray<Integer>());
+        listConsumer.accept(new DoublyLinkedList<>());
+        listConsumer.accept(new LinkedList<>());
     }
 
     @Test
@@ -62,8 +69,10 @@ public class ConcurrentExceptionTest {
                 }
             });
         };
-        listConsumer.accept(new ArrayList<Integer>());
-        listConsumer.accept(new DynamicArray<Integer>());
+//        listConsumer.accept(new ArrayList<Integer>());
+//        listConsumer.accept(new DynamicArray<Integer>());
+        listConsumer.accept(new DoublyLinkedList<>());
+        listConsumer.accept(new LinkedList<>());
     }
 
     @Test
@@ -82,7 +91,9 @@ public class ConcurrentExceptionTest {
                 }
             });
         };
-        listConsumer.accept(new ArrayList<Integer>());
-        listConsumer.accept(new DynamicArray<Integer>());
+        //listConsumer.accept(new ArrayList<Integer>());
+        //listConsumer.accept(new DynamicArray<Integer>());
+        listConsumer.accept(new DoublyLinkedList<>());
+        listConsumer.accept(new LinkedList<>());
     }
 }

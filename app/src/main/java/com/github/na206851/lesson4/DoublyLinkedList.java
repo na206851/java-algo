@@ -391,7 +391,8 @@ public class DoublyLinkedList<E>
         if (size == 0) {
             addFirst(e);
             return true;
-        } else if (size > 0) {
+        }
+        if (size > 0) {
             addLast(e);
             return true;
         }

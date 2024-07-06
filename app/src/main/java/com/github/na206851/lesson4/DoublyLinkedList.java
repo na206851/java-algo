@@ -599,18 +599,20 @@ public class DoublyLinkedList<E>
         if (size == 0) {
             throw new NullPointerException();
         }
+
         Object o = null;
+        if (index == 0) {
+            o = removeFirst();
+            return (E) o;
+        }
+        if (index == size - 1) {
+            o = removeLast();
+            return (E) o;
+        }
+
         Node currentNode = head;
         int count = 0;
         while (count < size) {
-            if (index == 0) {
-                o = removeFirst();
-                break;
-            }
-            if (index == size - 1) {
-                o = removeLast();
-                break;
-            }
             if (count == index) {
                 o = currentNode.item;
                 if (currentNode.prev != null) {

@@ -491,7 +491,19 @@ public class DoublyLinkedList<E>
 
     @Override
     public boolean retainAll(Collection<?> c) {
-        return false;
+        int count = 0;
+        Node node = head;
+        while (node != null) {
+            if (!c.contains(node.item)) {
+                Node next = node.next;
+                remove(node.item);
+                node = next;
+                count++;
+            } else {
+                node = node.next;
+            }
+        }
+        return count > 0;
     }
 
     @Override

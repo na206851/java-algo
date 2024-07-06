@@ -141,4 +141,63 @@ public class SpeedTest {
         listConsumer.accept(new ArrayList<>());
         //listConsumer.accept(new DynamicArray<>());
     }
+
+    @Test
+    void getBeginIndex() {
+        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
+            for (int i = 0; i < 1_000_000; i++) {
+                list.add(i);
+            }
+
+            long start = System.nanoTime();
+            list.get(0);
+            long end = System.nanoTime();
+
+            long result = end - start;
+            System.out.println(result + " speed get element for begin index");
+        };
+//        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
+//        listConsumer.accept(new DoublyLinkedList<>());
+        //listConsumer.accept(new LinkedList<>());
+    }
+
+    @Test
+    void getMiddleIndex() {
+        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
+            for (int i = 0; i < 1_000_000; i++) {
+                list.add(i);
+            }
+
+            long start = System.nanoTime();
+            list.get(list.size()/2);
+            long end = System.nanoTime();
+
+            long result = end - start;
+            System.out.println(result + " speed get element for middle index");
+        };
+//        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
+//        listConsumer.accept(new DoublyLinkedList<>());
+        //listConsumer.accept(new LinkedList<>());
+    }
+    @Test
+    void getFinishIndex() {
+        Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
+            for (int i = 0; i < 1_000_000; i++) {
+                list.add(i);
+            }
+
+            long start = System.nanoTime();
+            list.get(list.size()-1);
+            long end = System.nanoTime();
+
+            long result = end - start;
+            System.out.println(result + " speed get element for begin index");
+        };
+//        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
+//        listConsumer.accept(new DoublyLinkedList<>());
+       //listConsumer.accept(new LinkedList<>());
+    }
 }

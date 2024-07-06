@@ -29,8 +29,8 @@ public class DynamicArrayTest {
         Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
             assertThrows(IndexOutOfBoundsException.class, () -> list.get(1));
         };
-        //listConsumer.accept(new ArrayList<>());
-        // listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
         listConsumer.accept(new LinkedList<>());
         listConsumer.accept(new DoublyLinkedList<>());
     }
@@ -57,8 +57,8 @@ public class DynamicArrayTest {
             list.add(2);
             assertTrue(list.contains(2));
         };
-//        listConsumer.accept(new ArrayList<>());
-//        listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
         listConsumer.accept(new DoublyLinkedList<>());
     }
 
@@ -71,8 +71,8 @@ public class DynamicArrayTest {
             list.clear();
             assertEquals(0, list.size());
         };
-        //listConsumer.accept(new ArrayList<>());
-        //listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
         listConsumer.accept(new LinkedList<>());
         listConsumer.accept(new DoublyLinkedList<>());
     }
@@ -92,8 +92,8 @@ public class DynamicArrayTest {
             assertEquals(3, list.size());
             assertThrows(IndexOutOfBoundsException.class, () -> list.remove(5));
         };
-        //listConsumer.accept(new ArrayList<>());
-        //listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
         listConsumer.accept(new LinkedList<>());
         listConsumer.accept(new DoublyLinkedList<>());
     }
@@ -114,8 +114,8 @@ public class DynamicArrayTest {
             assertEquals(3, list1.get(1));
             assertEquals(3, list1.size());
         };
-        //listConsumer1.accept(new ArrayList<>());
-        //listConsumer1.accept(new DynamicArray<>());
+        listConsumer1.accept(new ArrayList<>());
+        listConsumer1.accept(new DynamicArray<>());
         listConsumer1.accept(new LinkedList<>());
         listConsumer1.accept(new DoublyLinkedList<>());
     }
@@ -134,8 +134,8 @@ public class DynamicArrayTest {
 
 
         };
-        //listConsumer1.accept(new ArrayList<>());
-        //listConsumer1.accept(new DynamicArray<>());
+        listConsumer1.accept(new ArrayList<>());
+        listConsumer1.accept(new DynamicArray<>());
         listConsumer1.accept(new LinkedList<>());
         listConsumer1.accept(new DoublyLinkedList<>());
     }
@@ -148,10 +148,9 @@ public class DynamicArrayTest {
             list.add("peter");
 
             list.remove("");
-            System.out.println(list);
         };
-        //listConsumer1.accept(new ArrayList<>());
-        //listConsumer1.accept(new DynamicArray<>());
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
         listConsumer.accept(new LinkedList<>());
         listConsumer.accept(new DoublyLinkedList<>());
     }
@@ -168,8 +167,8 @@ public class DynamicArrayTest {
             assertFalse(list1.remove("-1"));
 
         };
-        //listConsumer1.accept(new ArrayList<>());
-        //listConsumer1.accept(new DynamicArray<>());
+        listConsumer1.accept(new ArrayList<>());
+        listConsumer1.accept(new DynamicArray<>());
         listConsumer1.accept(new LinkedList<>());
         listConsumer1.accept(new DoublyLinkedList<>());
     }
@@ -191,8 +190,8 @@ public class DynamicArrayTest {
             assertThrows(IndexOutOfBoundsException.class, () -> list.set(-1, -1));
 
         };
-//        listConsumer.accept(new ArrayList<>());
-//        listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
         listConsumer.accept(new DoublyLinkedList<>());
         listConsumer.accept(new LinkedList<>());
     }
@@ -208,9 +207,10 @@ public class DynamicArrayTest {
             assertEquals(5, list.get(2));
             assertThrows(IndexOutOfBoundsException.class, () -> list.get(9));
         };
-        //listConsumer.accept(new ArrayList<>());
-        // listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
         listConsumer.accept(new DoublyLinkedList<>());
+        listConsumer.accept(new LinkedList<>());
 
     }
 
@@ -224,13 +224,12 @@ public class DynamicArrayTest {
                 list.add(i);
             }
             list.addAll(0, example);
-
             assertEquals(0, list.get(5));
             assertEquals(-1, list.get(2));
             assertEquals(10, list.size());
         };
-//        listConsumer.accept(new ArrayList<>());
-//        listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
         listConsumer.accept(new LinkedList<>());
         listConsumer.accept(new DoublyLinkedList<>());
     }
@@ -251,8 +250,8 @@ public class DynamicArrayTest {
             assertEquals(1, list.get(2));
             assertEquals(2, list.get(3));
         };
-        //listConsumer.accept(new ArrayList<>());
-        //listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
         listConsumer.accept(new LinkedList<>());
         listConsumer.accept(new DoublyLinkedList<>());
     }
@@ -273,8 +272,8 @@ public class DynamicArrayTest {
             assertEquals(3, list.get(2));
             assertEquals(0, list.get(3));
         };
-//        listConsumer.accept(new ArrayList<>());
-//        listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
         listConsumer.accept(new LinkedList<>());
         listConsumer.accept(new DoublyLinkedList<>());
     }
@@ -292,11 +291,10 @@ public class DynamicArrayTest {
             assertEquals(1, list.get(0));
             assertEquals(2, list.get(1));
             assertEquals(3, list.get(2));
-            assertFalse(list.addAll(example));
-//            assertEquals(0, list.get(3));
+
         };
-//        listConsumer.accept(new ArrayList<>());
-//        listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
         listConsumer.accept(new LinkedList<>());
         listConsumer.accept(new DoublyLinkedList<>());
     }
@@ -312,9 +310,9 @@ public class DynamicArrayTest {
             assertEquals(0, list.indexOf(1));
             assertEquals(-1, list.indexOf(2));
         };
-//        listConsumer.accept(new ArrayList<>());
-//        listConsumer.accept(new DynamicArray<>());
-//        listConsumer.accept(new LinkedList<>());
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new LinkedList<>());
         listConsumer.accept(new DoublyLinkedList<>());
     }
 
@@ -330,8 +328,8 @@ public class DynamicArrayTest {
             assertEquals(-1, list.lastIndexOf(5));
             assertEquals(0, list.lastIndexOf(1));
         };
-//        listConsumer.accept(new ArrayList<>());
-        // listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
         listConsumer.accept(new DoublyLinkedList<>());
         listConsumer.accept(new LinkedList<>());
     }
@@ -351,20 +349,17 @@ public class DynamicArrayTest {
 
             assertTrue(list.containsAll(example));
         };
-//        listConsumer.accept(new ArrayList<>());
-//        listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
         listConsumer.accept(new LinkedList<>());
         listConsumer.accept(new DoublyLinkedList<>());
     }
 
     @Test
-    void containsAll() { //negative example
+    void containsAll() {
         Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
             List<Integer> in = new ArrayList<>();
             in.add(1);
-            in.add(3);
-            in.add(2);
-            in.add(2);
             in.add(-1);
 
             list.add(1);
@@ -374,8 +369,8 @@ public class DynamicArrayTest {
 
             assertFalse(list.containsAll(in));
         };
-//        listConsumer.accept(new ArrayList<>());
-//        listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
         listConsumer.accept(new LinkedList<>());
         listConsumer.accept(new DoublyLinkedList<>());
     }
@@ -396,8 +391,8 @@ public class DynamicArrayTest {
             assertEquals(3, sublist.size());
             assertThrows(RuntimeException.class, () -> sublist.get(3));
         };
-        //listConsumer.accept(new ArrayList<>());
-        //listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
         listConsumer.accept(new DoublyLinkedList<>());
         listConsumer.accept(new LinkedList<>());
     }
@@ -418,8 +413,8 @@ public class DynamicArrayTest {
         };
         listConsumer.accept(new ArrayList<>());
         listConsumer.accept(new DynamicArray<>());
-        //listConsumer.accept(new DoublyLinkedList<>());
-        //listConsumer.accept(new LinkedList<>());
+        listConsumer.accept(new DoublyLinkedList<>());
+        listConsumer.accept(new LinkedList<>());
     }
 
     @Test
@@ -431,8 +426,8 @@ public class DynamicArrayTest {
             assertEquals(2, list.get(0));
             assertEquals(1, list.get(1));
         };
-//        listConsumer.accept(new ArrayList<>());
-//        listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
         listConsumer.accept(new DoublyLinkedList<>());
         listConsumer.accept(new LinkedList<>());
     }
@@ -451,10 +446,10 @@ public class DynamicArrayTest {
             assertEquals(3, test.next());
             assertFalse(test.hasNext());
         };
-        // listConsumer.accept(new ArrayList<>());
-        //listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
         listConsumer.accept(new DoublyLinkedList<>());
-        //listConsumer.accept(new LinkedList<>());
+        listConsumer.accept(new LinkedList<>());
     }
 
     @Test
@@ -473,8 +468,8 @@ public class DynamicArrayTest {
             assertEquals(2, testForIndex.previous());
             assertEquals(1, testForIndex.previous());
         };
-        // listConsumer.accept(new ArrayList<>());
-        //listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
         listConsumer.accept(new DoublyLinkedList<>());
         listConsumer.accept(new LinkedList<>());
     }
@@ -498,8 +493,8 @@ public class DynamicArrayTest {
             assertEquals(1, testPrevious.previousIndex());
 
         };
-        //listConsumer.accept(new ArrayList<>());
-        //listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
         listConsumer.accept(new DoublyLinkedList<>());
         listConsumer.accept(new LinkedList<>());
     }
@@ -522,9 +517,9 @@ public class DynamicArrayTest {
             assertTrue(iterator.hasNext());
 
         };
-        //listConsumer.accept(new ArrayList<>());
-        // listConsumer.accept(new DynamicArray<>());
-        listConsumer.accept(new DoublyLinkedList<>()); //что то не так в моем примере
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new DoublyLinkedList<>());
         listConsumer.accept(new LinkedList<>());
     }
 
@@ -544,8 +539,8 @@ public class DynamicArrayTest {
             testWithIndex.set(0);
             assertEquals(0, list.get(0));
         };
-        //listConsumer.accept(new ArrayList<>());
-        //listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
         listConsumer.accept(new LinkedList<>());
         listConsumer.accept(new DoublyLinkedList<>());
     }
@@ -564,8 +559,8 @@ public class DynamicArrayTest {
             assertEquals(-1, list.get(0));
             assertEquals(4, list.size());
         };
-        //listConsumer.accept(new ArrayList<>());
-        //listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
         listConsumer.accept(new LinkedList<>());
         listConsumer.accept(new DoublyLinkedList<>());
     }
@@ -584,8 +579,8 @@ public class DynamicArrayTest {
             assertEquals(4, list.size());
             assertEquals(1, list.get(1));
         };
-        // listConsumer.accept(new ArrayList<>());
-        //listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
         listConsumer.accept(new LinkedList<>());
         listConsumer.accept(new DoublyLinkedList<>());
     }
@@ -604,11 +599,10 @@ public class DynamicArrayTest {
 
             assertEquals(4, list.size());
             assertEquals(1, list.get(1));
-
             assertEquals(2, test3.next());
         };
-        ///listConsumer.accept((new ArrayList<>()));
-        //listConsumer.accept((new DynamicArray<>()));
+        listConsumer.accept((new ArrayList<>()));
+        listConsumer.accept((new DynamicArray<>()));
         listConsumer.accept(new LinkedList<>());
         listConsumer.accept(new DoublyLinkedList<>());
     }
@@ -631,8 +625,8 @@ public class DynamicArrayTest {
             ListIterator<Integer> newIterator = list.listIterator();
             assertEquals(2, newIterator.next());
         };
-        // listConsumer.accept(new ArrayList<>());
-        // listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
         listConsumer.accept(new LinkedList<>());
         listConsumer.accept(new DoublyLinkedList<>());
     }
@@ -652,8 +646,8 @@ public class DynamicArrayTest {
             assertEquals(3, list.get(1));
             assertTrue(test2.hasNext());
         };
-        //listConsumer.accept(new ArrayList<>());
-        //listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
         listConsumer.accept(new LinkedList<>());
         listConsumer.accept(new DoublyLinkedList<>());
     }
@@ -675,8 +669,8 @@ public class DynamicArrayTest {
             assertEquals(1, list.get(0));
             assertEquals(2, list.get(1));
         };
-        //listConsumer.accept(new ArrayList<>());
-        // listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
         listConsumer.accept(new LinkedList<>());
         listConsumer.accept(new DoublyLinkedList<>());
     }
@@ -699,8 +693,8 @@ public class DynamicArrayTest {
             assertEquals(3, list.get(1));
             assertTrue(test2.hasNext());
         };
-        //listConsumer.accept(new ArrayList<>());
-        //listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
         listConsumer.accept(new LinkedList<>());
         listConsumer.accept(new DoublyLinkedList<>());
     }
@@ -712,8 +706,8 @@ public class DynamicArrayTest {
             ListIterator<Integer> iterator = list.listIterator();
             assertThrows(IllegalStateException.class, () -> iterator.remove());
         };
-        //   listConsumer.accept(new ArrayList<>());
-        //  listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
         listConsumer.accept(new LinkedList<>());
         listConsumer.accept(new DoublyLinkedList<>());
     }
@@ -733,8 +727,8 @@ public class DynamicArrayTest {
             assertEquals("3", typeString[2]);
             assertEquals(3, list.size());
         };
-//        listConsumer.accept(new ArrayList<>());
-//        listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
         listConsumer.accept(new DoublyLinkedList<>());
         listConsumer.accept(new LinkedList<>());
     }
@@ -754,14 +748,13 @@ public class DynamicArrayTest {
 
             Employee[] typeEmployee = new Employee[list.size()];
             list.toArray(typeEmployee);
-
             assertEquals(employee1.toString(), list.get(0).toString());
             assertEquals(employee2.toString(), typeEmployee[1].toString());
             assertEquals(list.get(2).toString(), typeEmployee[2].toString());
             assertEquals(4, list.size());
         };
-        // listConsumer.accept(new ArrayList<>());
-        //listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new DynamicArray<>());
         listConsumer.accept(new LinkedList<>());
         listConsumer.accept(new DoublyLinkedList<>());
     }

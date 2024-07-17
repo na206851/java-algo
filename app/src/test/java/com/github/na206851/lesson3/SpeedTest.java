@@ -43,6 +43,8 @@ public class SpeedTest {
         };
         listConsumer.accept(new ArrayList<>());
         listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new DoublyLinkedList<>());
+        listConsumer.accept(new LinkedList<>());
     }
 
     @Test
@@ -66,7 +68,7 @@ public class SpeedTest {
     }
 
     @Test
-    void addIndex() {
+    void addIndex() {       // add element in zero index
         Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
 
             long start = System.nanoTime();
@@ -80,10 +82,12 @@ public class SpeedTest {
         };
         listConsumer.accept(new ArrayList<>());
         listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new DoublyLinkedList<>());
+        listConsumer.accept(new LinkedList<>());
     }
 
     @Test
-    void removeElement() { //из начала
+    void removeElementBeginIndex() { //remove element beggin index
         Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
             for (int i = 0; i < 1_000_000; i++) {
                 list.add(i);
@@ -100,6 +104,8 @@ public class SpeedTest {
         };
         listConsumer.accept(new ArrayList<>());
         listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new DoublyLinkedList<>());
+        listConsumer.accept(new LinkedList<>());
     }
 
     @Test
@@ -120,6 +126,8 @@ public class SpeedTest {
         };
         listConsumer.accept(new ArrayList<>());
         listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new DoublyLinkedList<>());
+        listConsumer.accept(new LinkedList<>());
     }
 
     @Test
@@ -156,10 +164,10 @@ public class SpeedTest {
             long result = end - start;
             System.out.println(result + " speed get element for begin index");
         };
-//        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new ArrayList<>());
         listConsumer.accept(new DynamicArray<>());
-//        listConsumer.accept(new DoublyLinkedList<>());
-        //listConsumer.accept(new LinkedList<>());
+        listConsumer.accept(new DoublyLinkedList<>());
+        listConsumer.accept(new LinkedList<>());
     }
 
     @Test
@@ -170,17 +178,18 @@ public class SpeedTest {
             }
 
             long start = System.nanoTime();
-            list.get(list.size()/2);
+            list.get(list.size() / 2);
             long end = System.nanoTime();
 
             long result = end - start;
             System.out.println(result + " speed get element for middle index");
         };
-//        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new ArrayList<>());
         listConsumer.accept(new DynamicArray<>());
-//        listConsumer.accept(new DoublyLinkedList<>());
-        //listConsumer.accept(new LinkedList<>());
+        listConsumer.accept(new DoublyLinkedList<>());
+        listConsumer.accept(new LinkedList<>());
     }
+
     @Test
     void getFinishIndex() {
         Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
@@ -189,15 +198,15 @@ public class SpeedTest {
             }
 
             long start = System.nanoTime();
-            list.get(list.size()-1);
+            list.get(list.size() - 1);
             long end = System.nanoTime();
 
             long result = end - start;
             System.out.println(result + " speed get element for begin index");
         };
-//        listConsumer.accept(new ArrayList<>());
+        listConsumer.accept(new ArrayList<>());
         listConsumer.accept(new DynamicArray<>());
-//        listConsumer.accept(new DoublyLinkedList<>());
-       //listConsumer.accept(new LinkedList<>());
+        listConsumer.accept(new DoublyLinkedList<>());
+        listConsumer.accept(new LinkedList<>());
     }
 }

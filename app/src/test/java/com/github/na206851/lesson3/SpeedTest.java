@@ -1,8 +1,10 @@
 package com.github.na206851.lesson3;
 
+import com.github.na206851.lesson4.DoublyLinkedList;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -23,11 +25,12 @@ public class SpeedTest {
         };
         listConsumer.accept(new ArrayList<>());
         listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new LinkedList<>());
+        listConsumer.accept(new DoublyLinkedList<>());
     }
 
     @Test
     void addElementMiddleIndex() {
-
         Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
             for (int i = 0; i < 1_000_000; i++) {
                 list.add(i);
@@ -49,7 +52,6 @@ public class SpeedTest {
 
     @Test
     void addElementBeginIndex() {
-
         Consumer<List<Integer>> listConsumer = (List<Integer> list) -> {
             for (int i = 0; i < 1_000_000; i++) {
                 list.add(i);
@@ -65,6 +67,8 @@ public class SpeedTest {
         };
         listConsumer.accept(new ArrayList<>());
         listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new LinkedList<>());
+        listConsumer.accept(new DoublyLinkedList<>());
     }
 
     @Test
@@ -147,7 +151,9 @@ public class SpeedTest {
             System.out.println(result + " remove speed middle index");
         };
         listConsumer.accept(new ArrayList<>());
-        //listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new DynamicArray<>());
+        listConsumer.accept(new DoublyLinkedList<>());
+        listConsumer.accept(new LinkedList<>());
     }
 
     @Test

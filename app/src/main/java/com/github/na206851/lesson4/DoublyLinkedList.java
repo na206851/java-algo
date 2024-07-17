@@ -546,7 +546,6 @@ public class DoublyLinkedList<E>
         }
         if (index == 0) {
             addFirst(element);
-
         } else if (index == size) {
             addLast(element);
         } else if (index < size) {
@@ -658,6 +657,5 @@ public class DoublyLinkedList<E>
         }
         sub.size = toIndex - fromIndex;
         return sub;
-
     }
 }

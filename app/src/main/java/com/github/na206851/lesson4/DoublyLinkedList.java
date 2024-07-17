@@ -9,7 +9,6 @@ public class DoublyLinkedList<E>
     Node<E> tail;
     private int size = 0;
 
-
     private class Node<E> {
         Node<E> next;
         E item;
@@ -58,13 +57,11 @@ public class DoublyLinkedList<E>
     public void addLast(E e) {
         Node node = new Node(null, e, null);
         if (tail == null) {
-            this.head = node;
-            tail = node;
-        } else {
-            tail.next = node;
-            node.prev = tail;
-            tail = node;
+            addFirst(e);
         }
+        tail.next = node;
+        node.prev = tail;
+        tail = node;
         size++;
         modCount++;
     }
@@ -85,7 +82,6 @@ public class DoublyLinkedList<E>
     public E removeFirst() {
         Object removeElement = head.item;
         head = head.next;
-        Object removeElement = removeNode.item;
         size -= 1;
         modCount++;
         return (E) removeElement;
@@ -350,14 +346,13 @@ public class DoublyLinkedList<E>
             try {
                 DoublyLinkedList.this.set(lastIndex, e);
             } catch (IllegalStateException exception) {
-                throw new ConcurrentModificationException();
+                throw new ConcurrentModificationException("ошибка");
             }
         }
 
         @Override
         public void add(E e) {
             checkForModification();
-
             DoublyLinkedList.this.add(nextIndex, e);
             expectedModCount++;
         }
@@ -420,17 +415,6 @@ public class DoublyLinkedList<E>
         return false;
     }
 
-    public int searchItem(E item) {
-        Object o = (Object) item;
-        for (int i = 0; i < size(); i++) {
-            if (DoublyLinkedList.this.get(i).equals(o)) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-
     @Override
     public boolean containsAll(Collection<?> c) {
         if (c.size() > size) {
@@ -473,15 +457,11 @@ public class DoublyLinkedList<E>
     public boolean removeAll(Collection<?> c) {
         if (size == 0) return false;
 
-        Object[] in = c.toArray();
-        int i = 0;
         int count = 0;
         for (Object o : c) {
             if (DoublyLinkedList.this.contains(o)) {
                 DoublyLinkedList.this.remove(o);
                 count++;
-            } else {
-                i++;
             }
         }
         return count != 0;
@@ -506,7 +486,6 @@ public class DoublyLinkedList<E>
 
     @Override
     public void clear() {
-
         head = null;
         tail = null;
         size = 0;
@@ -516,7 +495,6 @@ public class DoublyLinkedList<E>
     public Iterator<E> descendingIterator() {
         return new MyListIterator(0);
     }
-
 
     @Override
     public E get(int index) {
@@ -540,7 +518,6 @@ public class DoublyLinkedList<E>
             }
             return (E) nodeTail.item;
         }
-        return (E) null;
     }
 
     @Override
@@ -668,7 +645,7 @@ public class DoublyLinkedList<E>
     }
 
     @Override
-    public List<E> subList(int fromIndex, int toIndex) {    //доработать
+    public List<E> subList(int fromIndex, int toIndex) {
         if (fromIndex < 0 || fromIndex > size || toIndex < 0 || toIndex > size) {
             throw new RuntimeException();
         }

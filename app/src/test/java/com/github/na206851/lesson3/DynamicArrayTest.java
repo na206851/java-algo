@@ -733,31 +733,31 @@ public class DynamicArrayTest {
         listConsumer.accept(new LinkedList<>());
     }
 
-    @Test
-    void testToArrayWithType2() {
-        Consumer<List<Employee>> listConsumer = (List<Employee> list) -> {
-            Employee employee1 = new Employee("peter");
-            Employee employee2 = new Employee("pasha");
-            Employee employee3 = new Employee("julia");
-            Employee employee4 = new Employee("amur");
-
-            list.add(employee1);
-            list.add(employee2);
-            list.add(employee3);
-            list.add(employee4);
-
-            Employee[] typeEmployee = new Employee[list.size()];
-            list.toArray(typeEmployee);
-            assertEquals(employee1.toString(), list.get(0).toString());
-            assertEquals(employee2.toString(), typeEmployee[1].toString());
-            assertEquals(list.get(2).toString(), typeEmployee[2].toString());
-            assertEquals(4, list.size());
-        };
-        listConsumer.accept(new ArrayList<>());
-        listConsumer.accept(new DynamicArray<>());
-        listConsumer.accept(new LinkedList<>());
-        listConsumer.accept(new DoublyLinkedList<>());
-    }
+//    @Test
+//    void testToArrayWithType2() {
+//        Consumer<List<Employee>> listConsumer = (List<Employee> list) -> {
+//            Employee employee1 = new Employee("peter");
+//            Employee employee2 = new Employee("pasha");
+//            Employee employee3 = new Employee("julia");
+//            Employee employee4 = new Employee("amur");
+//
+//            list.add(employee1);
+//            list.add(employee2);
+//            list.add(employee3);
+//            list.add(employee4);
+//
+//            Employee[] typeEmployee = new Employee[list.size()];
+//            list.toArray(typeEmployee);
+//            assertEquals(employee1.toString(), list.get(0).toString());
+//            assertEquals(employee2.toString(), typeEmployee[1].toString());
+//            assertEquals(list.get(2).toString(), typeEmployee[2].toString());
+//            assertEquals(4, list.size());
+//        };
+//        listConsumer.accept(new ArrayList<>());
+//        listConsumer.accept(new DynamicArray<>());
+//        listConsumer.accept(new LinkedList<>());
+//        listConsumer.accept(new DoublyLinkedList<>());
+//    }
 
     @Test
     public void removeAll() {

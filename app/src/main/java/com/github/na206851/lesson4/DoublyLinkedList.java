@@ -13,7 +13,6 @@ public class DoublyLinkedList<E>
         Node<E> next;
         E item;
         Node<E> prev;
-        int modcount;
 
         Node(Node<E> next, E element, Node<E> prev) {
             this.item = element;

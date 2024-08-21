@@ -200,7 +200,7 @@ public class DoublyLinkedList<E>
 
     @Override
     public E pop() {
-        if (size == 0) {
+        if (DoublyLinkedList.this.isEmpty()) {
             throw new NoSuchElementException();
         }
         return removeFirst();

@@ -7,7 +7,6 @@ public class Employee {
     int workExperience;
     int salary;
 
-
     public String getFirstName() {
         return this.firstName;
     }
@@ -46,7 +45,6 @@ public class Employee {
     public Employee(String firstName) {
         this.firstName = firstName;
     }
-
 
     public Employee(String firstName, int salary) {
         this.firstName = firstName;
@@ -97,6 +95,5 @@ public class Employee {
     @Override
     public String toString() {
         return this.getFirstName() + " " + this.getSalary();
-
     }
 }

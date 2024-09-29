@@ -9,6 +9,23 @@ public class MyMap<K, V> implements Map<K, V> {
         map = new Node[defaultSize];
     }
 
+    private class Node<S, T> {
+        S key;
+        T val;
+        Node next;
+
+        public Node(S key, T val) {
+            this.key = key;
+            this.val = val;
+        }
+
+        @Override
+        public String toString() {
+            return key + "=" + val;
+        }
+    }
+
+
     @Override
     public void add(K key, V value) {
         int index = hash(key);

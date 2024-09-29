@@ -27,8 +27,8 @@ public class MyMap<K, V> implements Map<K, V> {
 
 
     @Override
-    public void add(K key, V value) {
-        int index = hash(key);
+    public void put(K key, V value) {
+        int index = index(key);
 
         if (index >= map.length) {
             increaseSize();
@@ -38,43 +38,43 @@ public class MyMap<K, V> implements Map<K, V> {
         if (map[index] == null) {
             map[index] = newNode;
         } else if (map[index] != null) {
-            Node<K, V> tmp = map[index];
-            if (hash(tmp.key) != (hash((K) newNode.key)) && tmp.val != newNode.val) {
+            Node tmp = map[index];
+            if (index((K) tmp.key) != (index((K) newNode.key)) && tmp.val != newNode.val) {
                 while (tmp != null) {
                     tmp = tmp.next;
                 }
                 tmp.next = newNode;
-            } else if (hash(tmp.key) != hash((K) newNode.key) && tmp.val == newNode.val) {
+            } else if (index((K) tmp.key) != index((K) newNode.key) && tmp.val == newNode.val) {
                 map[index] = newNode;
             }
         }
     }
 
     @Override
-    public Node remove(K key) {
-        int index = hash(key);
-        Node<K, V> tmp = map[index];
+    public V remove(K key) {
+        int index = index(key);
+        Node tmp = map[index];
         if (tmp.next == null) {
             map[index] = null;
         } else {
             while (tmp != null) {
-                if (tmp.key.equals(hash(key))) {
+                if (tmp.key.equals(index(key))) {
                     tmp.val = null;
                     tmp.key = null;
                 }
                 tmp = tmp.next;
             }
         }
-        return tmp;
+        return (V) tmp.val;
     }
 
     @Override
-    public V search(K key) {
-        Node tmp = map[hash(key)];
+    public V get(K key) {
+        Node tmp = map[index(key)];
         if (tmp.next == null) {
-            return (V) map[hash(key)].val;
+            return (V) map[index(key)].val;
         } else {
-            Node nodeInOnesIndex = map[hash(key)];
+            Node nodeInOnesIndex = map[index(key)];
             while (nodeInOnesIndex != null) {
                 if (nodeInOnesIndex.key == key && nodeInOnesIndex.equals(key)) {
                     return (V) nodeInOnesIndex.val;
@@ -85,27 +85,17 @@ public class MyMap<K, V> implements Map<K, V> {
         return null;
     }
 
-    int size() {
-        for (Node<K, V> o : map) {
-            if (o != null) {
-                size++;
-            }
-        }
-        return size;
+    public int index(K key) {
+        return Math.abs(key.hashCode()) % map.length;
     }
 
-    public int hash(K key) {
-        int numberHash = (key.hashCode() % size());
-        return numberHash;
-    }
-
-    public void increaseSize() {
-        Node<K, V>[] tmpMap = map;
+    private void increaseSize() {
+        Node[] tmpMap = map;
         map = new Node[tmpMap.length * 2];
         size = size * 2;
-        for (Node<K, V> node : tmpMap) {
+        for (Node node : tmpMap) {
             while (node != null) {
-                add(node.key, node.val);
+                put((K) node.key, (V) node.val);
                 node = node.next;
             }
         }
@@ -121,20 +111,5 @@ public class MyMap<K, V> implements Map<K, V> {
         }
         tmp.append("}");
         return tmp.toString();
-    }
-}
-
-class Node<K, V> {
-    K key;
-    V val;
-    Node next;
-
-    public Node(K key, V val) {
-        this.key = key;
-        this.val = val;
-    }
-
-    public String toString() {
-        return key + "=" + val;
     }
 }

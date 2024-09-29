@@ -101,7 +101,8 @@ public class MyMap<K, V> implements Map<K, V> {
         }
     }
 
-    public String toStringAllElementHashTable() {
+    @Override
+    public String toString() {
         StringBuilder tmp = new StringBuilder();
         tmp.append("{");
         for (Object o : map) {

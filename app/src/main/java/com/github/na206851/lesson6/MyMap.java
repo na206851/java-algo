@@ -1,5 +1,7 @@
 package com.github.na206851.lesson6;
 
+import java.util.HashMap;
+
 public class MyMap<K, V> implements Map<K, V> {
     public Node[] map;
     int defaultSize = 8;
@@ -25,16 +27,28 @@ public class MyMap<K, V> implements Map<K, V> {
         }
     }
 
+    public static void main(String[] args) {
+        MyMap<String, Integer> test = new MyMap<>();
+        HashMap<String, Integer> jdk = new HashMap<>();
+        for (int i = 0; i < 10; i++) {
+            test.put(String.valueOf(i), i);
+            jdk.put(String.valueOf(i), i);
+        }
+
+        System.out.println(test);
+        System.out.println(jdk);
+    }
 
     @Override
     public void put(K key, V value) {
         int index = index(key);
 
-        if (index >= map.length) {
+        if (map[index] != null) {
             increaseSize();
+            index = index(key);
         }
-        Node newNode = new Node(key, value);
 
+        Node newNode = new Node(key, value);
         if (map[index] == null) {
             map[index] = newNode;
         } else if (map[index] != null) {

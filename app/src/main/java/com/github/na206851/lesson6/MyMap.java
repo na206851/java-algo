@@ -107,7 +107,18 @@ public class MyMap<K, V> implements Map<K, V> {
                 tmp.append(o + ", ");
             }
         }
+        tmp.delete(tmp.length() - 2, tmp.length());
         tmp.append("}");
         return tmp.toString();
+    }
+
+    int size() {
+        int currentSize = 0;
+        for (Node node : map) {
+            if (node != null) {
+                currentSize++;
+            }
+        }
+        return currentSize;
     }
 }

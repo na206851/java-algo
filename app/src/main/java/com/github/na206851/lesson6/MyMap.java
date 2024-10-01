@@ -1,7 +1,5 @@
 package com.github.na206851.lesson6;
 
-import java.util.HashMap;
-
 public class MyMap<K, V> implements Map<K, V> {
     public Node[] map;
     int defaultSize = 8;
@@ -25,18 +23,6 @@ public class MyMap<K, V> implements Map<K, V> {
         public String toString() {
             return key + "=" + val;
         }
-    }
-
-    public static void main(String[] args) {
-        MyMap<String, Integer> test = new MyMap<>();
-        HashMap<String, Integer> jdk = new HashMap<>();
-        for (int i = 0; i < 10; i++) {
-            test.put(String.valueOf(i), i);
-            jdk.put(String.valueOf(i), i);
-        }
-
-        System.out.println(test);
-        System.out.println(jdk);
     }
 
     @Override
@@ -84,23 +70,20 @@ public class MyMap<K, V> implements Map<K, V> {
 
     @Override
     public V get(K key) {
-        Node tmp = map[index(key)];
-        if (tmp.next == null) {
-            return (V) map[index(key)].val;
-        } else {
-            Node nodeInOnesIndex = map[index(key)];
-            while (nodeInOnesIndex != null) {
-                if (nodeInOnesIndex.key == key && nodeInOnesIndex.equals(key)) {
-                    return (V) nodeInOnesIndex.val;
-                }
-                nodeInOnesIndex = nodeInOnesIndex.next;
+        int index = index(key);
+        Node<K, V> tmp = map[index];
+
+        while (tmp != null) {
+            if (tmp.key.equals(key)) {
+                return tmp.val;
             }
+            tmp = tmp.next;
         }
         return null;
     }
 
-    public int index(K key) {
-        return Math.abs(key.hashCode()) % map.length;
+    private int index(K key) {
+        return (key.hashCode()) % map.length;
     }
 
     private void increaseSize() {

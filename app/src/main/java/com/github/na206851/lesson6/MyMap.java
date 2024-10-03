@@ -72,12 +72,15 @@ public class MyMap<K, V> implements Map<K, V> {
     public V get(K key) {
         int index = index(key);
         Node<K, V> tmp = map[index];
-
-        while (tmp != null) {
-            if (tmp.key.equals(key)) {
-                return tmp.val;
+        if (tmp.next == null) {
+            return tmp.val;
+        } else {
+            while (tmp.next != null) {
+                if (tmp.key.equals(key)) {
+                    return tmp.val;
+                }
+                tmp = tmp.next;
             }
-            tmp = tmp.next;
         }
         return null;
     }

@@ -1,5 +1,6 @@
-package com.github.na206851.lesson6;
+package com.github.na206851.lesson6.MyMapTest;
 
+import com.github.na206851.lesson6.hashMap.MyMap;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;

@@ -39,14 +39,10 @@ public class MyMap<K, V> implements Map<K, V> {
             map[index] = newNode;
         } else if (map[index] != null) {
             Node tmp = map[index];
-            if (index((K) tmp.key) != (index((K) newNode.key)) && tmp.val != newNode.val) {
-                while (tmp != null) {
-                    tmp = tmp.next;
-                }
-                tmp.next = newNode;
-            } else if (index((K) tmp.key) != index((K) newNode.key) && tmp.val == newNode.val) {
-                map[index] = newNode;
+            while (tmp.next != null) {
+                tmp = tmp.next;
             }
+            tmp.next = newNode;
         }
     }
 

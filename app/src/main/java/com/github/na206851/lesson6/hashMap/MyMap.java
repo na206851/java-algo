@@ -1,15 +1,14 @@
 package com.github.na206851.lesson6;
 
 public class MyMap<K, V> implements Map<K, V> {
-    public Node[] map;
-    int defaultSize = 8;
-    int size = defaultSize;
+    private Node[] map;
+    private int defaultSize = 8;
 
     public MyMap() {
         map = new Node[defaultSize];
     }
 
-    private class Node<S, T> {
+    private static class Node<S, T> {
         S key;
         T val;
         Node next;
@@ -28,8 +27,9 @@ public class MyMap<K, V> implements Map<K, V> {
     @Override
     public void put(K key, V value) {
         int index = index(key);
-
-        if (map[index] != null) {
+        int transhold = (int) (map.length * 0.75);
+        System.out.println(transhold + "transhold; " + index + " index");
+        if (index(key) > transhold) {
             increaseSize();
             index = index(key);
         }

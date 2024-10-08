@@ -110,11 +110,20 @@ public class MyMap<K, V> implements Map<K, V> {
 
     int size() {
         int currentSize = 0;
+    public int size() {
+        int size = 0;
         for (Node node : map) {
             if (node != null) {
                 currentSize++;
             }
         }
         return currentSize;
+            while (node != null) {
+                size++;
+                node = node.next;
+            }
+        }
+        return size;
+    }
     }
 }

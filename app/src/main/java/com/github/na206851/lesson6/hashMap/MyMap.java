@@ -36,12 +36,19 @@ public class MyMap<K, V> implements Map<K, V> {
         Node newNode = new Node(key, value);
         if (map[index] == null) {
             map[index] = newNode;
-        } else if (map[index] != null) {
+        } else {
             Node tmp = map[index];
-            while (tmp.next != null) {
+            while (tmp != null) {
+                if (tmp.key.equals(newNode.key)) {
+                    tmp.val = value;
+                    return;
+                }
+                if (tmp.next == null) {
+                    tmp.next = newNode;
+                    tmp = tmp.next;
+                }
                 tmp = tmp.next;
             }
-            tmp.next = newNode;
         }
     }
 

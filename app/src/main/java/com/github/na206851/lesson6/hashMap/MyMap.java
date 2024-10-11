@@ -27,9 +27,8 @@ public class MyMap<K, V> implements Map<K, V> {
     @Override
     public void put(K key, V value) {
         int index = index(key);
-        int transhold = (int) (map.length * 0.75);
-        System.out.println(transhold + "transhold; " + index + " index");
-        if (index(key) > transhold) {
+        int threshold = (int) (map.length * 0.75);
+        if (index(key) > threshold) {
             increaseSize();
             index = index(key);
         }
@@ -108,16 +107,9 @@ public class MyMap<K, V> implements Map<K, V> {
         return tmp.toString();
     }
 
-    int size() {
-        int currentSize = 0;
     public int size() {
         int size = 0;
         for (Node node : map) {
-            if (node != null) {
-                currentSize++;
-            }
-        }
-        return currentSize;
             while (node != null) {
                 size++;
                 node = node.next;
@@ -125,5 +117,24 @@ public class MyMap<K, V> implements Map<K, V> {
         }
         return size;
     }
+
+    public static void main(String[] args) {
+        MyMap<Integer, Integer> map = new MyMap<>();
+        HashMap<Integer, Integer> jdk = new HashMap<>(1);
+        for (int i = 0; i < 10; i++) {
+            map.put(i, i);
+            jdk.put(i, i);
+        }
+
+        map.put(0, 1);
+        map.put(3, -1);
+        jdk.put(0, 1);
+        jdk.put(3, -1);
+
+        System.out.println(map + " mymap");
+
+        System.out.println(map.size());
+        System.out.println(jdk);
+        System.out.println(jdk.size());
     }
 }

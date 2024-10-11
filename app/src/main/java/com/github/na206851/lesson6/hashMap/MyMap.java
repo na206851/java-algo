@@ -91,7 +91,6 @@ public class MyMap<K, V> implements Map<K, V> {
     private void increaseSize() {
         Node[] tmpMap = map;
         map = new Node[tmpMap.length * 2];
-        size = size * 2;
         for (Node node : tmpMap) {
             while (node != null) {
                 put((K) node.key, (V) node.val);

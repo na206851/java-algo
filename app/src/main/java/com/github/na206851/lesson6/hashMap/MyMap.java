@@ -101,18 +101,13 @@ public class MyMap<K, V> implements Map<K, V> {
     }
 
     private int index(K key) {
-        return (key.hashCode()) % map.length;
+        return key.hashCode() % map.length;
     }
 
-    private void increaseSize() {
+    private void increaseSize() {       //new method
         Node[] tmpMap = map;
-        map = new Node[tmpMap.length * 2];
-        for (Node node : tmpMap) {
-            while (node != null) {
-                put((K) node.key, (V) node.val);
-                node = node.next;
-            }
-        }
+        map = new Node[map.length * 2];
+        System.arraycopy(tmpMap, 0, map, 0, size);
     }
 
     @Override

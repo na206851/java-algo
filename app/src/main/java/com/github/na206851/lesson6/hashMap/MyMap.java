@@ -1,4 +1,6 @@
-package com.github.na206851.lesson6;
+package com.github.na206851.lesson6.hashMap;
+
+import java.util.HashMap;
 
 public class MyMap<K, V> implements Map<K, V> {
     private Node[] map;

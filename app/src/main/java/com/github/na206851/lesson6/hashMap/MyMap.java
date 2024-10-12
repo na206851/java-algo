@@ -58,22 +58,26 @@ public class MyMap<K, V> implements Map<K, V> {
         }
     }
 
-    @Override
-    public V remove(K key) {
+    public V remove(K key) {        //new method
         int index = index(key);
         Node tmp = map[index];
-        if (tmp.next == null) {
+        if (map[index].key.equals(key)) {
             map[index] = null;
-        } else {
+            size--;
+            return (V) tmp.val;
+        } else if (tmp.next != null) {
             while (tmp != null) {
-                if (tmp.key.equals(index(key))) {
-                    tmp.val = null;
+                Node removeElement = tmp;
+                if (tmp.key.equals(key)) {
                     tmp.key = null;
+                    tmp.val = null;
+                    return (V) removeElement.val;
                 }
                 tmp = tmp.next;
             }
+            size--;
         }
-        return (V) tmp.val;
+        return null;
     }
 
     @Override

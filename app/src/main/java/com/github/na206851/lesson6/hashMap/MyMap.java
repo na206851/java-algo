@@ -81,15 +81,21 @@ public class MyMap<K, V> implements Map<K, V> {
     }
 
     @Override
-    public V get(K key) {
+    public V get(K key) {       //new method
         int index = index(key);
+        if (index > map.length || index < 0) {
+            return null;
+        }
         Node<K, V> tmp = map[index];
-
-        while (tmp != null) {
-            if (tmp.key.equals(key)) {
-                return tmp.val;
+        if (map[index].key.equals(key)) {
+            return (V) map[index].val;
+        } else if (tmp.next != null) {
+            while (tmp != null) {
+                if (tmp.key.equals(key)) {
+                    return (V) tmp.val;
+                }
+                tmp = tmp.next;
             }
-            tmp = tmp.next;
         }
         return null;
     }

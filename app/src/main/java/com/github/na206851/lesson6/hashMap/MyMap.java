@@ -5,6 +5,8 @@ import java.util.HashMap;
 public class MyMap<K, V> implements Map<K, V> {
     private Node[] map;
     private int defaultSize = 8;
+    static final float DEFAULT_LOAD_FACTOR = 0.75f;
+    private int size = 0;
 
     public MyMap() {
         map = new Node[defaultSize];
@@ -29,8 +31,8 @@ public class MyMap<K, V> implements Map<K, V> {
     @Override
     public void put(K key, V value) {
         int index = index(key);
-        int threshold = (int) (map.length * 0.75);
-        if (index(key) > threshold) {
+        int threshold = (int) (map.length * DEFAULT_LOAD_FACTOR);
+        if (size() > threshold) {
             increaseSize();
             index = index(key);
         }
@@ -38,6 +40,7 @@ public class MyMap<K, V> implements Map<K, V> {
         Node newNode = new Node(key, value);
         if (map[index] == null) {
             map[index] = newNode;
+            size++;
         } else {
             Node tmp = map[index];
             while (tmp != null) {
@@ -48,6 +51,7 @@ public class MyMap<K, V> implements Map<K, V> {
                 if (tmp.next == null) {
                     tmp.next = newNode;
                     tmp = tmp.next;
+                    size++;
                 }
                 tmp = tmp.next;
             }
@@ -115,14 +119,7 @@ public class MyMap<K, V> implements Map<K, V> {
         return tmp.toString();
     }
 
-    public int size() {
-        int size = 0;
-        for (Node node : map) {
-            while (node != null) {
-                size++;
-                node = node.next;
-            }
-        }
+    public int size() {     //new method
         return size;
     }
 

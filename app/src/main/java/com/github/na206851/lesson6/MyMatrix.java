@@ -44,6 +44,10 @@ public class MyMatrix<V>
         return i.hashCode() ^ j.hashCode() << 8;
     }
 
+    public int size() {
+        return currentSize;
+    }
+
     public String toString() {
         StringBuilder str = new StringBuilder();
         int count = 0;

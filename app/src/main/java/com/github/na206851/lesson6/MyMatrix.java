@@ -28,11 +28,16 @@ public class MyMatrix<V>
     public void set(int i, int j, V value) {
         if (i < 0 || i >= size || j < 0 || j >= size) {
             throw new IndexOutOfBoundsException("выход за пределы матрицы в методе set");
+        } else {
+            if (matrix.containsKey(key(i, j))) {
+                matrix.remove(key(i, j));
+                matrix.put(key(i, j), value);
+            } else {
+                matrix.put(key(i, j), value);
+                list.add(new Pair(i, j));
+                currentSize++;
+            }
         }
-        if (matrix.get(key(i, j)) != null) {
-            matrix.remove(key(i, j));
-        }
-        matrix.put(key(i, j), value);
     }
 
     private int key(Integer i, Integer j) {

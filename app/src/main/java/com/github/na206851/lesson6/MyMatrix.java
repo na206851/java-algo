@@ -18,7 +18,7 @@ public class MyMatrix<V>
 
     @Override
     public V get(int i, int j) {
-        if ((i < 0 || i > size) && (j < 0 || j > size)) {
+        if (i < 0 || i >= size || j < 0 || j >= size) {
             throw new IndexOutOfBoundsException("выход за пределы матрицы в методе get");
         }
         return matrix.get(key(i, j));
@@ -26,7 +26,7 @@ public class MyMatrix<V>
 
     @Override
     public void set(int i, int j, V value) {
-        if ((i < 0 || i > size) && (j < 0 || j > size)) {
+        if (i < 0 || i >= size || j < 0 || j >= size) {
             throw new IndexOutOfBoundsException("выход за пределы матрицы в методе set");
         }
         if (matrix.get(key(i, j)) != null) {
@@ -40,13 +40,16 @@ public class MyMatrix<V>
     }
 
     public static void main(String[] args) {
-        MyMatrix<String> arr = new MyMatrix<>(10);
-        arr.set(0, 0, "value");
-        arr.set(0, 1, "value");
-        arr.set(1, 1, "value");
-        arr.set(1, 2, "value");
-        arr.set(2, 2, "value");
-        System.out.println(arr.matrix);
+        MyMatrix<String> arr = new MyMatrix<>(1_000_000);
+
+        arr.set(5, 5, "first");
+        arr.set(999_999, 999_999, "second");
+        arr.set(5, 5, "three");
+        System.out.println(arr);
+
+    }
+}
+
 class Pair {
     public final int row;
     public final int colon;

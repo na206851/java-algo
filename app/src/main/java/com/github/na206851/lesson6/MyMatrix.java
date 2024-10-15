@@ -44,6 +44,19 @@ public class MyMatrix<V>
         return i.hashCode() ^ j.hashCode() << 8;
     }
 
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+        int count = 0;
+        for (Pair pair : list) {
+            str.append("row = " + pair.getRow() + ", colon = " + pair.getColon() + ", value = " + matrix.get(key(pair.getRow(), pair.getColon())));
+            if (count != list.size() - 1) {
+                str.append("\n");
+            }
+            count++;
+        }
+        return str.toString();
+    }
+
     public static void main(String[] args) {
         MyMatrix<String> arr = new MyMatrix<>(1_000_000);
 

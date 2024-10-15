@@ -33,6 +33,6 @@ class MyMatrixTest {
         assertNull(matrix.get(0, 1));
 
         matrix.set(0, 0, 0);
-        assertEquals("row = 0, colon = 0, value = 0", matrix.get(0, 0));
+        assertEquals("row = 0, colon = 0, value = 0", matrix.toString());
     }
 }

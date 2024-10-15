@@ -1,11 +1,15 @@
 package com.github.na206851.lesson6;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class MyMatrix<V>
         extends HashMap implements Matrix<V> {
     HashMap<Integer, V> matrix;
+    List<Pair> list = new ArrayList<>();
     int size;
+    int currentSize = 0;
 
     public MyMatrix(int n) {
         this.matrix = new HashMap<>();
@@ -43,5 +47,20 @@ public class MyMatrix<V>
         arr.set(1, 2, "value");
         arr.set(2, 2, "value");
         System.out.println(arr.matrix);
+class Pair {
+    public final int row;
+    public final int colon;
+
+    public Pair(int row, int colon) {
+        this.row = row;
+        this.colon = colon;
+    }
+
+    public int getColon() {
+        return this.colon;
+    }
+
+    public int getRow() {
+        return this.row;
     }
 }

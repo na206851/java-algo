@@ -79,14 +79,17 @@ public class MyMap<K, V> implements Map<K, V> {
     }
 
     @Override
-    public V get(K key) {       //new method
+    public V get(K key) {
         int index = index(key);
-        if (index > map.length || index < 0) {
+        if (index > size || index < 0) {
             return null;
         }
         Node<K, V> tmp = map[index];
+        if (tmp == null) {
+            return null;
+        }
         if (map[index].key.equals(key)) {
-            return (V) map[index].val;
+            return tmp.val;
         } else if (tmp.next != null) {
             while (tmp != null) {
                 if (tmp.key.equals(key)) {
@@ -139,7 +142,7 @@ public class MyMap<K, V> implements Map<K, V> {
         return tmp.toString();
     }
 
-    public int size() {     //new method
+    public int size() {
         return size;
     }
 

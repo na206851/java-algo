@@ -1,7 +1,5 @@
 package com.github.na206851.lesson6.hashMap;
 
-import java.util.HashMap;
-
 public class MyMap<K, V> implements Map<K, V> {
     private Node[] map;
     private int defaultSize = 8;
@@ -124,15 +122,19 @@ public class MyMap<K, V> implements Map<K, V> {
     }
 
     @Override
-    public String toString() {
+    public String toString() {  //переписать метод чтобы он печатал в глубину
         StringBuilder tmp = new StringBuilder();
         tmp.append("{");
-        for (Object o : map) {
-            if (o != null) {
-                tmp.append(o + ", ");
+        for (Node currentNode : map) {
+            while (currentNode != null) {
+                tmp.append(currentNode + ", ");
+                currentNode = currentNode.next;
             }
+
         }
-        tmp.delete(tmp.length() - 2, tmp.length());
+        if (size > 2) {
+            tmp.delete(tmp.length() - 2, tmp.length());
+        }
         tmp.append("}");
         return tmp.toString();
     }

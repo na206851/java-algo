@@ -71,13 +71,6 @@ class MyMapTest {
         MyMap<Integer, Integer> myMap = new MyMap<>();
         HashMap<Integer, Integer> jdkMap = new HashMap<>();
         for (int i = 0; i < 10000; i++) {
-            myMap.put(String.valueOf(i), i);
-            jdkMap.put(String.valueOf(i), i);
-        }
-        assertEquals(jdkMap.get("7"), myMap.get("7"));
-        assertEquals(jdkMap.get("9999"), myMap.get("9999"));
-        assertEquals(jdkMap.get("-1"), myMap.get("-1"));
-        assertEquals(null, myMap.get("-12"));
             myMap.put(i, i);
             jdkMap.put(i, i);
         }
@@ -87,5 +80,29 @@ class MyMapTest {
         assertNull(myMap.get(-12));
     }
 
+    @Test
+    void containsKey() {
+        MyMap<Integer, Integer> myMap = new MyMap<>();
+        HashMap<Integer, Integer> jdkMap = new HashMap<>();
+        for (int i = 0; i < 10; i++) {
+            myMap.put(i, i);
+            jdkMap.put(i, i);
+        }
+        assertEquals(jdkMap.containsKey(5), myMap.containsKey(5));
+        assertEquals(jdkMap.containsKey(-1), myMap.containsKey(-1));
+    }
+
+    @Test
+    void isEmpty() {
+        MyMap<Integer, Integer> myMap = new MyMap<>();
+        HashMap<Integer, Integer> jdkMap = new HashMap<>();
+        for (int i = 0; i < 10; i++) {
+            myMap.put(i, i);
+            jdkMap.put(i, i);
+        }
+        assertEquals(jdkMap.isEmpty(), myMap.isEmpty());
+        jdkMap.clear();
+        myMap.clear();
+        assertEquals(jdkMap.isEmpty(), myMap.isEmpty());
     }
 }

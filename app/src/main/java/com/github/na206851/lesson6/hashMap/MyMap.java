@@ -110,6 +110,19 @@ public class MyMap<K, V> implements Map<K, V> {
         System.arraycopy(tmpMap, 0, map, 0, size);
     }
 
+    public boolean containsKey(K key) {
+        return get(key) != null;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    public void clear() {
+        map = new Node[defaultSize];
+        size = 0;
+    }
+
     @Override
     public String toString() {
         StringBuilder tmp = new StringBuilder();

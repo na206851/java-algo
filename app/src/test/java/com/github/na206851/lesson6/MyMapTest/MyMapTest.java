@@ -6,8 +6,27 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class MyMapTest {
+    @Test
+    void hashcodeTest() {
+        MyMap<String, Integer> myMap = new MyMap<>();
+        HashMap<String, Integer> jdk = new HashMap<>();
+        String o = "polygenelubricants";
+        String b = "GydZG_";
+        String k = "DESIGNING WORKHOUSES";
+        myMap.put(o, 1);
+        myMap.put(b, 1);
+        myMap.put(k, 1);
+
+        jdk.put(o, 1);
+        jdk.put(b, 1);
+        jdk.put(k, 1);
+
+        assertEquals(jdk.toString(), myMap.toString());
+    }
+
     @Test
     void resizeTest() {
         MyMap<Integer, Integer> myMap = new MyMap<>();

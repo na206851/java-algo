@@ -145,24 +145,4 @@ public class MyMap<K, V> implements Map<K, V> {
     public int size() {
         return size;
     }
-
-    public static void main(String[] args) {
-        MyMap<Integer, Integer> map = new MyMap<>();
-        HashMap<Integer, Integer> jdk = new HashMap<>(1);
-        for (int i = 0; i < 10; i++) {
-            map.put(i, i);
-            jdk.put(i, i);
-        }
-
-        map.put(0, 1);
-        map.put(3, -1);
-        jdk.put(0, 1);
-        jdk.put(3, -1);
-
-        System.out.println(map + " mymap");
-
-        System.out.println(map.size());
-        System.out.println(jdk);
-        System.out.println(jdk.size());
-    }
 }

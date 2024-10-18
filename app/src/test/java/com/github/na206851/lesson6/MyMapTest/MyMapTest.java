@@ -68,8 +68,8 @@ class MyMapTest {
 
     @Test
     void get() {
-        MyMap<String, Integer> myMap = new MyMap<>();
-        HashMap<String, Integer> jdkMap = new HashMap<>();
+        MyMap<Integer, Integer> myMap = new MyMap<>();
+        HashMap<Integer, Integer> jdkMap = new HashMap<>();
         for (int i = 0; i < 10000; i++) {
             myMap.put(String.valueOf(i), i);
             jdkMap.put(String.valueOf(i), i);
@@ -78,5 +78,14 @@ class MyMapTest {
         assertEquals(jdkMap.get("9999"), myMap.get("9999"));
         assertEquals(jdkMap.get("-1"), myMap.get("-1"));
         assertEquals(null, myMap.get("-12"));
+            myMap.put(i, i);
+            jdkMap.put(i, i);
+        }
+        assertEquals(jdkMap.get(7), myMap.get(7));
+        assertEquals(jdkMap.get(9999), myMap.get(9999));
+        assertEquals(jdkMap.get(-1), myMap.get(-1));
+        assertNull(myMap.get(-12));
+    }
+
     }
 }

@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MyMatrixTest {
     @Test
-    void setTestSparceAbility() {
+    void setTestPrint() {
         MyMatrix<Integer> matrix = new MyMatrix<>(1_000_000);
         matrix.set(0, 0, -1);
         matrix.set(999_999, 999_999, -1);

@@ -7,9 +7,27 @@ import java.util.List;
 public class MyMatrix<V>
         extends HashMap implements Matrix<V> {
     HashMap<Integer, V> matrix;
-    List<Pair> list = new ArrayList<>();
+    List<Pair> coordinatesOfSetValues = new ArrayList<>();
     int size;
     int currentSize = 0;
+
+    private static class Pair {
+        public final int row;
+        public final int colon;
+
+        public Pair(int row, int colon) {
+            this.row = row;
+            this.colon = colon;
+        }
+
+        public int getColon() {
+            return this.colon;
+        }
+
+        public int getRow() {
+            return this.row;
+        }
+    }
 
     public MyMatrix(int n) {
         this.matrix = new HashMap<>();
@@ -34,7 +52,7 @@ public class MyMatrix<V>
                 matrix.put(key(i, j), value);
             } else {
                 matrix.put(key(i, j), value);
-                list.add(new Pair(i, j));
+                coordinatesOfSetValues.add(new Pair(i, j));
                 currentSize++;
             }
         }
@@ -51,9 +69,9 @@ public class MyMatrix<V>
     public String toString() {
         StringBuilder str = new StringBuilder();
         int count = 0;
-        for (Pair pair : list) {
+        for (Pair pair : coordinatesOfSetValues) {
             str.append("row = " + pair.getRow() + ", colon = " + pair.getColon() + ", value = " + matrix.get(key(pair.getRow(), pair.getColon())));
-            if (count != list.size() - 1) {
+            if (count != coordinatesOfSetValues.size() - 1) {
                 str.append("\n");
             }
             count++;
@@ -69,23 +87,5 @@ public class MyMatrix<V>
         arr.set(5, 5, "three");
         System.out.println(arr);
 
-    }
-}
-
-class Pair {
-    public final int row;
-    public final int colon;
-
-    public Pair(int row, int colon) {
-        this.row = row;
-        this.colon = colon;
-    }
-
-    public int getColon() {
-        return this.colon;
-    }
-
-    public int getRow() {
-        return this.row;
     }
 }

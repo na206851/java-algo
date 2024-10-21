@@ -56,7 +56,7 @@ public class MyMap<K, V> implements Map<K, V> {
         }
     }
 
-    public V remove(K key) {        //new method
+    public V remove(K key) {
         int index = index(key);
         Node tmp = map[index];
         if (map[index].key.equals(key)) {
@@ -105,7 +105,7 @@ public class MyMap<K, V> implements Map<K, V> {
         return key.hashCode() % map.length;
     }
 
-    private void increaseSize() {       //new method
+    private void increaseSize() {
         Node[] tmpMap = map;
         map = new Node[map.length * 2];
         System.arraycopy(tmpMap, 0, map, 0, size);
@@ -125,7 +125,7 @@ public class MyMap<K, V> implements Map<K, V> {
     }
 
     @Override
-    public String toString() {  //переписать метод чтобы он печатал в глубину
+    public String toString() {
         StringBuilder tmp = new StringBuilder();
         tmp.append("{");
         for (Node currentNode : map) {
@@ -133,7 +133,6 @@ public class MyMap<K, V> implements Map<K, V> {
                 tmp.append(currentNode + ", ");
                 currentNode = currentNode.next;
             }
-
         }
         if (size > 2) {
             tmp.delete(tmp.length() - 2, tmp.length());

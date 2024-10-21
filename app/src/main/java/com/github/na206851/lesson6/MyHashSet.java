@@ -5,53 +5,46 @@ import com.github.na206851.lesson6.hashMap.MyMap;
 import java.util.*;
 
 public class MyHashSet<K> extends AbstractSet implements Set {
-    MyMap<K, Object> map = new MyMap<>();
-    int size = 0;
-    Object defaultValue = new Object(); // то что лежит по умолчанию в качестве значения
+    MyMap<K, Object> set = new MyMap<>();
+    Object defaultValue = new Object();
 
     public MyHashSet() {
-        //дописать свой set
     }
 
     @Override
     public int size() {
-        return size;
+        return set.size();
     }
 
     @Override
     public boolean isEmpty() {
-        return size == 0;
+        return size() == 0;
     }
 
     @Override
     public boolean contains(Object o) {
-        return map.containsKey((K) o);
+        return set.containsKey((K) o);
     }
 
     @Override
     public Iterator iterator() {
-        return null;
+        throw new UnsupportedOperationException("Not implemented");
     }
 
     @Override
     public Object[] toArray() {
-        Object[] result = new Object[map.size()];
-        for (int i = 0; i < map.size(); i++) {
-            result[i++] = map.toString();
+        Object[] result = new Object[set.size()];
+        for (int i = 0; i < set.size(); i++) {
+            result[i++] = set.toString();
         }
         return result;
-    }
 
-    private void getKey() {
-        List<K> list = new ArrayList<>();
     }
-
 
     @Override
     public boolean add(Object o) {
-        if (map.get((K) o) == null) {
-            map.put((K) o, defaultValue);
-            size++;
+        if (set.get((K) o) == null) {
+            set.put((K) o, defaultValue);
             return true;
         }
         return false;
@@ -59,52 +52,64 @@ public class MyHashSet<K> extends AbstractSet implements Set {
 
     @Override
     public boolean remove(Object o) {
-//        return map.remove(o) == defaultValue;
+        if (set.containsKey((K) o)) {
+            set.remove((K) o);
+            return true;
+        }
         return false;
     }
 
     @Override
     public boolean addAll(Collection c) {
-        return false;
+        int tmp = set.size();
+        for (Object o : c) {
+            set.put((K) o, defaultValue);
+        }
+        return tmp != size();
     }
 
     @Override
     public void clear() {
-        map.clear();
+        set.clear();
     }
 
     @Override
     public boolean removeAll(Collection c) {
-        return false;
+        boolean containsCollection = false;
+        for (Object o : c) {
+            if (set.containsKey((K) o)) {
+                set.remove((K) o);
+                containsCollection = true;
+            }
+        }
+        return containsCollection;
     }
 
     @Override
     public boolean retainAll(Collection c) {
-        return false;
+        throw new UnsupportedOperationException("Not implemented");
     }
 
     @Override
     public boolean containsAll(Collection c) {
-        return false;
+        int count = 0;
+        for (Object o : c) {
+            if (set.containsKey((K) o)) {
+                count++;
+            }
+        }
+        return count == c.size();
     }
 
     @Override
     public Object[] toArray(Object[] a) {
-        return new Object[0];
+        throw new UnsupportedOperationException("Not implemented");
     }
 
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
-        Object[] arr = new MyMap[]{map};
+        str.append(set);
         return str.toString();
     }
-
-    public static void main(String[] args) {
-        MyHashSet<Integer> set = new MyHashSet<>();
-        set.add(0);
-        System.out.println(Arrays.toString(set.toArray()));
-    }
-
-
 }

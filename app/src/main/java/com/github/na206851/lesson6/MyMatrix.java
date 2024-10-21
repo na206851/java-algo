@@ -78,14 +78,4 @@ public class MyMatrix<V>
         }
         return str.toString();
     }
-
-    public static void main(String[] args) {
-        MyMatrix<String> arr = new MyMatrix<>(1_000_000);
-
-        arr.set(5, 5, "first");
-        arr.set(999_999, 999_999, "second");
-        arr.set(5, 5, "three");
-        System.out.println(arr);
-
-    }
 }

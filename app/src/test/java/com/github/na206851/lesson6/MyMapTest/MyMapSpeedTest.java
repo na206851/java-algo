@@ -18,7 +18,6 @@ class MyMapSpeedTest {
         long end = System.nanoTime();
         long result = end - start;
         System.out.println(result + " put speed");
-
     }
 
     @Test
@@ -56,7 +55,6 @@ class MyMapSpeedTest {
 
         long result = end - start;
         System.out.println(result + " get beggin index");
-
     }
 
     @Test
@@ -74,6 +72,5 @@ class MyMapSpeedTest {
 
         long result = end - start;
         System.out.println(result + " get middle index");
-
     }
 }

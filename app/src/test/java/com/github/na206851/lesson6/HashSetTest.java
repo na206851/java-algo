@@ -70,7 +70,7 @@ public class HashSetTest {
     }
 
     @Test
-    void removeUncorrectValues() {
+    void removeIncorrectValues() {
         Consumer<HashSet<Integer>> listConsumer = (HashSet<Integer> set) -> {
             for (int i = 0; i < 10; i++) {
                 set.add(i);
@@ -109,40 +109,8 @@ public class HashSetTest {
         HashSet<Object> set = new HashSet<>();
         assertTrue(set.addAll(linkedList));
         assertEquals(10, set.size());
-    }
 
-//    @Test
-//    void testAddNode() {
-//        HashSet<Node> set = new HashSet<>();
-//        int i = 0;
-//        Node<Integer, String> node = new Node<>(0, String.valueOf(0));
-//        while (i < 5) {
-//            node.next = new Node<>(i, String.valueOf(i));
-//            node = node.next;
-//            set.add(node);
-//            i++;
-//        }
-//        System.out.println(set + " это ноды в set");
-//
-//        int j = 0;
-//        List<Node> list = new LinkedList<>();
-//
-//        while (j < 5) {
-//            list.add(node);
-//            node.next = new Node<>(j, String.valueOf(j));
-//            node = node.next;
-//            j++;
-//        }
-//        System.out.println(list + " это коллекция нод в связном списке ");
-//
-//        set.addAll(list);      //добавляем в HashSet связный список нод
-//
-//        StringBuilder tmp = new StringBuilder();
-//        for (Object o : set) {
-//            tmp.append(o + ", ");
-//        }
-//        System.out.println(tmp);
-//    }
+    }
 
     class Node<K, V> {
         K key;

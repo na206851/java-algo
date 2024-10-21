@@ -22,7 +22,6 @@ public class JdkHashMapTest {
         }
         assertFalse(jdk.isEmpty());
         assertEquals(10, jdk.size());
-
         Assertions.assertArrayEquals(expected.toArray(), jdk.values().toArray());
     }
 
@@ -46,7 +45,7 @@ public class JdkHashMapTest {
         assertEquals(10, jdk.size());
         jdk.remove(0);
 
-        assertEquals(null, jdk.remove(10));
+        assertNull(jdk.remove(10));
         assertEquals(9, jdk.size());
     }
 

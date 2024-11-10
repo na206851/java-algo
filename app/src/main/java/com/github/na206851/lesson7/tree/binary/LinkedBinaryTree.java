@@ -13,9 +13,7 @@ import com.github.na206851.lesson7.tree.Tree;
  * @param <E> element
  */
 public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
-    public static void main(String[] args) {
-        System.out.println("test");
-    }
+    private Node<E> root;
     // nonpublic utility
 
     /**

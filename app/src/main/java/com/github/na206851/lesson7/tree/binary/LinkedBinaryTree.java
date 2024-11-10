@@ -31,7 +31,8 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
     @Override
     public Node<E> addRoot(E e) throws IllegalStateException {
-        return null;
+        root = new LinkedBinaryTree.NodeImpl<>(e);
+        return root;
     }
 
     @Override

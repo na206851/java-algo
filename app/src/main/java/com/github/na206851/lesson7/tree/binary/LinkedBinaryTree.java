@@ -37,7 +37,41 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
     @Override
     public Node<E> add(Node<E> n, E e) throws IllegalArgumentException {
-        return null;
+        if (root == null) {
+            addRoot(e);
+        } else {
+            rec(root, e);
+        }
+        return n;
+    }
+
+    public void rec(Node<E> currentNode, E e) {
+        if (((NodeImpl) currentNode).left == null) {
+//            addLeft(currentNode, e);
+            ((NodeImpl<E>) currentNode).left = new NodeImpl<>(e);
+//            rec(((NodeImpl) currentNode).left, e);
+        } else if (((NodeImpl<E>) currentNode).right == null) {
+//            addRight(root, e);
+            ((NodeImpl<E>) currentNode).right = new NodeImpl<>(e);
+//            rec(((NodeImpl) currentNode).right, e);
+        } else {
+            rec(((NodeImpl<E>) currentNode).left, e);
+        }
+    }
+
+
+    public static void visualMyTree() {
+        LinkedBinaryTree<Integer> tree = new LinkedBinaryTree<>();
+        tree.root = new NodeImpl<>(1);
+        ((NodeImpl<Integer>) tree.root).left = new NodeImpl<>(2);
+        ((NodeImpl<Integer>) tree.root).right = new NodeImpl<>(3);
+        ((NodeImpl<Integer>) ((NodeImpl<Integer>) tree.root).left).left = new NodeImpl<>(4);
+        ((NodeImpl<Integer>) ((NodeImpl<Integer>) tree.root).left).right = new NodeImpl<>(5);
+        ((NodeImpl<Integer>) ((NodeImpl<Integer>) tree.root).right).left = new NodeImpl<>(6);
+        ((NodeImpl<Integer>) ((NodeImpl<Integer>) tree.root).right).right = new NodeImpl<>(7);
+        ((NodeImpl<Integer>) ((NodeImpl<Integer>) ((NodeImpl<Integer>) tree.root).right).left).left = new NodeImpl<>(8);
+        ((NodeImpl<Integer>) ((NodeImpl<Integer>) ((NodeImpl<Integer>) tree.root).right).left).right = new NodeImpl<>(9);
+        inOrder((NodeImpl) tree.root);
     }
 
     @Override

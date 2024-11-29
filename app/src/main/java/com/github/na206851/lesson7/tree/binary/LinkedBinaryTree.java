@@ -144,7 +144,29 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
     @Override
     public Node<E> parent(Node<E> n) throws IllegalArgumentException {
-        return null;
+        return searchParent(root, n);
+    }
+
+    private Node<E> searchParent(Node<E> root, Node<E> child) {
+        if (((NodeImpl<E>) root).left == null && ((NodeImpl<E>) root).right == null) {
+            return null;
+        }
+        if (root == child) {
+            throw new IllegalArgumentException("был передан корень");
+        } else {
+            if (((NodeImpl<E>) root).left == child || ((NodeImpl<E>) root).right == child) {
+                return root;
+            } else {
+                Node<E> leftResult = searchParent(((NodeImpl<E>) root).left, child);
+                Node<E> rightResult = searchParent(((NodeImpl<E>) root).right, child);
+
+                if (leftResult != null) {
+                    return leftResult;
+                } else {
+                    return rightResult;
+                }
+            }
+        }
     }
 
 

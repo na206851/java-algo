@@ -14,6 +14,7 @@ import com.github.na206851.lesson7.tree.Tree;
  */
 public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     private Node<E> root;
+    private int size;
     // nonpublic utility
 
     /**
@@ -172,7 +173,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override

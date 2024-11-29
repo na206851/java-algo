@@ -191,6 +191,15 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         return null;
     }
 
+    public static void inOrder(NodeImpl node) {
+        if (node == null) {
+            return;
+        }
+        inOrder((NodeImpl) node.left);
+        System.out.print(node.getElement() + " ");
+        inOrder((NodeImpl) node.right);
+    }
+
     protected static class NodeImpl<E> implements Node<E> {
 
         @Override

@@ -75,6 +75,14 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         inOrder((NodeImpl) tree.root);
     }
 
+    public E getLeft(Node<E> current) {
+        return (E) ((NodeImpl) current).left.getElement();
+    }
+
+    public E getRight(Node<E> current) {
+        return (E) ((NodeImpl) current).right.getElement();
+    }
+
     @Override
     public Node<E> addLeft(Node<E> n, E e) throws IllegalArgumentException {
         Node<E> left = new NodeImpl<>(e);

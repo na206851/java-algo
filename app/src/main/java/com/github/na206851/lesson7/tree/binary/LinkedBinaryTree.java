@@ -2,10 +2,8 @@ package com.github.na206851.lesson7.tree.binary;
 
 import com.github.na206851.lesson7.tree.Node;
 
-import java.util.Iterator;
-
-import com.github.na206851.lesson7.tree.Node;
-import com.github.na206851.lesson7.tree.Tree;
+import javax.swing.*;
+import java.util.*;
 
 /**
  * Concrete implementation of a binary tree using a node-based, linked structure
@@ -13,7 +11,7 @@ import com.github.na206851.lesson7.tree.Tree;
  * @param <E> element
  */
 public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
-    private Node<E> root;
+    public Node<E> root;
     private int size;
     // nonpublic utility
 
@@ -60,7 +58,6 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
             rec(((NodeImpl<E>) currentNode).left, e);
         }
     }
-
 
     public static void visualMyTree() {
         LinkedBinaryTree<Integer> tree = new LinkedBinaryTree<>();
@@ -126,8 +123,6 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         return null;
     }
 
-    // {@link Tree} and {@link BinaryTree} implementations
-
     @Override
     public Node<E> left(Node<E> p) throws IllegalArgumentException {
         return null;
@@ -142,6 +137,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     public Node<E> root() {
         return root;
     }
+
 
     @Override
     public Node<E> parent(Node<E> n) throws IllegalArgumentException {
@@ -178,7 +174,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return null;
+        return new iteratorTree((NodeImpl) root);
     }
 
     @Override
@@ -194,10 +190,33 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     public static void inOrder(NodeImpl node) {
         if (node == null) {
             return;
+    public static class iteratorTree implements Iterator {
+        Stack<NodeImpl> stackIterator = new Stack<>();
+        NodeImpl currentNode;
+
+        iteratorTree(NodeImpl root) {
+            currentNode = root;
+            pushLeft(currentNode);
         }
-        inOrder((NodeImpl) node.left);
-        System.out.print(node.getElement() + " ");
-        inOrder((NodeImpl) node.right);
+
+        private void pushLeft(NodeImpl node) {
+            while (node != null) {
+                stackIterator.push(node);
+                node = (NodeImpl) node.left;
+            }
+        }
+
+        @Override
+        public boolean hasNext() {
+            return !stackIterator.isEmpty();
+        }
+
+        @Override
+        public Object next() {
+            NodeImpl node = stackIterator.pop();
+            pushLeft((NodeImpl) node.right);
+            return node.value;
+        }
     }
 
     protected static class NodeImpl<E> implements Node<E> {

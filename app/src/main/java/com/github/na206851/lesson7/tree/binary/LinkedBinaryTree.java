@@ -187,9 +187,43 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         return null;
     }
 
-    public static void inOrder(NodeImpl node) {
-        if (node == null) {
-            return;
+    //нужен тест на обход дерева
+    public List<E> inOrder(Node<E> node, List<E> list) {
+        NodeImpl<E> nodeImpl = (NodeImpl<E>) node;
+        if (node != null) {
+            inOrder(nodeImpl.left, list);
+            list.add(node.getElement());
+            inOrder(nodeImpl.right, list);
+        }
+        return list;
+    }
+
+    public static void main(String[] args) {
+        //создает отдельно узлы и отдельно линкуем их в дерево  ,
+        LinkedBinaryTree<Integer> tree = new LinkedBinaryTree<>();
+        NodeImpl<Integer> node1 = new NodeImpl<>(1);
+        NodeImpl<Integer> node2 = new NodeImpl<>(2);
+        NodeImpl<Integer> node3 = new NodeImpl<>(3);
+        NodeImpl<Integer> node4 = new NodeImpl<>(4);
+        NodeImpl<Integer> node5 = new NodeImpl<>(5);
+        NodeImpl<Integer> node6 = new NodeImpl<>(6);
+        NodeImpl<Integer> node7 = new NodeImpl<>(7);
+        tree.root = node1;
+        node1.left = node2;
+        node1.right = node3;
+        node2.left = node4;
+        node2.right = node5;
+        node3.left = node6;
+        node3.right = node7;
+        System.out.println(tree.inOrder(tree.root, new ArrayList<>()));
+        iteratorTree it = new iteratorTree(node1);
+        while (it.hasNext()) {
+            System.out.print(it.next() + " ");
+        }
+        System.out.println();
+        System.out.println(it.hasNext());
+    }
+
     public static class iteratorTree implements Iterator {
         Stack<NodeImpl> stackIterator = new Stack<>();
         NodeImpl currentNode;

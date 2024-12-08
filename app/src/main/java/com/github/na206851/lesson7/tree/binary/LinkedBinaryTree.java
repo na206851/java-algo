@@ -120,7 +120,6 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      */
     @Override
     public E remove(Node<E> n) throws IllegalArgumentException {
-        return null;
         NodeImpl<E> removeNodeParent = (NodeImpl<E>) parent(n);
         if (((NodeImpl) n).left == null && ((NodeImpl) n).right == null) {
             if (removeNodeParent.left == n) {
@@ -128,6 +127,15 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
             } else if (removeNodeParent.right == n) {
                 removeNodeParent.right = null;
             }
+        } else if (((NodeImpl<E>) n).left == null || ((NodeImpl<E>) n).right == null) {
+            if (((NodeImpl<E>) n).left == null) {
+                removeNodeParent.left = (Node<E>) getRightChild(n);
+            } else {
+                removeNodeParent.right = (Node<E>) getLeftChild(n);
+            }
+        } else if (((NodeImpl<E>) n).left != null && ((NodeImpl<E>) n).right != null) {
+            //здесь должна быть реализация удаления узла с двумя потомками
+        }
         size--;
         return (E) null;
     }

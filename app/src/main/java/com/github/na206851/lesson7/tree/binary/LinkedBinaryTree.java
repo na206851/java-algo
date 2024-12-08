@@ -118,6 +118,14 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      * @return replace element
      * @throws IllegalArgumentException
      */
+    public E getLeftChild(Node<E> n) {
+        return (E) ((NodeImpl<E>) n).left;
+    }
+
+    public E getRightChild(Node<E> n) {
+        return (E) ((NodeImpl<E>) n).right;
+    }
+
     @Override
     public E remove(Node<E> n) throws IllegalArgumentException {
         NodeImpl<E> removeNodeParent = (NodeImpl<E>) parent(n);

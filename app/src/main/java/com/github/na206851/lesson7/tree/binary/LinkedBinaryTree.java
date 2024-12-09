@@ -155,7 +155,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
     @Override
     public Node<E> right(Node<E> p) throws IllegalArgumentException {
-        return null;
+        return ((NodeImpl<E>) p).right;
     }
 
     @Override

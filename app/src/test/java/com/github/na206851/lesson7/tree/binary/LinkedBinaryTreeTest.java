@@ -194,4 +194,44 @@ class LinkedBinaryTreeTest {
         }
         assertFalse(iterator.hasNext());
     }
+
+    @Test
+    void testInOrder() {
+        LinkedBinaryTree<Integer> tree = new LinkedBinaryTree<>();
+        LinkedBinaryTree.NodeImpl<Integer> node1 = new LinkedBinaryTree.NodeImpl<>(1);
+        LinkedBinaryTree.NodeImpl<Integer> node2 = new LinkedBinaryTree.NodeImpl<>(2);
+        LinkedBinaryTree.NodeImpl<Integer> node3 = new LinkedBinaryTree.NodeImpl<>(3);
+
+        tree.root = node1;
+        node1.left = node2;
+        node1.right = node3;
+
+        List<Integer> expected = Arrays.asList(2, 1, 3);
+        List<Integer> actual = tree.inOrder(node1, new ArrayList<>());
+        assertEquals(expected, actual, "list not equals");
+    }
+
+    @Test
+    void testRemoveLeaf() {
+        LinkedBinaryTree<Integer> tree = new LinkedBinaryTree<>();
+        LinkedBinaryTree.NodeImpl<Integer> node1 = new LinkedBinaryTree.NodeImpl<>(1);
+        LinkedBinaryTree.NodeImpl<Integer> node2 = new LinkedBinaryTree.NodeImpl<>(2);
+        LinkedBinaryTree.NodeImpl<Integer> node3 = new LinkedBinaryTree.NodeImpl<>(3);
+
+        tree.root = node1;
+        node1.left = node2;
+        node1.right = node3;
+
+        tree.remove(node2);
+
+        List<Integer> expected = Arrays.asList(1, 3);
+        List<Integer> actual = tree.inOrder(node1, new ArrayList<>());
+        assertEquals(expected, actual, "list not equals");
+
+        tree.remove(node3);
+        List<Integer> expected2 = Arrays.asList(1);
+        List<Integer> actual2 = tree.inOrder(node1, new ArrayList<>());
+        assertEquals(expected2, actual2, "list not equals");
+    }
+
 }

@@ -23,7 +23,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      * @throws IllegalArgumentException
      */
     protected NodeImpl<E> validate(Node<E> n) throws IllegalArgumentException {
-        return null;
+        return (NodeImpl<E>) n;
     }
 
     // update methods supported by this class

@@ -234,4 +234,45 @@ class LinkedBinaryTreeTest {
         assertEquals(expected2, actual2, "list not equals");
     }
 
+    @Test
+    void testRemoveNodeHaveOneChild() {
+        LinkedBinaryTree<Integer> tree = new LinkedBinaryTree<>();
+        LinkedBinaryTree.NodeImpl<Integer> node1 = new LinkedBinaryTree.NodeImpl<>(1);
+        LinkedBinaryTree.NodeImpl<Integer> node2 = new LinkedBinaryTree.NodeImpl<>(2);
+        LinkedBinaryTree.NodeImpl<Integer> node3 = new LinkedBinaryTree.NodeImpl<>(3);
+        LinkedBinaryTree.NodeImpl<Integer> node4 = new LinkedBinaryTree.NodeImpl<>(4);
+        LinkedBinaryTree.NodeImpl<Integer> node5 = new LinkedBinaryTree.NodeImpl<>(5);
+
+        tree.root = node1;
+        node1.left = node2;
+        node1.right = node3;
+        node2.left = node4;
+        node3.left = node5;
+        System.out.println(tree.inOrder(node1, new ArrayList<>()) + " before manipulation ");
+        tree.remove(node2);
+        System.out.println(tree.inOrder(node1, new ArrayList<>()) + " after manipulation");
+    }
+
+    @Test
+    void findMaxValueInBinaryTree() {
+        //создать дефолтное дерево
+        LinkedBinaryTree<Integer> tree = new LinkedBinaryTree<>();
+        LinkedBinaryTree.NodeImpl<Integer> node1 = new LinkedBinaryTree.NodeImpl<>(1);
+        LinkedBinaryTree.NodeImpl<Integer> node2 = new LinkedBinaryTree.NodeImpl<>(2);
+        LinkedBinaryTree.NodeImpl<Integer> node3 = new LinkedBinaryTree.NodeImpl<>(3);
+        LinkedBinaryTree.NodeImpl<Integer> node4 = new LinkedBinaryTree.NodeImpl<>(4);
+        LinkedBinaryTree.NodeImpl<Integer> node5 = new LinkedBinaryTree.NodeImpl<>(5);
+        LinkedBinaryTree.NodeImpl<Integer> node6 = new LinkedBinaryTree.NodeImpl<>(6);
+        LinkedBinaryTree.NodeImpl<Integer> node7 = new LinkedBinaryTree.NodeImpl<>(7);
+        tree.root = node1;
+        node1.left = node2;
+        node1.right = node3;
+        node2.left = node4;
+        node2.right = node5;
+        node3.left = node6;
+        node3.right = node7;
+
+        assertEquals(node7.getElement(), tree.inOrder(tree.root, new ArrayList<>()).stream().max(Integer::compareTo).get());
+
+    }
 }

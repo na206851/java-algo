@@ -107,7 +107,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      */
     @Override
     public E set(Node<E> n, E e) throws IllegalArgumentException {
-        ((NodeImpl) n).value = e;
+        ((NodeImpl<E>) n).value = e;
         return ((NodeImpl<E>) n).value;
     }
 

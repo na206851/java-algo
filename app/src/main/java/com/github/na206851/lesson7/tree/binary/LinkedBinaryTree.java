@@ -30,9 +30,13 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
     @Override
     public Node<E> addRoot(E e) throws IllegalStateException {
-        root = new NodeImpl<>(e);
-        size++;
-        return root;
+        if (root == null) {
+            root = new NodeImpl<>(e);
+            size++;
+            return root;
+        } else {
+            throw new IllegalStateException("корень уже есть");
+        }
     }
 
     @Override

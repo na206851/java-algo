@@ -88,7 +88,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     @Override
     public Node<E> addLeft(Node<E> n, E e) throws IllegalArgumentException {
         Node<E> left = new NodeImpl<>(e);
-        ((NodeImpl) n).left = left;
+        validate(n).left = left;
         size++;
         return left;
     }
@@ -96,7 +96,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     @Override
     public Node<E> addRight(Node<E> n, E e) throws IllegalArgumentException {
         Node<E> right = new NodeImpl<>(e);
-        ((NodeImpl) n).right = right;
+        validate(n).right = right;
         size++;
         return right;
     }
@@ -111,8 +111,8 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      */
     @Override
     public E set(Node<E> n, E e) throws IllegalArgumentException {
-        ((NodeImpl<E>) n).value = e;
-        return ((NodeImpl<E>) n).value;
+        validate(n).value = e;
+        return validate(n).value;
     }
 
     /**
@@ -133,7 +133,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     @Override
     public E remove(Node<E> n) throws IllegalArgumentException {
         NodeImpl<E> removeNodeParent = (NodeImpl<E>) parent(n);
-        if (((NodeImpl) n).left == null && ((NodeImpl) n).right == null) {
+        if (left(n) == null && right(n) == null) {
             if (removeNodeParent.left == n) {
                 removeNodeParent.left = null;
             } else if (removeNodeParent.right == n) {
@@ -160,12 +160,12 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
     @Override
     public Node<E> left(Node<E> p) throws IllegalArgumentException {
-        return ((NodeImpl<E>) p).left;
+        return validate(p).left;
     }
 
     @Override
     public Node<E> right(Node<E> p) throws IllegalArgumentException {
-        return ((NodeImpl<E>) p).right;
+        return validate(p).right;
     }
 
     @Override
@@ -180,17 +180,17 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     }
 
     private Node<E> searchParent(Node<E> root, Node<E> child) {
-        if (((NodeImpl<E>) root).left == null && ((NodeImpl<E>) root).right == null) {
+        if (validate(root).left == null && validate(root).right == null) {
             return null;
         }
         if (root == child) {
             throw new IllegalArgumentException("был передан корень");
         } else {
-            if (((NodeImpl<E>) root).left == child || ((NodeImpl<E>) root).right == child) {
+            if (validate(root).left == child || validate(root).right == child) {
                 return root;
             } else {
-                Node<E> leftResult = searchParent(((NodeImpl<E>) root).left, child);
-                Node<E> rightResult = searchParent(((NodeImpl<E>) root).right, child);
+                Node<E> leftResult = searchParent(validate(root).left, child);
+                Node<E> rightResult = searchParent(validate(root).right, child);
 
                 if (leftResult != null) {
                     return leftResult;

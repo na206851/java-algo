@@ -173,7 +173,6 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         return root;
     }
 
-
     @Override
     public Node<E> parent(Node<E> n) throws IllegalArgumentException {
         return searchParent(root, n);
@@ -200,7 +199,6 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
             }
         }
     }
-
 
     @Override
     public int size() {
@@ -257,6 +255,17 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         }
         System.out.println();
         System.out.println(it.hasNext());
+    /**
+     * метод для печати дерева в стиле ascii
+     */
+    public void printAscii(NodeImpl node, int space) {
+        if (node == null) return;
+        space += 10;
+        printAscii((NodeImpl) node.right, space);
+        System.out.print("\n");
+        for (int i = 10; i < space; i++) System.out.print(" ");
+        System.out.print(node.value + "\n");
+        printAscii((NodeImpl) node.left, space);
     }
 
     public static class iteratorTree implements Iterator {

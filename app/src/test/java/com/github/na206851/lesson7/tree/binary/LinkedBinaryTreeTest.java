@@ -319,4 +319,37 @@ class LinkedBinaryTreeTest {
          */
     }
 
+    @Test
+    void removeNodeHasOneRightChild() {
+        /**
+         *        1
+         *     2     3
+         *       4     5
+         */
+        LinkedBinaryTree<Integer> tree = new LinkedBinaryTree<>();
+        LinkedBinaryTree.NodeImpl<Integer> node1 = new LinkedBinaryTree.NodeImpl<>(1);
+        LinkedBinaryTree.NodeImpl<Integer> node2 = new LinkedBinaryTree.NodeImpl<>(2);
+        LinkedBinaryTree.NodeImpl<Integer> node3 = new LinkedBinaryTree.NodeImpl<>(3);
+        LinkedBinaryTree.NodeImpl<Integer> node4 = new LinkedBinaryTree.NodeImpl<>(4);
+        LinkedBinaryTree.NodeImpl<Integer> node5 = new LinkedBinaryTree.NodeImpl<>(5);
+        tree.root = node1;
+        node1.left = node2;
+        node1.right = node3;
+        node2.right = node4;
+        node3.right = node5;
+
+        tree.remove(node2);
+        List<Integer> removeNode2Expected = new ArrayList<>(List.of(4, 1, 3, 5));
+        Assertions.assertEquals(removeNode2Expected, tree.inOrder(node1, new ArrayList<>()));
+
+        tree.remove(node3);
+        List<Integer> removeNode3Expected = new ArrayList<>(List.of(4, 1, 5));
+        Assertions.assertEquals(removeNode3Expected, tree.inOrder(node1, new ArrayList<>()));
+        tree.printAscii((LinkedBinaryTree.NodeImpl<Integer>) tree.root, 0);
+        /**
+         * view binary tree
+         *      1
+         *    4   5
+         */
+    }
 }

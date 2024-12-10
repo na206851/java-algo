@@ -139,13 +139,19 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
             } else if (removeNodeParent.right == n) {
                 removeNodeParent.right = null;
             }
-        } else if (((NodeImpl<E>) n).left == null || ((NodeImpl<E>) n).right == null) {
-            if (((NodeImpl<E>) n).left == null) {
-                removeNodeParent.left = (Node<E>) getRightChild(n);
+        } else if (left(n) == null || right(n) == null) {
+            Node<E> child;
+            if (left(n) == null) {
+                child = validate(right(n));
             } else {
-                removeNodeParent.right = (Node<E>) getLeftChild(n);
+                child = validate(left(n));
             }
-        } else if (((NodeImpl<E>) n).left != null && ((NodeImpl<E>) n).right != null) {
+            if (removeNodeParent.left == n) {
+                removeNodeParent.left = child;
+            } else {
+                removeNodeParent.right = child;
+            }
+        } else if (left(n) != null && right(n) != null) {
             //здесь должна быть реализация удаления узла с двумя потомками
         }
         size--;

@@ -252,8 +252,22 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         iteratorTree it = new iteratorTree(node1);
         while (it.hasNext()) {
             System.out.print(it.next() + " ");
+    public Node<E> findMaxNode(Node<E> node) {
+        if (node == null) {
+            return parent(node);
         }
-        return node;
+        Node<E> maxNode = node;
+        Node<E> maxLeft = findMaxNode(validate(node).left);
+        Node<E> maxRight = findMaxNode(validate(node).right);
+
+        if (maxLeft != null && (Integer) maxLeft.getElement() > (Integer) (maxNode.getElement())) {
+            maxNode = maxLeft;
+        }
+
+        if (maxRight != null && (Integer) maxRight.getElement() > (Integer) (maxNode.getElement())) {
+            maxNode = maxRight;
+        }
+        return maxNode;
     }
 
     /**

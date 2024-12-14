@@ -41,6 +41,9 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
     @Override
     public Node<E> add(Node<E> n, E e) throws IllegalArgumentException {
+        if (n == null) {
+            throw new IllegalArgumentException();
+        }
         if (root == null) {
             addRoot(e);
         } else {
@@ -232,8 +235,8 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     }
 
     public static void main(String[] args) {
-        //создает отдельно узлы и отдельно линкуем их в дерево  ,
-        LinkedBinaryTree<Integer> tree = new LinkedBinaryTree<>();
+        LinkedBinaryTree<Integer> tree = new LinkedBinaryTree<Integer>();
+
         NodeImpl<Integer> node1 = new NodeImpl<>(1);
         NodeImpl<Integer> node2 = new NodeImpl<>(2);
         NodeImpl<Integer> node3 = new NodeImpl<>(3);
@@ -241,6 +244,15 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         NodeImpl<Integer> node5 = new NodeImpl<>(5);
         NodeImpl<Integer> node6 = new NodeImpl<>(6);
         NodeImpl<Integer> node7 = new NodeImpl<>(7);
+        NodeImpl<Integer> node8 = new NodeImpl<>(8);
+        NodeImpl<Integer> node9 = new NodeImpl<>(9);
+        NodeImpl<Integer> node10 = new NodeImpl<>(10);
+        NodeImpl<Integer> node11 = new NodeImpl<>(11);
+        NodeImpl<Integer> node12 = new NodeImpl<>(12);
+        NodeImpl<Integer> node13 = new NodeImpl<>(13);
+        NodeImpl<Integer> node14 = new NodeImpl<>(14);
+        NodeImpl<Integer> node15 = new NodeImpl<>(15);
+        NodeImpl<Integer> node16 = new NodeImpl<>(16);
         tree.root = node1;
         node1.left = node2;
         node1.right = node3;
@@ -248,17 +260,31 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         node2.right = node5;
         node3.left = node6;
         node3.right = node7;
-        System.out.println(tree.inOrder(tree.root, new ArrayList<>()));
-        iteratorTree it = new iteratorTree(node1);
-        while (it.hasNext()) {
-            System.out.print(it.next() + " ");
+        node4.left = node8;
+        node4.right = node9;
+        node5.left = node10;
+        node5.right = node11;
+        node6.left = node12;
+        node6.right = node13;
+        node7.left = node14;
+        node7.right = node15;
+        node8.right = node16;
+
+        tree.printAscii((NodeImpl) tree.root, 0);
+//        node7.left = node8;
+//        tree.printAscii(node1, 0);
+
+//        System.out.println(tree.findMaxNode(node1).getElement());
+//        System.out.println(tree.findMaxNode(tree.root).getElement());
+    }
+
     public Node<E> findMaxNode(Node<E> node) {
         if (node == null) {
             return parent(node);
         }
         Node<E> maxNode = node;
-        Node<E> maxLeft = findMaxNode(validate(node).left);
-        Node<E> maxRight = findMaxNode(validate(node).right);
+        Node<E> maxLeft = findMaxNode(left(node));
+        Node<E> maxRight = findMaxNode(right(node));
 
         if (maxLeft != null && (Integer) maxLeft.getElement() > (Integer) (maxNode.getElement())) {
             maxNode = maxLeft;

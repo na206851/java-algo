@@ -46,8 +46,20 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         }
         if (root == null) {
             addRoot(e);
+        }
+
+        if (validate(n).right != null && validate(n).left == null) {
+            if (validate(n).left == null) {
+                addLeft(validate(n), e);
+            } else {
+                add(validate(n).left, e);
+            }
         } else {
-            rec(root, e);
+            if (size % 2 == 1) {
+                addRight(validate(n), e);
+            } else {
+                add(validate(n).right, e);
+            }
         }
         return n;
     }

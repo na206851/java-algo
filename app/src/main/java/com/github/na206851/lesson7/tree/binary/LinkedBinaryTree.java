@@ -2,8 +2,9 @@ package com.github.na206851.lesson7.tree.binary;
 
 import com.github.na206851.lesson7.tree.Node;
 
-import javax.swing.*;
-import java.util.*;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Stack;
 
 /**
  * Concrete implementation of a binary tree using a node-based, linked structure
@@ -64,42 +65,6 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         return n;
     }
 
-    public void rec(Node<E> currentNode, E e) {
-        if (((NodeImpl) currentNode).left == null) {
-//            addLeft(currentNode, e);
-            ((NodeImpl<E>) currentNode).left = new NodeImpl<>(e);
-//            rec(((NodeImpl) currentNode).left, e);
-        } else if (((NodeImpl<E>) currentNode).right == null) {
-//            addRight(root, e);
-            ((NodeImpl<E>) currentNode).right = new NodeImpl<>(e);
-//            rec(((NodeImpl) currentNode).right, e);
-        } else {
-            rec(((NodeImpl<E>) currentNode).left, e);
-        }
-    }
-
-    public static void visualMyTree() {
-        LinkedBinaryTree<Integer> tree = new LinkedBinaryTree<>();
-        tree.root = new NodeImpl<>(1);
-        ((NodeImpl<Integer>) tree.root).left = new NodeImpl<>(2);
-        ((NodeImpl<Integer>) tree.root).right = new NodeImpl<>(3);
-        ((NodeImpl<Integer>) ((NodeImpl<Integer>) tree.root).left).left = new NodeImpl<>(4);
-        ((NodeImpl<Integer>) ((NodeImpl<Integer>) tree.root).left).right = new NodeImpl<>(5);
-        ((NodeImpl<Integer>) ((NodeImpl<Integer>) tree.root).right).left = new NodeImpl<>(6);
-        ((NodeImpl<Integer>) ((NodeImpl<Integer>) tree.root).right).right = new NodeImpl<>(7);
-        ((NodeImpl<Integer>) ((NodeImpl<Integer>) ((NodeImpl<Integer>) tree.root).right).left).left = new NodeImpl<>(8);
-        ((NodeImpl<Integer>) ((NodeImpl<Integer>) ((NodeImpl<Integer>) tree.root).right).left).right = new NodeImpl<>(9);
-        inOrder((NodeImpl) tree.root);
-    }
-
-    public E getLeft(Node<E> current) {
-        return (E) ((NodeImpl) current).left.getElement();
-    }
-
-    public E getRight(Node<E> current) {
-        return (E) ((NodeImpl) current).right.getElement();
-    }
-
     @Override
     public Node<E> addLeft(Node<E> n, E e) throws IllegalArgumentException {
         Node<E> left = new NodeImpl<>(e);
@@ -137,13 +102,6 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      * @return replace element
      * @throws IllegalArgumentException
      */
-    public E getLeftChild(Node<E> n) {
-        return (E) ((NodeImpl<E>) n).left;
-    }
-
-    public E getRightChild(Node<E> n) {
-        return (E) ((NodeImpl<E>) n).right;
-    }
 
     @Override
     public E remove(Node<E> n) throws IllegalArgumentException {
@@ -365,8 +323,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
         @Override
         public E getElement() {
-            return null;
+            return value;
         }
     }
-
 }

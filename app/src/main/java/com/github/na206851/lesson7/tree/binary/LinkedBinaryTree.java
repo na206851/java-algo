@@ -13,7 +13,7 @@ import java.util.Stack;
  */
 public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     public Node<E> root;
-    private int size;
+    private int size = 0;
     // nonpublic utility
 
     /**
@@ -26,8 +26,6 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     protected NodeImpl<E> validate(Node<E> n) throws IllegalArgumentException {
         return (NodeImpl<E>) n;
     }
-
-    // update methods supported by this class
 
     @Override
     public Node<E> addRoot(E e) throws IllegalStateException {
@@ -44,22 +42,18 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     public Node<E> add(Node<E> n, E e) throws IllegalArgumentException {
         if (n == null) {
             throw new IllegalArgumentException();
-        }
-        if (root == null) {
-            addRoot(e);
-        }
-
-        if (validate(n).right != null && validate(n).left == null) {
-            if (validate(n).left == null) {
-                addLeft(validate(n), e);
-            } else {
-                add(validate(n).left, e);
-            }
+        } else if (root == null) {
+            return addRoot(e);
+        } else if (validate(n).left == null) {
+            return addLeft(validate(n), e);
+        } else if (validate(n).right == null) {
+            return addRight(validate(n), e);
         } else {
-            if (size % 2 == 1) {
-                addRight(validate(n), e);
+            if (size % 2 == 1 && validate(n).right != null) {
+
+                n = add(left(n), e);
             } else {
-                add(validate(n).right, e);
+                n = add(right(n), e);
             }
         }
         return n;
@@ -125,6 +119,13 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
                 removeNodeParent.right = child;
             }
         } else if (left(n) != null && right(n) != null) {
+
+
+            //нужно найти максимальный узел
+            //забрать его значение и перекинуть в тот узел который мы хотим удалить, а ссылку на тот узел из
+            //которого мы забрали значение сделать null
+            //чтобы не пришлось заново линковать
+
             //здесь должна быть реализация удаления узла с двумя потомками
         }
         size--;
@@ -224,23 +225,35 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         NodeImpl<Integer> node15 = new NodeImpl<>(15);
         NodeImpl<Integer> node16 = new NodeImpl<>(16);
         tree.root = node1;
-        node1.left = node2;
-        node1.right = node3;
-        node2.left = node4;
-        node2.right = node5;
-        node3.left = node6;
-        node3.right = node7;
-        node4.left = node8;
-        node4.right = node9;
-        node5.left = node10;
-        node5.right = node11;
-        node6.left = node12;
-        node6.right = node13;
-        node7.left = node14;
-        node7.right = node15;
-        node8.right = node16;
+        for (int i = 0; i < 15; i++) {
+            tree.add(node1, i);
+        }
 
-        tree.printAscii((NodeImpl) tree.root, 0);
+        System.out.println(tree.size);
+
+        tree.printAscii(node1, 0);
+
+//        tree.root = node1;
+//        node1.left = node2;
+//        node1.right = node3;
+//        node2.left = node4;
+//        node2.right = node5;
+//        node3.left = node6;
+//        node3.right = node7;
+//        node4.left = node8;
+//        node4.right = node9;
+//        node5.left = node10;
+//        node5.right = node11;
+//        node6.left = node12;
+//        node6.right = node13;
+//        node7.left = node14;
+//        node7.right = node15;
+//        node8.right = node16;
+
+//        tree.remove(node2);
+//        tree.remove(node3);
+//        tree.remove(node4);
+//        tree.printAscii((NodeImpl) tree.root, 0);
 //        node7.left = node8;
 //        tree.printAscii(node1, 0);
 

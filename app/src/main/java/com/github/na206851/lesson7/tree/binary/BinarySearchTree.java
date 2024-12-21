@@ -199,7 +199,7 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override

@@ -142,6 +142,18 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
                 removeNodeParent.right = child;
             }
             size--;
+        } else if (left(n) != null && right(n) != null) {
+            Node<E> nodeWithIn = getMinValueInRightSubtree(right(n));
+            set(n, validate(nodeWithIn).value);
+            remove(nodeWithIn);
+        }
+        return validate(n).value;
+    }
+
+    public Node<E> getMinValueInRightSubtree(Node<E> n) {
+        while (validate(n).left != null) {
+            n = validate(n).left;
+        }
         return n;
     }
 

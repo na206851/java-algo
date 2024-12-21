@@ -204,7 +204,7 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return null;
+        return new iteratorTree((NodeImpl<Integer>) root);
     }
 
     @Override
@@ -212,6 +212,34 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
         return null;
     }
 
+    public static class iteratorTree implements Iterator {
+        Stack<BinarySearchTree.NodeImpl> stackIterator = new Stack<>();
+        BinarySearchTree.NodeImpl<Integer> currentNode;
+
+        iteratorTree(BinarySearchTree.NodeImpl<Integer> root) {
+            currentNode = root;
+            pushLeft(currentNode);
+        }
+
+        private void pushLeft(BinarySearchTree.NodeImpl<Integer> node) {
+            while (node != null) {
+                stackIterator.push(node);
+                node = (BinarySearchTree.NodeImpl<Integer>) node.left;
+            }
+        }
+
+        @Override
+        public boolean hasNext() {
+            return !stackIterator.isEmpty();
+        }
+
+        @Override
+        public Object next() {
+            BinarySearchTree.NodeImpl node = stackIterator.pop();
+            pushLeft((BinarySearchTree.NodeImpl) node.right);
+            return node.value;
+        }
+    }
 
     protected static class NodeImpl<E> implements Node<E> {
         private E value;
@@ -231,6 +259,5 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
             return value;
         }
     }
-
 }
 

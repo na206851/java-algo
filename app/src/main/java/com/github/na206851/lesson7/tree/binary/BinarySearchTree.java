@@ -176,7 +176,25 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
 
     @Override
     public Node<E> parent(Node<E> n) throws IllegalArgumentException {
-        return null;
+        return searchParent(root, n);
+    }
+
+    private Node<E> searchParent(Node<E> parent, Node<E> child) {
+        if (child == null) {
+            return null;
+        } else {
+            if (validate(root).left == child || validate(root).right == child) {
+                return root;
+            } else {
+                Node<E> leftResult = searchParent(validate(parent).left, child);
+                Node<E> rightResult = searchParent(validate(parent).left, child);
+                if (leftResult != null) {
+                    return leftResult;
+                } else {
+                    return rightResult;
+                }
+            }
+        }
     }
 
     @Override

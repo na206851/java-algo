@@ -29,8 +29,58 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
 
     @Override
     public Node<E> addRoot(E e) throws IllegalStateException {
-        return null;
+        if (root == null) {
+            root = new NodeImpl<>(e);
+        } else {
+            throw new IllegalStateException();
+        }
+        size++;
+        return validate(root);
     }
+
+    public static void main(String[] args) {
+        BinarySearchTree<Integer> test = new BinarySearchTree<>();
+        BinarySearchTree.NodeImpl<Integer> node1 = new NodeImpl<>(8);
+
+        test.root = node1;
+        test.add(test.root(), 3);
+        test.add(test.root(), 10);
+        test.add(test.root(), 1);
+        test.add(test.root(), 6);   //узел потерялся
+        test.add(test.root(), 14);
+        test.add(test.root(), 4);   //узел потерялся
+        test.add(test.root(), 7);   //узел потерялся
+
+        System.out.println(test.root.getElement() + " this root");
+        test.printTree((NodeImpl) test.root, 0);
+        System.out.println(test.inOrder(node1, new ArrayList<>()));
+    }
+
+    public List<Integer> inOrder(Node<E> root, List<Integer> list) {
+        if (root == null) {
+            return list;
+        } else {
+            inOrder(validate(root).left, list);
+            list.add((int) validate(root).value);
+            inOrder(validate(root).right, list);
+        }
+        return list;
+    }
+
+    private void printTree(BinarySearchTree.NodeImpl node, int space) {
+        if (node == null) {
+            return;
+        }
+        space += 10;
+        printTree((NodeImpl) validate(node).right, space);
+        System.out.println();
+        for (int i = 10; i < space; i++) {
+            System.out.print(" ");
+        }
+        System.out.print(node.value + "\n");
+        printTree((NodeImpl) validate(node).left, space);
+    }
+
 
     @Override
     public Node<E> add(Node<E> n, E e) throws IllegalArgumentException {

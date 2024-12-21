@@ -161,12 +161,12 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
 
     @Override
     public Node<E> left(Node<E> p) throws IllegalArgumentException {
-        return null;
+        return validate(p).left;
     }
 
     @Override
     public Node<E> right(Node<E> p) throws IllegalArgumentException {
-        return null;
+        return validate(p).right;
     }
 
     @Override

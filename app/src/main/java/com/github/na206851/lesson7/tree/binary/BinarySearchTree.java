@@ -121,13 +121,25 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
      */
     @Override
     public E remove(Node<E> n) throws IllegalArgumentException {
-        return null;
         LinkedBinaryTree.NodeImpl<E> removeNodeParent = (LinkedBinaryTree.NodeImpl<E>) parent(n);
         if (left(n) == null && right(n) == null) {
             if (removeNodeParent.left == n) {
                 removeNodeParent.left = null;
             } else if (removeNodeParent.right == n) {
                 removeNodeParent.right = null;
+            }
+            size--;
+        } else if (left(n) == null || right(n) == null) {
+            Node<E> child;
+            if (left(n) == null) {
+                child = validate(right(n));
+            } else {
+                child = validate(left(n));
+            }
+            if (removeNodeParent.left == n) {
+                removeNodeParent.left = child;
+            } else {
+                removeNodeParent.right = child;
             }
             size--;
         return n;

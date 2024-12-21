@@ -214,10 +214,21 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
 
 
     protected static class NodeImpl<E> implements Node<E> {
+        private E value;
+        public Node<E> left;
+        public Node<E> right;
+
+        public NodeImpl(E value) {
+            this.value = value;
+            left = right = null;
+        }
+
+        public NodeImpl() {
+        }
 
         @Override
         public E getElement() {
-            return null;
+            return value;
         }
     }
 

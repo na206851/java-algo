@@ -202,7 +202,7 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
 
     @Override
     public Node<E> root() {
-        return null;
+        return root;
     }
 
     @Override

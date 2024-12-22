@@ -87,8 +87,36 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
 
     @Override
     public Node<E> add(Node<E> n, E e) throws IllegalArgumentException {
-        return null;
+        if (e == null) {
+            throw new IllegalArgumentException("error e=null");
+        }
+        if (n == null) {
+            size++;
+            return new NodeImpl<>(e);       //базовый случай
+        } else {
+            if ((Integer) e < (Integer) validate(n).value) {
+                validate(n).left = add(validate(n).left, e);
+                size++;
+            } else if ((Integer) e > (Integer) validate(root).value) {
+                validate(n).right = add(validate(n).right, e);
+                size++;
+            } else if (e == validate(root).value) {
+                return null;
+            }
+        }
+        return n;
     }
+//  возможно что метод не нужен
+//    public Node<E> addRootIfRootNotNull(Node<E> n, E e) {
+//        if (root != null) {
+//            if ((Integer) validate(n).value > (Integer) validate(root).value) {
+//                validate(root).right = new NodeImpl<>(e);
+//            } else {
+//                validate(root).left = new NodeImpl<>(e);
+//            }
+//        }
+//        return n;
+//    }
 
     @Override
     public Node<E> addLeft(Node<E> n, E e) throws IllegalArgumentException {

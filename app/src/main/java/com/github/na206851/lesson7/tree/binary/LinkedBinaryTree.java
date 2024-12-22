@@ -2,8 +2,9 @@ package com.github.na206851.lesson7.tree.binary;
 
 import com.github.na206851.lesson7.tree.Node;
 
-import javax.swing.*;
-import java.util.*;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Stack;
 
 /**
  * Concrete implementation of a binary tree using a node-based, linked structure
@@ -12,7 +13,7 @@ import java.util.*;
  */
 public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     public Node<E> root;
-    private int size;
+    private int size = 0;
     // nonpublic utility
 
     /**
@@ -23,68 +24,45 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      * @throws IllegalArgumentException
      */
     protected NodeImpl<E> validate(Node<E> n) throws IllegalArgumentException {
-        return null;
+        return (NodeImpl<E>) n;
     }
-
-    // update methods supported by this class
 
     @Override
     public Node<E> addRoot(E e) throws IllegalStateException {
-        root = new NodeImpl<>(e);
-        size++;
-        return root;
+        if (root == null) {
+            root = new NodeImpl<>(e);
+            size++;
+            return root;
+        } else {
+            throw new IllegalStateException("корень уже есть");
+        }
     }
 
     @Override
     public Node<E> add(Node<E> n, E e) throws IllegalArgumentException {
-        if (root == null) {
-            addRoot(e);
+        if (n == null) {
+            throw new IllegalArgumentException();
+        } else if (root == null) {
+            return addRoot(e);
+        } else if (validate(n).left == null) {
+            return addLeft(validate(n), e);
+        } else if (validate(n).right == null) {
+            return addRight(validate(n), e);
         } else {
-            rec(root, e);
+            if (size % 2 == 1 && validate(n).right != null) {
+
+                n = add(left(n), e);
+            } else {
+                n = add(right(n), e);
+            }
         }
         return n;
-    }
-
-    public void rec(Node<E> currentNode, E e) {
-        if (((NodeImpl) currentNode).left == null) {
-//            addLeft(currentNode, e);
-            ((NodeImpl<E>) currentNode).left = new NodeImpl<>(e);
-//            rec(((NodeImpl) currentNode).left, e);
-        } else if (((NodeImpl<E>) currentNode).right == null) {
-//            addRight(root, e);
-            ((NodeImpl<E>) currentNode).right = new NodeImpl<>(e);
-//            rec(((NodeImpl) currentNode).right, e);
-        } else {
-            rec(((NodeImpl<E>) currentNode).left, e);
-        }
-    }
-
-    public static void visualMyTree() {
-        LinkedBinaryTree<Integer> tree = new LinkedBinaryTree<>();
-        tree.root = new NodeImpl<>(1);
-        ((NodeImpl<Integer>) tree.root).left = new NodeImpl<>(2);
-        ((NodeImpl<Integer>) tree.root).right = new NodeImpl<>(3);
-        ((NodeImpl<Integer>) ((NodeImpl<Integer>) tree.root).left).left = new NodeImpl<>(4);
-        ((NodeImpl<Integer>) ((NodeImpl<Integer>) tree.root).left).right = new NodeImpl<>(5);
-        ((NodeImpl<Integer>) ((NodeImpl<Integer>) tree.root).right).left = new NodeImpl<>(6);
-        ((NodeImpl<Integer>) ((NodeImpl<Integer>) tree.root).right).right = new NodeImpl<>(7);
-        ((NodeImpl<Integer>) ((NodeImpl<Integer>) ((NodeImpl<Integer>) tree.root).right).left).left = new NodeImpl<>(8);
-        ((NodeImpl<Integer>) ((NodeImpl<Integer>) ((NodeImpl<Integer>) tree.root).right).left).right = new NodeImpl<>(9);
-        inOrder((NodeImpl) tree.root);
-    }
-
-    public E getLeft(Node<E> current) {
-        return (E) ((NodeImpl) current).left.getElement();
-    }
-
-    public E getRight(Node<E> current) {
-        return (E) ((NodeImpl) current).right.getElement();
     }
 
     @Override
     public Node<E> addLeft(Node<E> n, E e) throws IllegalArgumentException {
         Node<E> left = new NodeImpl<>(e);
-        ((NodeImpl) n).left = left;
+        validate(n).left = left;
         size++;
         return left;
     }
@@ -92,7 +70,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     @Override
     public Node<E> addRight(Node<E> n, E e) throws IllegalArgumentException {
         Node<E> right = new NodeImpl<>(e);
-        ((NodeImpl) n).right = right;
+        validate(n).right = right;
         size++;
         return right;
     }
@@ -107,8 +85,8 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      */
     @Override
     public E set(Node<E> n, E e) throws IllegalArgumentException {
-        ((NodeImpl) n).value = e;
-        return ((NodeImpl<E>) n).value;
+        validate(n).value = e;
+        return validate(n).value;
     }
 
     /**
@@ -118,19 +96,50 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
      * @return replace element
      * @throws IllegalArgumentException
      */
+
     @Override
     public E remove(Node<E> n) throws IllegalArgumentException {
-        return null;
+        NodeImpl<E> removeNodeParent = (NodeImpl<E>) parent(n);
+        if (left(n) == null && right(n) == null) {
+            if (removeNodeParent.left == n) {
+                removeNodeParent.left = null;
+            } else if (removeNodeParent.right == n) {
+                removeNodeParent.right = null;
+            }
+        } else if (left(n) == null || right(n) == null) {
+            Node<E> child;
+            if (left(n) == null) {
+                child = validate(right(n));
+            } else {
+                child = validate(left(n));
+            }
+            if (removeNodeParent.left == n) {
+                removeNodeParent.left = child;
+            } else {
+                removeNodeParent.right = child;
+            }
+        } else if (left(n) != null && right(n) != null) {
+
+
+            //нужно найти максимальный узел
+            //забрать его значение и перекинуть в тот узел который мы хотим удалить, а ссылку на тот узел из
+            //которого мы забрали значение сделать null
+            //чтобы не пришлось заново линковать
+
+            //здесь должна быть реализация удаления узла с двумя потомками
+        }
+        size--;
+        return (E) null;
     }
 
     @Override
     public Node<E> left(Node<E> p) throws IllegalArgumentException {
-        return null;
+        return validate(p).left;
     }
 
     @Override
     public Node<E> right(Node<E> p) throws IllegalArgumentException {
-        return null;
+        return validate(p).right;
     }
 
     @Override
@@ -138,24 +147,23 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         return root;
     }
 
-
     @Override
     public Node<E> parent(Node<E> n) throws IllegalArgumentException {
         return searchParent(root, n);
     }
 
     private Node<E> searchParent(Node<E> root, Node<E> child) {
-        if (((NodeImpl<E>) root).left == null && ((NodeImpl<E>) root).right == null) {
+        if (validate(root).left == null && validate(root).right == null) {
             return null;
         }
         if (root == child) {
             throw new IllegalArgumentException("был передан корень");
         } else {
-            if (((NodeImpl<E>) root).left == child || ((NodeImpl<E>) root).right == child) {
+            if (validate(root).left == child || validate(root).right == child) {
                 return root;
             } else {
-                Node<E> leftResult = searchParent(((NodeImpl<E>) root).left, child);
-                Node<E> rightResult = searchParent(((NodeImpl<E>) root).right, child);
+                Node<E> leftResult = searchParent(validate(root).left, child);
+                Node<E> rightResult = searchParent(validate(root).right, child);
 
                 if (leftResult != null) {
                     return leftResult;
@@ -165,7 +173,6 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
             }
         }
     }
-
 
     @Override
     public int size() {
@@ -199,8 +206,8 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     }
 
     public static void main(String[] args) {
-        //создает отдельно узлы и отдельно линкуем их в дерево  ,
-        LinkedBinaryTree<Integer> tree = new LinkedBinaryTree<>();
+        LinkedBinaryTree<Integer> tree = new LinkedBinaryTree<Integer>();
+
         NodeImpl<Integer> node1 = new NodeImpl<>(1);
         NodeImpl<Integer> node2 = new NodeImpl<>(2);
         NodeImpl<Integer> node3 = new NodeImpl<>(3);
@@ -208,20 +215,81 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         NodeImpl<Integer> node5 = new NodeImpl<>(5);
         NodeImpl<Integer> node6 = new NodeImpl<>(6);
         NodeImpl<Integer> node7 = new NodeImpl<>(7);
+        NodeImpl<Integer> node8 = new NodeImpl<>(8);
+        NodeImpl<Integer> node9 = new NodeImpl<>(9);
+        NodeImpl<Integer> node10 = new NodeImpl<>(10);
+        NodeImpl<Integer> node11 = new NodeImpl<>(11);
+        NodeImpl<Integer> node12 = new NodeImpl<>(12);
+        NodeImpl<Integer> node13 = new NodeImpl<>(13);
+        NodeImpl<Integer> node14 = new NodeImpl<>(14);
+        NodeImpl<Integer> node15 = new NodeImpl<>(15);
+        NodeImpl<Integer> node16 = new NodeImpl<>(16);
         tree.root = node1;
-        node1.left = node2;
-        node1.right = node3;
-        node2.left = node4;
-        node2.right = node5;
-        node3.left = node6;
-        node3.right = node7;
-        System.out.println(tree.inOrder(tree.root, new ArrayList<>()));
-        iteratorTree it = new iteratorTree(node1);
-        while (it.hasNext()) {
-            System.out.print(it.next() + " ");
+        for (int i = 0; i < 15; i++) {
+            tree.add(node1, i);
         }
-        System.out.println();
-        System.out.println(it.hasNext());
+
+        System.out.println(tree.size);
+
+        tree.printAscii(node1, 0);
+
+//        tree.root = node1;
+//        node1.left = node2;
+//        node1.right = node3;
+//        node2.left = node4;
+//        node2.right = node5;
+//        node3.left = node6;
+//        node3.right = node7;
+//        node4.left = node8;
+//        node4.right = node9;
+//        node5.left = node10;
+//        node5.right = node11;
+//        node6.left = node12;
+//        node6.right = node13;
+//        node7.left = node14;
+//        node7.right = node15;
+//        node8.right = node16;
+
+//        tree.remove(node2);
+//        tree.remove(node3);
+//        tree.remove(node4);
+//        tree.printAscii((NodeImpl) tree.root, 0);
+//        node7.left = node8;
+//        tree.printAscii(node1, 0);
+
+//        System.out.println(tree.findMaxNode(node1).getElement());
+//        System.out.println(tree.findMaxNode(tree.root).getElement());
+    }
+
+    public Node<E> findMaxNode(Node<E> node) {
+        if (node == null) {
+            return parent(node);
+        }
+        Node<E> maxNode = node;
+        Node<E> maxLeft = findMaxNode(left(node));
+        Node<E> maxRight = findMaxNode(right(node));
+
+        if (maxLeft != null && (Integer) maxLeft.getElement() > (Integer) (maxNode.getElement())) {
+            maxNode = maxLeft;
+        }
+
+        if (maxRight != null && (Integer) maxRight.getElement() > (Integer) (maxNode.getElement())) {
+            maxNode = maxRight;
+        }
+        return maxNode;
+    }
+
+    /**
+     * метод для печати дерева в стиле ascii
+     */
+    public void printAscii(NodeImpl node, int space) {
+        if (node == null) return;
+        space += 10;
+        printAscii((NodeImpl) node.right, space);
+        System.out.print("\n");
+        for (int i = 10; i < space; i++) System.out.print(" ");
+        System.out.print(node.value + "\n");
+        printAscii((NodeImpl) node.left, space);
     }
 
     public static class iteratorTree implements Iterator {
@@ -253,12 +321,22 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         }
     }
 
-    protected static class NodeImpl<E> implements Node<E> {
+    public static class NodeImpl<E> implements Node<E> {
+        private E value;
+        public Node<E> left;
+        public Node<E> right;
+
+        public NodeImpl(E value) {
+            this.value = value;
+            left = right = null;
+        }
+
+        public NodeImpl() {
+        }
 
         @Override
         public E getElement() {
-            return null;
+            return value;
         }
     }
-
 }

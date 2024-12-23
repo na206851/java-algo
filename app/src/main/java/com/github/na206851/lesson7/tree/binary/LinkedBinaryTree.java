@@ -61,18 +61,16 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
     @Override
     public Node<E> addLeft(Node<E> n, E e) throws IllegalArgumentException {
-        Node<E> left = new NodeImpl<>(e);
-        validate(n).left = left;
+        validate(root).left = new NodeImpl<>(e);
         size++;
-        return left;
+        return validate(root).left;
     }
 
     @Override
     public Node<E> addRight(Node<E> n, E e) throws IllegalArgumentException {
-        Node<E> right = new NodeImpl<>(e);
-        validate(n).right = right;
+        validate(root).right = new NodeImpl<>(e);
         size++;
-        return right;
+        return validate(root).right;
     }
 
     /**

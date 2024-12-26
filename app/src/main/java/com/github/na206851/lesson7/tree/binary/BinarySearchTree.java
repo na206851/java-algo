@@ -97,16 +97,19 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
 
         if (n == null) {
             size++;
-            return new NodeImpl<>(e);       //базовый случай
-        } else {
-            if ((Integer) e < (Integer) validate(n).value) {
-                validate(n).left = add(validate(n).left, e);
-                size++;
-            } else if ((Integer) e > (Integer) validate(root).value) {
-                validate(n).right = add(validate(n).right, e);
-                size++;
-            } else if (e == validate(root).value) {
-                return null;
+            return newNode;
+        } else if ((Integer) e > (Integer) validate(n).value) {
+            if (validate(n).right == null) {
+                return validate(n).right = new NodeImpl<>(e);
+            } else {
+                n = validate(n).right;
+                add(validate(n), e);
+            }
+        } else if ((Integer) e < (Integer) validate(n).value) {
+            if (validate(n).left == null) {
+                return validate(n).left = new NodeImpl<>(e);
+            } else {
+                add(validate(n).left, e);
             }
         }
         return n;

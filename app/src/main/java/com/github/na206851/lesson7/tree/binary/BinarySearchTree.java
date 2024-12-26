@@ -112,7 +112,7 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
                 add(validate(n).left, e);
             }
         }
-        return n;
+        return newNode;
     }
 //  возможно что метод не нужен
 //    public Node<E> addRootIfRootNotNull(Node<E> n, E e) {

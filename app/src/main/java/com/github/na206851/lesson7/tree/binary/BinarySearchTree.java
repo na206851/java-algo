@@ -25,7 +25,7 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
      * @throws IllegalArgumentException
      */
     protected NodeImpl<E> validate(Node<E> n) throws IllegalArgumentException {
-        return (NodeImpl<E>) n;
+        return (BinarySearchTree.NodeImpl<E>) n;
     }
 
     // update methods supported by this class
@@ -35,7 +35,7 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
         if (root == null) {
             root = new NodeImpl<>(e);
         } else {
-            throw new IllegalStateException();
+            throw new IllegalStateException("root != null");
         }
         size++;
         return validate(root);
@@ -70,18 +70,18 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
         return list;
     }
 
-    private void printTree(BinarySearchTree.NodeImpl node, int space) {
+    public void printTree(Node<E> node, int space) {
         if (node == null) {
             return;
         }
         space += 10;
-        printTree((NodeImpl) validate(node).right, space);
+        printTree(validate(node).right, space);
         System.out.println();
         for (int i = 10; i < space; i++) {
             System.out.print(" ");
         }
-        System.out.print(node.value + "\n");
-        printTree((NodeImpl) validate(node).left, space);
+        System.out.print(validate(node).value + "\n");
+        printTree(validate(node).left, space);
     }
 
 

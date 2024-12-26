@@ -87,9 +87,14 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
 
     @Override
     public Node<E> add(Node<E> n, E e) throws IllegalArgumentException {
+        Node<E> newNode = new NodeImpl<>(e);
         if (e == null) {
-            throw new IllegalArgumentException("error e=null");
+            throw new IllegalArgumentException("error e = null");
         }
+        if (root == null) {
+            return addRoot(e);
+        }
+
         if (n == null) {
             size++;
             return new NodeImpl<>(e);       //базовый случай

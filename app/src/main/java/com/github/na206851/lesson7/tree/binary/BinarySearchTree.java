@@ -242,11 +242,15 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
         if (child == null) {
             return null;
         } else {
-            if (validate(root).left == child || validate(root).right == child) {
+            if (validate(root).left.getElement().equals(child.getElement()) || validate(root).right.getElement().equals(child.getElement())) {
                 return root;
             } else {
+                if ((validate(parent).left == null) || (validate(parent).right == null)) {
+                    return parent;
+                }
                 Node<E> leftResult = searchParent(validate(parent).left, child);
-                Node<E> rightResult = searchParent(validate(parent).left, child);
+                Node<E> rightResult = searchParent(validate(parent).right, child);
+
                 if (leftResult != null) {
                     return leftResult;
                 } else {

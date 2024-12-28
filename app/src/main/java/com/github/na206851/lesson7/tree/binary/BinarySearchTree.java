@@ -114,17 +114,6 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
         }
         return newNode;
     }
-//  возможно что метод не нужен
-//    public Node<E> addRootIfRootNotNull(Node<E> n, E e) {
-//        if (root != null) {
-//            if ((Integer) validate(n).value > (Integer) validate(root).value) {
-//                validate(root).right = new NodeImpl<>(e);
-//            } else {
-//                validate(root).left = new NodeImpl<>(e);
-//            }
-//        }
-//        return n;
-//    }
 
     @Override
     public Node<E> addLeft(Node<E> n, E e) throws IllegalArgumentException {
@@ -160,7 +149,8 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
      */
     @Override
     public E remove(Node<E> n) throws IllegalArgumentException {
-        LinkedBinaryTree.NodeImpl<E> removeNodeParent = (LinkedBinaryTree.NodeImpl<E>) parent(n);
+        BinarySearchTree.NodeImpl<E> removeNodeParent = (BinarySearchTree.NodeImpl<E>) parent(n);
+
         if (left(n) == null && right(n) == null) {
             if (removeNodeParent.left == n) {
                 removeNodeParent.left = null;
@@ -243,7 +233,7 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return new iteratorTree((NodeImpl<Integer>) root);
+        return new iteratorTree((NodeImpl<Integer>) validate(root));
     }
 
     @Override
@@ -252,10 +242,10 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
     }
 
     public static class iteratorTree implements Iterator {
-        Stack<BinarySearchTree.NodeImpl> stackIterator = new Stack<>();
+        Stack<NodeImpl<Integer>> stackIterator = new Stack<>();
         BinarySearchTree.NodeImpl<Integer> currentNode;
 
-        iteratorTree(BinarySearchTree.NodeImpl<Integer> root) {
+        private iteratorTree(BinarySearchTree.NodeImpl<Integer> root) {
             currentNode = root;
             pushLeft(currentNode);
         }
@@ -274,8 +264,8 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
 
         @Override
         public Object next() {
-            BinarySearchTree.NodeImpl node = stackIterator.pop();
-            pushLeft((BinarySearchTree.NodeImpl) node.right);
+            NodeImpl<Integer> node = stackIterator.pop();
+            pushLeft((NodeImpl<Integer>) node.right);
             return node.value;
         }
     }

@@ -158,6 +158,9 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
     }
 
     public E removeNodeForValue(Node<E> n, E value) throws IllegalArgumentException {
+        if (n == null || value == null) {
+            throw new IllegalArgumentException("n == null");
+        }
         BinarySearchTree.NodeImpl<E> removeNodeParent = (BinarySearchTree.NodeImpl<E>) parent(n);
 
         if (left(n) == null && right(n) == null) {

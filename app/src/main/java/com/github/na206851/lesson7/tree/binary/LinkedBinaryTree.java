@@ -40,23 +40,31 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
     @Override
     public Node<E> add(Node<E> n, E e) throws IllegalArgumentException {
-        if (n == null) {
-            throw new IllegalArgumentException();
-        } else if (root == null) {
+        Node<E> newNode = new LinkedBinaryTree.NodeImpl<>(e);
+        if (e == null) {
+            throw new IllegalArgumentException("error e = null");
+        }
+        if (root == null) {
             return addRoot(e);
-        } else if (validate(n).left == null) {
-            return addLeft(validate(n), e);
-        } else if (validate(n).right == null) {
-            return addRight(validate(n), e);
-        } else {
-            if (size % 2 == 1 && validate(n).right != null) {
+        }
 
-                n = add(left(n), e);
+        if (n == null) {
+            return null;
+        } else if ((Integer) e > (Integer) validate(n).value) {
+            if (validate(n).right == null) {
+                return validate(n).right = newNode;
             } else {
-                n = add(right(n), e);
+                n = validate(n).right;
+                add(validate(n), e);
+            }
+        } else if ((Integer) e < (Integer) validate(n).value) {
+            if (validate(n).left == null) {
+                return validate(n).left = newNode;
+            } else {
+                add(validate(n).left, e);
             }
         }
-        return n;
+        return newNode;
     }
 
     @Override

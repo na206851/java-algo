@@ -156,7 +156,8 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
             set(n, validate(nodeWithIn).value);
             remove(nodeWithIn);
         }
-        return validate(n).value;
+        return n.getElement();
+
     }
 
     public E removeNodeForValue(Node<E> n, E value) throws IllegalArgumentException {
@@ -222,12 +223,11 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
     }
 
     private Node<E> searchParent(Node<E> parent, Node<E> child) {
-        if (child.getElement() == null) {
+        if (child == null) {
             return null;
         } else {
-            if (validate(root).left.getElement().equals(child.getElement()) ||
-                    validate(root).right.getElement().equals(child.getElement())) {
-                return root;
+            if (validate(parent).left == (child) || validate(parent).right == (child)) {
+                return parent;
             } else {
                 if ((validate(parent).left == null) || (validate(parent).right == null)) {
                     return parent;

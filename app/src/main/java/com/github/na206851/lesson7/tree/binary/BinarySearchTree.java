@@ -143,7 +143,7 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
             } else {
                 child = validate(left(n));
             }
-            if (removeNodeParent.left == n) {
+            if (removeNodeParent.left.equals(n)) {
                 removeNodeParent.left = child;
             } else {
                 removeNodeParent.right = child;
@@ -192,7 +192,7 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
     }
 
 
-    public Node<E> getMinValueInRightSubtree(Node<E> n) {
+    private Node<E> getMinValueInRightSubtree(Node<E> n) {
         while (validate(n).left != null) {
             n = validate(n).left;
         }

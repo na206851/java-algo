@@ -113,6 +113,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
             } else if (removeNodeParent.right == n) {
                 removeNodeParent.right = null;
             }
+            size--;
         } else if (left(n) == null || right(n) == null) {
             Node<E> child;
             if (left(n) == null) {
@@ -125,18 +126,20 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
             } else {
                 removeNodeParent.right = child;
             }
+            size--;
         } else if (left(n) != null && right(n) != null) {
-
-
-            //нужно найти максимальный узел
-            //забрать его значение и перекинуть в тот узел который мы хотим удалить, а ссылку на тот узел из
-            //которого мы забрали значение сделать null
-            //чтобы не пришлось заново линковать
-
-            //здесь должна быть реализация удаления узла с двумя потомками
+            Node<E> nodeWithIn = getMinValueInRightSubtree(right(n));
+            set(n, validate(nodeWithIn).value);
+            remove(nodeWithIn);
         }
-        size--;
-        return (E) null;
+        return validate(n).value;
+    }
+
+    public Node<E> getMinValueInRightSubtree(Node<E> n) {
+        while (validate(n).left != null) {
+            n = validate(n).left;
+        }
+        return n;
     }
 
     @Override

@@ -195,10 +195,10 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
 
 
     private Node<E> getMinValueInRightSubtree(Node<E> n) {
-        while (validate(n).left != null) {
-            n = validate(n).left;
+        if (validate(n).left == null) {
+            return n;
         }
-        return n;
+        return getMinValueInRightSubtree(validate(n).left);
     }
 
     @Override

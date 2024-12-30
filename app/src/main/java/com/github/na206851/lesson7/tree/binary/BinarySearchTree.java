@@ -223,7 +223,8 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
         if (child.getElement() == null) {
             return null;
         } else {
-            if (validate(root).left.getElement().equals(child.getElement()) || validate(root).right.getElement().equals(child.getElement())) {
+            if (validate(root).left.getElement().equals(child.getElement()) ||
+                    validate(root).right.getElement().equals(child.getElement())) {
                 return root;
             } else {
                 if ((validate(parent).left == null) || (validate(parent).right == null)) {

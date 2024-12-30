@@ -115,7 +115,9 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
      */
     @Override
     public E set(Node<E> n, E e) throws IllegalArgumentException {
-        return validate(n).value = e;
+        E oldValue = n.getElement();
+        validate(n).value = e;
+        return oldValue;
     }
 
     /**

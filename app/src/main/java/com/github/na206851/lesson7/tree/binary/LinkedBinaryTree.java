@@ -191,7 +191,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return new iteratorTree((NodeImpl) root);
+        return new iteratorTree(validate(root));
     }
 
     @Override
@@ -204,13 +204,11 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         return null;
     }
 
-    //нужен тест на обход дерева
-    public List<E> inOrder(Node<E> node, List<E> list) {
-        NodeImpl<E> nodeImpl = (NodeImpl<E>) node;
+    public List<E> inOrder(NodeImpl<E> node, List<E> list) {
         if (node != null) {
-            inOrder(nodeImpl.left, list);
+            inOrder((NodeImpl<E>) node.left, list);
             list.add(node.getElement());
-            inOrder(nodeImpl.right, list);
+            inOrder((NodeImpl<E>) node.right, list);
         }
         return list;
     }
@@ -292,14 +290,14 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     /**
      * метод для печати дерева в стиле ascii
      */
-    public void printAscii(NodeImpl node, int space) {
+    public void printAscii(NodeImpl<E> node, int space) {
         if (node == null) return;
         space += 10;
-        printAscii((NodeImpl) node.right, space);
+        printAscii((NodeImpl<E>) node.right, space);
         System.out.print("\n");
         for (int i = 10; i < space; i++) System.out.print(" ");
         System.out.print(node.value + "\n");
-        printAscii((NodeImpl) node.left, space);
+        printAscii((NodeImpl<E>) node.left, space);
     }
 
     public static class iteratorTree implements Iterator {

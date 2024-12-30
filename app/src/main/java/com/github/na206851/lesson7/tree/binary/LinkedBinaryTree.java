@@ -162,18 +162,18 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         return searchParent(root, n);
     }
 
-    private Node<E> searchParent(Node<E> root, Node<E> child) {
-        if (validate(root).left == null && validate(root).right == null) {
+    private Node<E> searchParent(Node<E> parent, Node<E> child) {
+        if (child == null) {
             return null;
-        }
-        if (root == child) {
-            throw new IllegalArgumentException("был передан корень");
         } else {
-            if (validate(root).left == child || validate(root).right == child) {
-                return root;
+            if (validate(parent).left == (child) || validate(parent).right == (child)) {
+                return parent;
             } else {
-                Node<E> leftResult = searchParent(validate(root).left, child);
-                Node<E> rightResult = searchParent(validate(root).right, child);
+                if ((validate(parent).left == null) || (validate(parent).right == null)) {
+                    return parent;
+                }
+                Node<E> leftResult = searchParent(validate(parent).left, child);
+                Node<E> rightResult = searchParent(validate(parent).right, child);
 
                 if (leftResult != null) {
                     return leftResult;

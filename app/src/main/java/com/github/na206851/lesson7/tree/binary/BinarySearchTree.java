@@ -78,16 +78,17 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
             return null;
         } else if ((Integer) e > (Integer) validate(n).value) {
             if (validate(n).right == null) {
+                size++;
                 return validate(n).right = newNode;
             } else {
-                n = validate(n).right;
-                add(validate(n), e);
+                return add(validate(n).right, e);
             }
         } else if ((Integer) e < (Integer) validate(n).value) {
             if (validate(n).left == null) {
+                size++;
                 return validate(n).left = newNode;
             } else {
-                add(validate(n).left, e);
+                return add(validate(n).left, e);
             }
         }
         return newNode;
@@ -165,7 +166,6 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
             throw new IllegalArgumentException("n == null");
         }
         BinarySearchTree.NodeImpl<E> removeNodeParent = (BinarySearchTree.NodeImpl<E>) parent(n);
-
         if (left(n) == null && right(n) == null) {
             if ((removeNodeParent.left.getElement()).equals(value)) {
                 removeNodeParent.left = null;
@@ -223,7 +223,10 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
     }
 
     private Node<E> searchParent(Node<E> parent, Node<E> child) {
-        if (child == null) {
+        if (parent == child) {
+            throw new IllegalArgumentException("parent == root");
+        }
+        if (parent == null || child == null) {
             return null;
         } else {
             if (validate(parent).left == (child) || validate(parent).right == (child)) {

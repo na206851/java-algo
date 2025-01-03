@@ -183,7 +183,24 @@ class BinarySearchTreeTest {
     }
 
     @Test
-    void testRemoveLeaf() {
+    void testRemoveLeftLeaf() {
+        /*
+                8
+              5   10
+         */
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        tree.add(tree.root, 8);
+        Node<Integer> node5 = tree.add(tree.root, 5);
+        tree.add(tree.root, 10);
+
+        tree.remove(node5);
+
+        List<Integer> expected = List.of(8, 10);
+        Assertions.assertIterableEquals(expected, tree.inOrder(tree.root, new ArrayList<>()));
+    }
+
+    @Test
+    void testRemoveRightLeaf() {
         /*
                 8
               5   10

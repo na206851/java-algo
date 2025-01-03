@@ -2,7 +2,6 @@ package com.github.na206851.lesson7.tree.binary;
 
 import com.github.na206851.lesson7.tree.Node;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
@@ -14,8 +13,7 @@ import java.util.Stack;
  */
 public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
     Node<E> root;
-    int size = 0;
-    // nonpublic utility
+    private int size = 0;
 
     /**
      * Validates the node is an instance of supported {@link NodeImpl} type and casts to it
@@ -31,11 +29,11 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
     @Override
     public Node<E> addRoot(E e) throws IllegalStateException {
         if (root == null) {
+            size++;
             root = new NodeImpl<>(e);
         } else {
             throw new IllegalStateException("root != null");
         }
-        size++;
         return validate(root);
     }
 
@@ -72,9 +70,7 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
         }
         if (root == null) {
             return addRoot(e);
-        }
-
-        if (n == null) {
+        } else if (n == null) {
             return null;
         } else if ((Integer) e > (Integer) validate(n).value) {
             if (validate(n).right == null) {
@@ -131,7 +127,8 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
     @Override
     public E remove(Node<E> n) throws IllegalArgumentException {
         BinarySearchTree.NodeImpl<E> removeNodeParent = (BinarySearchTree.NodeImpl<E>) parent(n);
-
+        Node<E> child;
+//        if (n==root) посмотреть как сделать так чтобы исключение вылетало когда это нужно
         if (left(n) == null && right(n) == null) {
             if (removeNodeParent.left == n) {
                 removeNodeParent.left = null;

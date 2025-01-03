@@ -255,4 +255,28 @@ class BinarySearchTreeTest {
         List<Integer> expected = List.of(3, 5, 8, 11);
         Assertions.assertIterableEquals(expected, tree.inOrder(tree.root, new ArrayList<>()));
     }
+    @Test
+    void RemoveLeftParentHasTwoChild() {
+        /*
+                8
+             5     10
+          4   6   9   11
+        */
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        Node<Integer> treeRoot = tree.add(tree.root, 8);
+        Node<Integer> node5 = tree.add(tree.root, 5);
+        Node<Integer> node10 = tree.add(tree.root, 10);
+        Node<Integer> node4 = tree.add(tree.root, 4);
+        Node<Integer> node6 = tree.add(tree.root, 6);
+        Node<Integer> node9 = tree.add(tree.root, 9);
+        Node<Integer> node11 = tree.add(tree.root, 11);
+
+        tree.remove(node10);
+        List<Integer> expectedBeforeRemoveNode10 = List.of(4, 5, 6, 8, 9, 11);
+        Assertions.assertIterableEquals(expectedBeforeRemoveNode10, tree.inOrder(tree.root, new ArrayList<>()));
+
+        tree.remove(node5);
+        List<Integer> expectedBeforeRemoveNode5 = List.of(4, 6, 8, 9, 11);
+        Assertions.assertIterableEquals(expectedBeforeRemoveNode5, tree.inOrder(tree.root, new ArrayList<>()));
+    }
 }

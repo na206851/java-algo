@@ -208,11 +208,31 @@ class BinarySearchTreeTest {
         BinarySearchTree<Integer> tree = new BinarySearchTree<>();
         tree.add(tree.root, 8);
         tree.add(tree.root, 5);
+        Node node10 = tree.add(tree.root, 10);
+
+        tree.remove(node10);
+
+        List<Integer> expected = List.of(5, 8);
+        Assertions.assertIterableEquals(expected, tree.inOrder(tree.root, new ArrayList<>()));
+    }
+
+    @Test
+    void RemoveParentOneChildLeft() {
+        /*
+                8
+             5     10
+          3            11
+         */
+
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        tree.add(tree.root, 8);
+        Node<Integer> node5 = tree.add(tree.root, 5);
         tree.add(tree.root, 10);
+        tree.add(tree.root, 3);
+        tree.add(tree.root, 11);
 
-        tree.removeNodeForValue(tree.root, 8);
-
-        List<Integer> expected = List.of(5, 10);
+        tree.remove(node5);
+        List<Integer> expected = List.of(3, 8, 10, 11);
         Assertions.assertIterableEquals(expected, tree.inOrder(tree.root, new ArrayList<>()));
     }
 }

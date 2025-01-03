@@ -1,5 +1,6 @@
 package com.github.na206851.lesson7.tree.binary;
 
+import com.github.na206851.lesson7.tree.Node;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -130,10 +131,6 @@ class BinarySearchTreeTest {
     }
 
     @Test
-    void remove() {
-    }
-
-    @Test
     void left() {
         BinarySearchTree<Integer> tree = new BinarySearchTree<>();
         tree.root = new BinarySearchTree.NodeImpl<>(5);
@@ -175,8 +172,7 @@ class BinarySearchTreeTest {
         tree.add(tree.root, 8);
         tree.add(tree.root, 5);
         tree.add(tree.root, 10);
-
-        tree.removeNodeForValue(tree.root, 8);
+        tree.remove(tree.root);
 
         List<Integer> expected = List.of(5, 10);
         Assertions.assertIterableEquals(expected, tree.inOrder(tree.root, new ArrayList<>()));

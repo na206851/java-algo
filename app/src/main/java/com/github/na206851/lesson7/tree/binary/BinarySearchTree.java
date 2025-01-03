@@ -218,27 +218,20 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
     }
 
     private Node<E> searchParent(Node<E> parent, Node<E> child) {
-        if (parent == child) {
-            throw new IllegalArgumentException("parent == root");
-        }
         if (parent == null || child == null) {
             return null;
-        } else {
-            if (validate(parent).left == (child) || validate(parent).right == (child)) {
-                return parent;
-            } else {
-                if ((validate(parent).left == null) || (validate(parent).right == null)) {
-                    return parent;
-                }
-                Node<E> leftResult = searchParent(validate(parent).left, child);
-                Node<E> rightResult = searchParent(validate(parent).right, child);
+        }
+        if (validate(parent).left == child || validate(parent).right == child) {
+            return parent;
+        }
 
-                if (leftResult != null) {
-                    return leftResult;
-                } else {
-                    return rightResult;
-                }
-            }
+        Node<E> leftResult = searchParent(validate(parent).left, child);
+        Node<E> rightResult = searchParent(validate(parent).right, child);
+
+        if (leftResult != null) {
+            return leftResult;
+        } else {
+            return rightResult;
         }
     }
 

@@ -128,22 +128,20 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
     public E remove(Node<E> n) throws IllegalArgumentException {
         BinarySearchTree.NodeImpl<E> removeNodeParent = (BinarySearchTree.NodeImpl<E>) parent(n);
         Node<E> child;
-//        if (n==root) посмотреть как сделать так чтобы исключение вылетало когда это нужно
         if (left(n) == null && right(n) == null) {
-            if (removeNodeParent.left == n) {
+            if (removeNodeParent != null && removeNodeParent.left == n) {
                 removeNodeParent.left = null;
-            } else if (removeNodeParent.right == n) {
+            } else if (removeNodeParent != null && removeNodeParent.right == n) {
                 removeNodeParent.right = null;
             }
             size--;
         } else if (left(n) == null || right(n) == null) {
-            Node<E> child;
             if (left(n) == null) {
                 child = validate(right(n));
             } else {
                 child = validate(left(n));
             }
-            if (removeNodeParent.left.equals(n)) {
+            if (removeNodeParent.left == (n)) {
                 removeNodeParent.left = child;
             } else {
                 removeNodeParent.right = child;

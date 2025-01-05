@@ -94,15 +94,18 @@ public class ArrayBinaryTree<E> extends AbstractBinaryTree<E> {
     }
 
     protected static class NodeImpl<E> implements Node<E> {
-        private E node;
+        private E value;
+        private Node<E> left;
+        private Node<E> right;
 
-        public NodeImpl(E node) {
-            this.node = node;
+        public NodeImpl(E value) {
+            this.value = value;
+            left = right = null;
         }
 
         @Override
         public E getElement() {
-            return null;
+            return value;
         }
     }
 }

@@ -34,7 +34,9 @@ public class ArrayBinaryTree<E> extends AbstractBinaryTree<E> {
 
     @Override
     public Node<E> right(Node<E> p) throws IllegalArgumentException {
-        return null;
+        int indexRight = indexNode(validate(p)) + 2;
+        return data[indexRight] == null ? null : data[indexRight];
+
     }
 
     @Override

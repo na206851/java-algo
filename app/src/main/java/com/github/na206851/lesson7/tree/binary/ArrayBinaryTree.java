@@ -11,6 +11,20 @@ import java.util.Iterator;
  */
 public class ArrayBinaryTree<E> extends AbstractBinaryTree<E> {
 
+    public int indexNode(NodeImpl searchNode) {
+        int index = 0;
+        for (Node tmp : data) {
+            if (tmp.equals(searchNode)) {
+                return index;
+            }
+            index++;
+        }
+        return -1;
+    }
+
+    protected ArrayBinaryTree.NodeImpl<E> validate(Node<E> n) throws IllegalArgumentException {
+        return (ArrayBinaryTree.NodeImpl<E>) n;
+    }
 
     @Override
     public Node<E> left(Node<E> p) throws IllegalArgumentException {

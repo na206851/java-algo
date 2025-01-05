@@ -168,12 +168,40 @@ public class ArrayBinaryTree<E> extends AbstractBinaryTree<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return null;
+        return new ArrayBinaryTree.iteratorTree(validate(root));
     }
 
     @Override
     public Iterable<Node<E>> nodes() {
         return null;
+    }
+
+    public class iteratorTree implements Iterator {
+        Stack<ArrayBinaryTree.NodeImpl> stackIterator = new Stack<>();
+        NodeImpl currentNode;
+
+        iteratorTree(ArrayBinaryTree.NodeImpl<E> root) {
+            currentNode = root;
+            pushStack(currentNode);
+        }
+
+        private void pushStack(ArrayBinaryTree.NodeImpl node) {
+            int currentIndex = 0;
+            while (currentIndex != ArrayBinaryTree.this.size) {
+                stackIterator.push(validate(data[currentIndex++]));
+            }
+        }
+
+        @Override
+        public boolean hasNext() {
+            return !stackIterator.isEmpty();
+        }
+
+        @Override
+        public Object next() {
+            ArrayBinaryTree.NodeImpl<E> node = stackIterator.pop();
+            return node.value;
+        }
     }
 
     protected static class NodeImpl<E> implements Node<E> {

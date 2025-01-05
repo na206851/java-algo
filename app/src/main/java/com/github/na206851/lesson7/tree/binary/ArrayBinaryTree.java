@@ -58,7 +58,14 @@ public class ArrayBinaryTree<E> extends AbstractBinaryTree<E> {
 
     @Override
     public Node<E> addRoot(E e) throws IllegalStateException {
-        return null;
+        if (root != null) {
+            throw new IllegalStateException("корень уже установлен");
+        } else {
+            root = new NodeImpl<>(e);
+            data[0] = root;
+            size++;
+        }
+        return root;
     }
 
     @Override

@@ -10,6 +10,9 @@ import java.util.Iterator;
  * @param <E> element
  */
 public class ArrayBinaryTree<E> extends AbstractBinaryTree<E> {
+    private Node<E> root;
+    public static Node[] data = new Node[8];
+    int size = 0;
 
     public int indexNode(NodeImpl searchNode) {
         int index = 0;

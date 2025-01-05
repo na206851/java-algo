@@ -57,12 +57,12 @@ class LinkedBinaryTreeTest {
     }
 
     @Test
-    void getParent() {      //добавить метод добавления родителя не знаю
+    void getParent() {
         LinkedBinaryTree<Integer> tree = new LinkedBinaryTree<>();
         tree.addRoot(1);
         tree.addLeft(tree.root(), 2);
         tree.addRight(tree.root(), 3);
-        assertEquals(1, tree.parent(tree.left(tree.root())));
+        assertEquals(1, tree.parent(tree.left(tree.root())).getElement());
     }
 
     @Test

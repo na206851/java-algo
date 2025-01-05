@@ -14,6 +14,33 @@ public class ArrayBinaryTree<E> extends AbstractBinaryTree<E> {
     public static Node[] data = new Node[8];
     int size = 0;
 
+
+    private static int calculateHeight(int size) {
+        return (int) Math.ceil(Math.log(size + 1) / Math.log(2));
+    }
+
+    public void printAsciiTree(Node[] data) {
+        if (data == null || data.length == 0) {
+            System.out.println("Дерево пустое.");
+            return;
+        }
+        int height = calculateHeight(data.length); // Вычисляем высоту дерева
+        List<String> result = new ArrayList<>();
+        for (int level = 0; level < height; level++) {
+            StringBuilder line = new StringBuilder();
+            int startIdx = (1 << level) - 1; // Индекс начала уровня
+            int endIdx = Math.min((1 << (level + 1)) - 1, data.length); // Индекс конца уровня
+            int spacing = (1 << (height - level)) - 1; // Расстояние между элементами
+            for (int i = startIdx; i < endIdx; i++) {
+                if (i < data.length) {
+                    line.append(" ".repeat(spacing)).append(data[i]).append(" ".repeat(spacing));
+                }
+            }
+            result.add(line.toString());
+        }
+        result.forEach(System.out::println);
+    }
+
     private static Node[] increaseSize(Node[] data) {
         data = Arrays.copyOf(data, data.length * 2);
         return data;
@@ -22,7 +49,7 @@ public class ArrayBinaryTree<E> extends AbstractBinaryTree<E> {
     public int indexNode(NodeImpl searchNode) {
         int index = 0;
         for (Node tmp : data) {
-            if (tmp.equals(searchNode)) {
+            if (tmp == searchNode) {
                 return index;
             }
             index++;
@@ -49,12 +76,18 @@ public class ArrayBinaryTree<E> extends AbstractBinaryTree<E> {
 
     @Override
     public Node<E> addLeft(Node<E> n, E e) throws IllegalArgumentException {
-        return null;
+        validate(root).left = new ArrayBinaryTree.NodeImpl<>(e);
+        data[1] = validate(root).left;
+        size++;
+        return data[1];
     }
 
     @Override
     public Node<E> addRight(Node<E> n, E e) throws IllegalArgumentException {
-        return null;
+        validate(root).right = new ArrayBinaryTree.NodeImpl<>(e);
+        data[2] = validate(root).right;
+        size++;
+        return data[2];
     }
 
     @Override

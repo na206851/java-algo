@@ -14,6 +14,11 @@ public class ArrayBinaryTree<E> extends AbstractBinaryTree<E> {
     public static Node[] data = new Node[8];
     int size = 0;
 
+    private static Node[] increaseSize(Node[] data) {
+        data = Arrays.copyOf(data, data.length * 2);
+        return data;
+    }
+
     public int indexNode(NodeImpl searchNode) {
         int index = 0;
         for (Node tmp : data) {

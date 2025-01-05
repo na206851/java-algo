@@ -73,22 +73,20 @@ class LinkedBinaryTreeTest {
     }
 
     @Test
-    void addMethodInLeftNode() {
+    void addMethodInRightNode() {
         LinkedBinaryTree<Integer> tree = new LinkedBinaryTree<>();
-        tree.add(new LinkedBinaryTree.NodeImpl<>(), -1);
-        tree.add(new LinkedBinaryTree.NodeImpl<>(), 0);
-        assertEquals(0, tree.left(tree.root()).getElement());
-        System.out.println(tree.left(tree.root()).getElement());
+        tree.add(tree.root, -1);
+        tree.add(tree.root, 0);
+        assertEquals(0, tree.right(tree.root()).getElement());
     }
 
     @Test
     void addMethodInRightNodeIfLeftNotEmpty() {
         LinkedBinaryTree<Integer> tree = new LinkedBinaryTree<>();
         tree.addRoot(0);
-        tree.add(new LinkedBinaryTree.NodeImpl<>(), 1);
-        tree.add(new LinkedBinaryTree.NodeImpl<>(2), 2);
-
-        System.out.println();
+        tree.add(tree.root, 1);
+        List<Integer> expected = List.of(0, 1);
+        Assertions.assertIterableEquals(expected, tree.inOrder(tree.validate(tree.root), new ArrayList<>()));
     }
 
     @Test

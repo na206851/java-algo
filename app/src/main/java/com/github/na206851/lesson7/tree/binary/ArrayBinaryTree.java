@@ -48,7 +48,7 @@ public class ArrayBinaryTree<E> extends AbstractBinaryTree<E> {
 
     @Override
     public Node<E> root() {
-        return null;
+        return root == null ? null : data[0];
     }
 
     @Override

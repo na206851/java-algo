@@ -22,7 +22,7 @@ public class ArrayBinaryTree<E> extends AbstractBinaryTree<E> {
         return -1;
     }
 
-    protected ArrayBinaryTree.NodeImpl<E> validate(Node<E> n) throws IllegalArgumentException {
+    private ArrayBinaryTree.NodeImpl<E> validate(Node<E> n) throws IllegalArgumentException {
         return (ArrayBinaryTree.NodeImpl<E>) n;
     }
 

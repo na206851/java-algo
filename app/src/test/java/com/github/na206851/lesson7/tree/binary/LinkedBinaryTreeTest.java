@@ -246,8 +246,7 @@ class LinkedBinaryTreeTest {
         node3.left = node6;
         node3.right = node7;
 
-        assertEquals(node7.getElement(), tree.inOrder(tree.root, new ArrayList<>()).stream().max(Integer::compareTo).get());
-
+        assertEquals(node7.getElement(), tree.inOrder(tree.validate(tree.root), new ArrayList<>()).stream().max(Integer::compareTo).get());
     }
 
     @Test

@@ -196,8 +196,18 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
     @Override
     public Iterable<Node<E>> nodes() {
-        return null;
-    }//новый итератор на основе связного списка
+        List<Node<E>> list = new LinkedList<>();
+        inOrderNodes(validate(root), list);
+        return list;
+    }
+
+    private void inOrderNodes(NodeImpl<E> root, List<Node<E>> node) {
+        if (node != null) {
+            inOrderNodes((NodeImpl<E>) validate(root).left, node);
+            node.add(root);
+            inOrderNodes((NodeImpl<E>) root.right, node);
+        }
+    }
 
     public List<E> inOrder(NodeImpl<E> node, List<E> list) {
         if (node != null) {

@@ -247,7 +247,17 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
 
     @Override
     public Iterable<Node<E>> nodes() {
-        return null;
+        List<Node<E>> listNode = new LinkedList<>();
+        inOrderNodes(validate(root), listNode);
+        return listNode;
+    }
+
+    private void inOrderNodes(NodeImpl<E> root, List<Node<E>> listNode) {
+        if (root != null) {
+            inOrderNodes((NodeImpl<E>) root.left, listNode);
+            listNode.add(root);
+            inOrderNodes((NodeImpl<E>) root.right, listNode);
+        }
     }
 
     public static class iteratorTree implements Iterator {

@@ -316,4 +316,50 @@ class LinkedBinaryTreeTest {
          *    4   5
          */
     }
+
+    @Test
+    void testIterable() {
+        LinkedBinaryTree<Integer> tree = new LinkedBinaryTree<>();
+        Node<Integer> node8 = tree.add(tree.root, 8);
+        Node<Integer> node10 = tree.add(tree.root, 10);
+        Node<Integer> node9 = tree.add(tree.root, 9);
+
+        List<Node<Integer>> expected = List.of(node8, node9, node10);
+
+        Assertions.assertIterableEquals(expected, tree.nodes());
+    }
+
+    @Test
+    void testIterableRootIsNull() {
+        LinkedBinaryTree<Integer> tree = new LinkedBinaryTree<>();
+
+        List<Node<Integer>> expected = List.of();
+
+        Assertions.assertIterableEquals(expected, tree.nodes());
+    }
+
+    @Test
+    void testIterableOnlyRoot() {
+        LinkedBinaryTree<Integer> tree = new LinkedBinaryTree<>();
+        Node<Integer> node10 = tree.add(tree.root, 10);
+        List<Node<Integer>> expected = List.of(node10);
+
+        Assertions.assertIterableEquals(expected, tree.nodes());
+    }
+
+    @Test
+    void testIterableThreeLevelTree() {
+        LinkedBinaryTree<Integer> tree = new LinkedBinaryTree<>();
+        Node<Integer> node8 = tree.add(tree.root, 8);
+        Node<Integer> node10 = tree.add(tree.root, 10);
+        Node<Integer> node9 = tree.add(tree.root, 9);
+        Node<Integer> node7 = tree.add(tree.root, 7);
+        Node<Integer> node6 = tree.add(tree.root, 6);
+        Node<Integer> node11 = tree.add(tree.root, 11);
+        Node<Integer> node13 = tree.add(tree.root, 13);
+
+        List<Node<Integer>> expected = List.of(node6, node7, node8, node9, node10, node11, node13);
+
+        Assertions.assertIterableEquals(expected, tree.nodes());
+    }
 }

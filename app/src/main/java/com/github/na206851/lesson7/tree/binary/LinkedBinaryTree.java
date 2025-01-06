@@ -201,11 +201,11 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         return list;
     }
 
-    private void inOrderNodes(NodeImpl<E> root, List<Node<E>> node) {
-        if (node != null) {
-            inOrderNodes((NodeImpl<E>) validate(root).left, node);
-            node.add(root);
-            inOrderNodes((NodeImpl<E>) root.right, node);
+    private void inOrderNodes(NodeImpl<E> root, List<Node<E>> listNode) {
+        if (root != null) {
+            inOrderNodes((NodeImpl<E>) validate(root).left, listNode);
+            listNode.add(root);
+            inOrderNodes((NodeImpl<E>) root.right, listNode);
         }
     }
 

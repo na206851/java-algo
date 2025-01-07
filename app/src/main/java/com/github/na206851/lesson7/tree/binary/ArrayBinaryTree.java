@@ -32,8 +32,8 @@ public class ArrayBinaryTree<E> extends AbstractBinaryTree<E> {
             int endIdx = Math.min((1 << (level + 1)) - 1, data.length); // Индекс конца уровня
             int spacing = (1 << (height - level)) - 1; // Расстояние между элементами
             for (int i = startIdx; i < endIdx; i++) {
-                if (i < data.length) {
-                    line.append(" ".repeat(spacing)).append(data[i]).append(" ".repeat(spacing));
+                if (i < size) {
+                    line.append(" ".repeat(spacing)).append(validate(data[i]).value).append(" ".repeat(spacing));
                 }
             }
             result.add(line.toString());

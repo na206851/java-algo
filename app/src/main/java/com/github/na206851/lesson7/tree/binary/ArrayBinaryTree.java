@@ -97,7 +97,9 @@ public class ArrayBinaryTree<E> extends AbstractBinaryTree<E> {
 
     @Override
     public Node<E> parent(Node<E> n) throws IllegalArgumentException {
-        return null;
+        int i = indexNode(validate(n));
+        Node<E> parentNode = data[(i - 1) / 2] == null ? null : data[(i - 1) / 2];
+        return parentNode;
     }
 
     @Override

@@ -2,9 +2,7 @@ package com.github.na206851.lesson7.tree.binary;
 
 import com.github.na206851.lesson7.tree.Node;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * Concrete implementation of a binary tree using a node-based, linked structure

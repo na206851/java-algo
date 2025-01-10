@@ -117,14 +117,12 @@ public class ArrayBinaryTree<E> extends AbstractBinaryTree<E> {
     @Override
     public Node<E> add(Node<E> n, E e) throws IllegalArgumentException {
         Node<E> newNode = new NodeImpl<>(e);
-
         int currentIndex = indexNode(validate(n));
-        int indexLeftChild = currentIndex + 1;
-        int indexRightChild = currentIndex + 2;
+        int indexLeftChild = 2 * currentIndex + 1;
+        int indexRightChild = 2 * currentIndex + 2;
 
-        if (currentIndex + 2 >= data.length) {
+        if (indexRightChild >= data.length) {
             data = increaseSize(data);
-
         }
         if (root == null) {
             return addRoot(e);
@@ -132,22 +130,24 @@ public class ArrayBinaryTree<E> extends AbstractBinaryTree<E> {
             if ((Integer) e > (Integer) validate(n).value) {
                 if (data[indexRightChild] == null) {
                     data[indexRightChild] = newNode;
-                    validate(n).left = data[indexRightChild];
+                    validate(n).left = newNode;
                     size++;
+                    return newNode;
                 } else {
-                    return add(data[indexRightChild], e);
+                    return add(validate(n).left, e);
                 }
             } else if ((Integer) e < (Integer) validate(n).value) {
                 if (data[indexLeftChild] == null) {
+                    validate(n).right = newNode;
                     data[indexLeftChild] = newNode;
-                    validate(n).right = data[indexLeftChild];
                     size++;
+                    return newNode;
                 } else {
-                    return add(data[indexLeftChild], e);
+                    return add(validate(n).right, e);
                 }
             }
         }
-        return data[indexNode(validate(newNode))];
+        return newNode;
 
     }
 

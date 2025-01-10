@@ -175,10 +175,18 @@ public class ArrayBinaryTree<E> extends AbstractBinaryTree<E> {
 
     @Override
     public Iterable<Node<E>> nodes() {
-        return null;
+        List<Node<E>> listNode = new LinkedList<>();
+        iterableList(0, listNode);
+        return listNode;
     }
 
-    public class iteratorTree implements Iterator {
+    private void iterableList(int currentIndex, List<Node<E>> listNode) {
+        while (data[currentIndex] != null) {
+            listNode.add(data[currentIndex++]);
+        }
+    }
+
+    public static class iteratorTree implements Iterator {
         Stack<ArrayBinaryTree.NodeImpl> stackIterator = new Stack<>();
         NodeImpl currentNode;
 

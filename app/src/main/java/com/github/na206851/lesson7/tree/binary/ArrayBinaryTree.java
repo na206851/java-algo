@@ -63,13 +63,13 @@ public class ArrayBinaryTree<E> extends AbstractBinaryTree<E> {
 
     @Override
     public Node<E> left(Node<E> p) throws IllegalArgumentException {
-        int indexLeft = indexNode(validate(p)) + 1;
+        int indexLeft = indexNode(validate(p)) * 2 + 1;
         return data[indexLeft] == null ? null : data[indexLeft];
     }
 
     @Override
     public Node<E> right(Node<E> p) throws IllegalArgumentException {
-        int indexRight = indexNode(validate(p)) + 2;
+        int indexRight = indexNode(validate(p)) * 2 + 1;
         return data[indexRight] == null ? null : data[indexRight];
 
     }

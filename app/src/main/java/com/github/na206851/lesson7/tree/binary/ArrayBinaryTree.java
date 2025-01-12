@@ -178,27 +178,21 @@ public class ArrayBinaryTree<E> extends AbstractBinaryTree<E> {
             }
             data[currentIndex] = null;
             size--;
-
-        } else if (left(n) == null || right(n) == null) {
+        } else if (left(n) != null || right(n) != null) {
             Node<E> child;
             if (left(n) == null) {
-                System.out.println(" залетели в первый child");
                 child = validate(right(n));
             } else {
-                System.out.println(" залетели во второй child ");
                 child = validate(left(n));
             }
-            if (validate(parentRemoveNode).left == n) {
-                validate(parentRemoveNode).left = child;
-                System.out.println(indexNode((NodeImpl) validate(parentRemoveNode).left));
-                data[indexNode((NodeImpl) validate(parentRemoveNode).left)] = data[indexNode((NodeImpl) child)];
+            if (validate(n).left == n) {
+                validate(n).left = child;
             } else {
-                validate(parentRemoveNode).right = child;
-                System.out.println(indexNode((NodeImpl) validate(parentRemoveNode).right));
-                data[indexNode((NodeImpl) validate(parentRemoveNode).right)] = data[indexNode((NodeImpl) child)];
-
+                validate(n).right = child;
             }
-//            data[currentIndex] = null;
+            int childIndex = indexNode((NodeImpl) child);
+            data[indexNode((NodeImpl) n)] = data[indexNode((NodeImpl) child)];
+            data[childIndex] = null;
             size--;
         } else if (left(n) != null && right(n) != null) {
             return null;

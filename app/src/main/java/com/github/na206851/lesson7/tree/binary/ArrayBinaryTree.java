@@ -278,5 +278,10 @@ public class ArrayBinaryTree<E> extends AbstractBinaryTree<E> {
         public E getElement() {
             return value;
         }
+
+        @Override
+        public String toString() {
+            return value.toString();
+        }
     }
 }

@@ -160,7 +160,54 @@ public class ArrayBinaryTree<E> extends AbstractBinaryTree<E> {
 
     @Override
     public E remove(Node<E> n) throws IllegalArgumentException {
-        return null;
+        if (n == null) {
+            throw new IllegalArgumentException();
+        }
+        Node<E> parentRemoveNode = parent(n);
+        int currentIndex = indexNode(validate(n));
+        int maxCurrentIndex = indexNode(validate(n)) * 2 + 2;
+
+        if (maxCurrentIndex >= data.length) {
+            data = increaseSize(data);
+        }
+        if (left(n) == null && right(n) == null) {
+            if (validate(parentRemoveNode).left == n) {
+                validate(parentRemoveNode).left = null;
+            } else if (validate(parentRemoveNode).left == n) {
+                validate(parentRemoveNode).right = null;
+            }
+            data[currentIndex] = null;
+            size--;
+
+        } else if (left(n) == null || right(n) == null) {
+            Node<E> child;
+            if (left(n) == null) {
+                System.out.println(" залетели в первый child");
+                child = validate(right(n));
+            } else {
+                System.out.println(" залетели во второй child ");
+                child = validate(left(n));
+            }
+            if (validate(parentRemoveNode).left == n) {
+                validate(parentRemoveNode).left = child;
+                System.out.println(indexNode((NodeImpl) validate(parentRemoveNode).left));
+                data[indexNode((NodeImpl) validate(parentRemoveNode).left)] = data[indexNode((NodeImpl) child)];
+            } else {
+                validate(parentRemoveNode).right = child;
+                System.out.println(indexNode((NodeImpl) validate(parentRemoveNode).right));
+                data[indexNode((NodeImpl) validate(parentRemoveNode).right)] = data[indexNode((NodeImpl) child)];
+
+            }
+//            data[currentIndex] = null;
+            size--;
+        } else if (left(n) != null && right(n) != null) {
+            return null;
+//            Node<E> nodeWithIn = getMinValueInRightSubtree(right(n));
+//            set(n, validate(nodeWithIn).value);
+//            remove(nodeWithIn);
+        }
+        System.arraycopy(data, 0, data, 0, this.size());
+        return validate(n).value;
     }
 
     @Override
@@ -181,8 +228,11 @@ public class ArrayBinaryTree<E> extends AbstractBinaryTree<E> {
     }
 
     private void iterableList(int currentIndex, List<Node<E>> listNode) {
-        while (data[currentIndex] != null) {
-            listNode.add(data[currentIndex++]);
+        while (currentIndex < data.length) {
+            if (data[currentIndex] != null) {
+                listNode.add(data[currentIndex]);
+            }
+            currentIndex++;
         }
     }
 
@@ -190,7 +240,7 @@ public class ArrayBinaryTree<E> extends AbstractBinaryTree<E> {
         Stack<ArrayBinaryTree.NodeImpl> stackIterator = new Stack<>();
         NodeImpl currentNode;
 
-        iteratorTree(ArrayBinaryTree.NodeImpl<E> root) {
+        iteratorTree(ArrayBinaryTree.NodeImpl<Integer> root) {
             currentNode = root;
             pushStack(currentNode);
         }

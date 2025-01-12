@@ -51,8 +51,9 @@ public class ArrayBinaryTree<E> extends AbstractBinaryTree<E> {
         for (Node tmp : data) {
             if (tmp == searchNode) {
                 return index;
+            } else {
+                index++;
             }
-            index++;
         }
         return -1;
     }

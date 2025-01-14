@@ -214,7 +214,7 @@ public class ArrayBinaryTree<E> extends AbstractBinaryTree<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return new ArrayBinaryTree.iteratorTree(validate(root));
+        return new ArrayBinaryTree.iteratorTree((NodeImpl<Integer>) validate(root));
     }
 
     @Override
@@ -234,18 +234,28 @@ public class ArrayBinaryTree<E> extends AbstractBinaryTree<E> {
     }
 
     public static class iteratorTree implements Iterator {
-        Stack<ArrayBinaryTree.NodeImpl> stackIterator = new Stack<>();
-        NodeImpl currentNode;
+        Stack<ArrayBinaryTree.NodeImpl<Integer>> stackIterator = new Stack<>();
+        NodeImpl<Integer> currentNode;
 
         iteratorTree(ArrayBinaryTree.NodeImpl<Integer> root) {
             currentNode = root;
             pushStack(currentNode);
         }
 
-        private void pushStack(ArrayBinaryTree.NodeImpl node) {
+        public int size() {
+            int count = 0;
+            for (Node<Integer> tmp : this.stackIterator) {
+                if (tmp != null) {
+                    count++;
+                }
+            }
+            return count;
+        }
+
+        private void pushStack(NodeImpl<Integer> node) {
             int currentIndex = 0;
-            while (currentIndex != ArrayBinaryTree.this.size) {
-                stackIterator.push(validate(data[currentIndex++]));
+            while (currentIndex != size()) {
+                stackIterator.push(this.stackIterator.get(currentIndex++));
             }
         }
 

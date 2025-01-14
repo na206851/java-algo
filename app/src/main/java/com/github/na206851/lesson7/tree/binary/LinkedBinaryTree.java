@@ -161,7 +161,7 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     }
 
     private Node<E> searchParent(Node<E> parent, Node<E> child) {
-        if (child == null) {
+        if (child == null || parent == null) {
             return null;
         } else {
             if (validate(parent).left == (child) || validate(parent).right == (child)) {

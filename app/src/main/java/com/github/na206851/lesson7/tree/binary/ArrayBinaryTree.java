@@ -164,43 +164,47 @@ public class ArrayBinaryTree<E> extends AbstractBinaryTree<E> {
         }
         Node<E> parentRemoveNode = parent(n);
         int currentIndex = indexNode(validate(n));
-        int maxCurrentIndex = indexNode(validate(n)) * 2 + 2;
 
-        if (maxCurrentIndex >= data.length) {
+        if (currentIndex * 2 + 2 >= data.length) {
             data = increaseSize(data);
         }
         if (left(n) == null && right(n) == null) {
             if (validate(parentRemoveNode).left == n) {
                 validate(parentRemoveNode).left = null;
-            } else if (validate(parentRemoveNode).left == n) {
+            } else if (validate(parentRemoveNode).right == n) {
                 validate(parentRemoveNode).right = null;
             }
             data[currentIndex] = null;
             size--;
-        } else if (left(n) != null || right(n) != null) {
+        } else if (left(n) == null || right(n) == null) {
             Node<E> child;
             if (left(n) == null) {
                 child = validate(right(n));
             } else {
                 child = validate(left(n));
             }
-            if (validate(n).left == n) {
-                validate(n).left = child;
+            if (validate(parentRemoveNode).left == n) {
+                validate(parentRemoveNode).left = child;
             } else {
-                validate(n).right = child;
+                validate(parentRemoveNode).right = child;
             }
-            int childIndex = indexNode((NodeImpl) child);
-            data[indexNode((NodeImpl) n)] = data[indexNode((NodeImpl) child)];
+            int childIndex = indexNode(validate(child));
+            data[indexNode((NodeImpl<E>) n)] = child;
             data[childIndex] = null;
             size--;
         } else if (left(n) != null && right(n) != null) {
-            return null;
-//            Node<E> nodeWithIn = getMinValueInRightSubtree(right(n));
-//            set(n, validate(nodeWithIn).value);
-//            remove(nodeWithIn);
+            Node<E> nodeWithIn = getMinValueInRightSubtree(right(n));
+            set(n, validate(nodeWithIn).value);
+            remove(nodeWithIn);
         }
-        System.arraycopy(data, 0, data, 0, this.size());
         return validate(n).value;
+    }
+
+    public Node<E> getMinValueInRightSubtree(Node<E> node) {
+        if (validate(node).left == null) {
+            return node;
+        }
+        return getMinValueInRightSubtree(validate(node).left);
     }
 
     @Override

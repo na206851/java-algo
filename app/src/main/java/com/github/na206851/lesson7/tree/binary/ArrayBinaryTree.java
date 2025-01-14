@@ -58,19 +58,19 @@ public class ArrayBinaryTree<E> extends AbstractBinaryTree<E> {
         return -1;
     }
 
-    private ArrayBinaryTree.NodeImpl<E> validate(Node<E> n) throws IllegalArgumentException {
+    public ArrayBinaryTree.NodeImpl<E> validate(Node<E> n) throws IllegalArgumentException {
         return (ArrayBinaryTree.NodeImpl<E>) n;
     }
 
     @Override
     public Node<E> left(Node<E> p) throws IllegalArgumentException {
-        int indexLeft = indexNode(validate(p)) * 2 + 1;
+        int indexLeft = 2 * indexNode(validate(p)) + 1;
         return data[indexLeft] == null ? null : data[indexLeft];
     }
 
     @Override
     public Node<E> right(Node<E> p) throws IllegalArgumentException {
-        int indexRight = indexNode(validate(p)) * 2 + 2;
+        int indexRight = 2 * indexNode(validate(p)) + 2;
         return data[indexRight] == null ? null : data[indexRight];
 
     }

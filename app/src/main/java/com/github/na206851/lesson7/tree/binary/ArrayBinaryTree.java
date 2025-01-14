@@ -280,5 +280,18 @@ public class ArrayBinaryTree<E> extends AbstractBinaryTree<E> {
         public String toString() {
             return value.toString();
         }
+
+
+        public int hashCode() {
+            return this.value.hashCode();
+        }
+
+        public boolean equals(Object value) {
+            if (this.value == value) {
+                return true;
+            }
+            return this.hashCode() == value.hashCode();
+        }
+
     }
 }

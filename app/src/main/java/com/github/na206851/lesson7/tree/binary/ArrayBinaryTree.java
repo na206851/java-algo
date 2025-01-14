@@ -152,8 +152,8 @@ public class ArrayBinaryTree<E> extends AbstractBinaryTree<E> {
 
     @Override
     public E set(Node<E> n, E e) throws IllegalArgumentException {
-        E oldValue = n.getElement();
-        validate(n).value = e;
+        E oldValue = validate(n).getElement();
+        validate(n).value = (E) e;
         return oldValue;
     }
 

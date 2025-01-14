@@ -256,8 +256,8 @@ public class ArrayBinaryTree<E> extends AbstractBinaryTree<E> {
 
         @Override
         public Object next() {
-            ArrayBinaryTree.NodeImpl<E> node = stackIterator.pop();
-            return node.value;
+            NodeImpl<Integer> node = stackIterator.pop();
+            return node.getElement();
         }
     }
 

@@ -293,5 +293,21 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         public E getElement() {
             return value;
         }
+
+        public String toString() {
+            return this.value.toString();
+        }
+
+        public int hashCode() {
+            return this.value.hashCode();
+        }
+
+        public boolean equals(Object value) {
+            if (this.value == value) {
+                return true;
+            }
+            return this.hashCode() == value.hashCode();
+        }
+
     }
 }

@@ -101,10 +101,23 @@ public class ArrayBinaryTree<E> extends AbstractBinaryTree<E> {
 
     @Override
     public Node<E> addRight(Node<E> n, E e) throws IllegalArgumentException {
-        validate(root).right = new ArrayBinaryTree.NodeImpl<>(e);
-        data[2] = validate(root).right;
-        size++;
-        return data[2];
+        if (e == null) {
+            throw new IllegalArgumentException();
+        }
+        if (root == null) {
+            return addRoot(e);
+        } else {
+            if (validate(n).left == null) {
+                Node<E> newNode = new NodeImpl<>(e);
+                validate(n).right = newNode;
+                data[indexNode(validate(n)) * 2 + 2] = validate(n).right;
+
+                size++;
+            } else {
+                return addRight(validate(n).right, e);
+            }
+            return null;
+        }
     }
 
     @Override

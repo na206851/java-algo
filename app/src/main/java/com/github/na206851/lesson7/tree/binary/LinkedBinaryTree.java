@@ -185,9 +185,6 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
             if (validate(parent).left == (child) || validate(parent).right == (child)) {
                 return parent;
             } else {
-                if ((validate(parent).left == null) || (validate(parent).right == null)) {
-                    return parent;
-                }
                 Node<E> leftResult = searchParent(validate(parent).left, child);
                 Node<E> rightResult = searchParent(validate(parent).right, child);
 

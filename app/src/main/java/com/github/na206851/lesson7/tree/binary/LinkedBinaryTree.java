@@ -9,7 +9,7 @@ import java.util.*;
  *
  * @param <E> element
  */
-public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
+public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTree<E> {
     public Node<E> root;
     private int size = 0;
     // nonpublic utility
@@ -47,15 +47,15 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
         }
 
         if (n == null) {
-            return null;
-        } else if ((Integer) e > (Integer) validate(n).value) {
+            throw new IllegalArgumentException();
+        } else if (e.compareTo(validate(n).value) > 0) {
             if (validate(n).right == null) {
                 return validate(n).right = newNode;
             } else {
                 n = validate(n).right;
                 return add(validate(n), e);
             }
-        } else if ((Integer) e < (Integer) validate(n).value) {
+        } else if (e.compareTo(validate(n).value) < 0) {
             if (validate(n).left == null) {
                 return validate(n).left = newNode;
             } else {

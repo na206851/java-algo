@@ -9,9 +9,9 @@ import java.util.Iterator;
  *
  * @param <E> element
  */
-public class ArrayBinaryTree<E> extends AbstractBinaryTree<E> {
-    private Node<E> root;
-    public static Node[] data = new Node[8];
+public class ArrayBinaryTree<E extends Comparable<E>> extends AbstractBinaryTree<E> {
+    Node<E> root;
+    public Node<E>[] data = new Node[8];
     int size = 0;
 
 
@@ -156,7 +156,7 @@ public class ArrayBinaryTree<E> extends AbstractBinaryTree<E> {
         if (root == null) {
             return addRoot(e);
         } else {
-            if ((Integer) e > (Integer) validate(n).value) {
+            if (e.compareTo(validate(n).value) > 0) {
                 if (data[indexRightChild] == null) {
                     data[indexRightChild] = newNode;
                     validate(n).right = newNode;
@@ -165,7 +165,7 @@ public class ArrayBinaryTree<E> extends AbstractBinaryTree<E> {
                 } else {
                     return add(validate(n).right, e);
                 }
-            } else if ((Integer) e < (Integer) validate(n).value) {
+            } else if (e.compareTo(validate(n).value) < 0) {
                 if (data[indexLeftChild] == null) {
                     validate(n).left = newNode;
                     data[indexLeftChild] = newNode;

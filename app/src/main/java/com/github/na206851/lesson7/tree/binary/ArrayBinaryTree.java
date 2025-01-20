@@ -2,7 +2,7 @@ package com.github.na206851.lesson7.tree.binary;
 
 import com.github.na206851.lesson7.tree.Node;
 
-import java.util.Iterator;
+import java.util.*;
 
 /**
  * Concrete implementation of a binary tree using a node-based, linked structure
@@ -13,33 +13,6 @@ public class ArrayBinaryTree<E extends Comparable<E>> extends AbstractBinaryTree
     Node<E> root;
     public Node<E>[] data = new Node[8];
     int size = 0;
-
-
-    private static int calculateHeight(int size) {
-        return (int) Math.ceil(Math.log(size + 1) / Math.log(2));
-    }
-
-    public void printAsciiTree(Node[] data) {
-        if (data == null || data.length == 0) {
-            System.out.println("Дерево пустое.");
-            return;
-        }
-        int height = calculateHeight(data.length); // Вычисляем высоту дерева
-        List<String> result = new ArrayList<>();
-        for (int level = 0; level < height; level++) {
-            StringBuilder line = new StringBuilder();
-            int startIdx = (1 << level) - 1; // Индекс начала уровня
-            int endIdx = Math.min((1 << (level + 1)) - 1, data.length); // Индекс конца уровня
-            int spacing = (1 << (height - level)) - 1; // Расстояние между элементами
-            for (int i = startIdx; i < endIdx; i++) {
-                if (i < size) {
-                    line.append(" ".repeat(spacing)).append(validate(data[i]).value).append(" ".repeat(spacing));
-                }
-            }
-            result.add(line.toString());
-        }
-        result.forEach(System.out::println);
-    }
 
     private static Node[] increaseSize(Node[] data) {
         data = Arrays.copyOf(data, data.length * 2);

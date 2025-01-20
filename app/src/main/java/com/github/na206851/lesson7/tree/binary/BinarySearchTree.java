@@ -176,40 +176,6 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
 
     }
 
-    public E removeNodeForValue(Node<E> n, E value) throws IllegalArgumentException {
-        if (n == null || value == null) {
-            throw new IllegalArgumentException("n == null");
-        }
-        BinarySearchTree.NodeImpl<E> removeNodeParent = (BinarySearchTree.NodeImpl<E>) parent(n);
-        if (left(n) == null && right(n) == null) {
-            if ((removeNodeParent.left.getElement()).equals(value)) {
-                removeNodeParent.left = null;
-            } else if (removeNodeParent.right == n) {
-                removeNodeParent.right = null;
-            }
-            size--;
-        } else if (left(n) == null || right(n) == null) {
-            Node<E> child;
-            if (left(n) == null) {
-                child = validate(right(n));
-            } else {
-                child = validate(left(n));
-            }
-            if (removeNodeParent.left.getElement().equals(value)) {
-                removeNodeParent.left = child;
-            } else {
-                removeNodeParent.right = child;
-            }
-            size--;
-        } else if (left(n) != null && right(n) != null) {
-            Node<E> nodeWithIn = getMinValueInRightSubtree(right(n));
-            set(n, validate(nodeWithIn).value);
-            remove(nodeWithIn);
-        }
-        return validate(n).value;
-    }
-
-
     private Node<E> getMinValueInRightSubtree(Node<E> n) {
         if (validate(n).left == null) {
             return n;

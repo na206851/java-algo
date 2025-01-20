@@ -320,17 +320,25 @@ public class ArrayBinaryTree<E extends Comparable<E>> extends AbstractBinaryTree
             return value.toString();
         }
 
-
+        @Override
         public int hashCode() {
             return this.value.hashCode();
         }
 
         public boolean equals(Object value) {
             if (this.value == value) {
+        @Override
+        public boolean equals(Object object) {
+            if (this == object) {
                 return true;
             }
-            return this.hashCode() == value.hashCode();
-        }
 
+            if (object == null || getClass() != object.getClass()) {
+                return false;
+            }
+
+            NodeImpl<E> other = (NodeImpl<E>) object;
+            return Objects.equals(this.value, other.value);
+        }
     }
 }

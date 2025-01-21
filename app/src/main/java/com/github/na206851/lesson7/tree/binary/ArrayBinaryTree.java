@@ -298,8 +298,6 @@ public class ArrayBinaryTree<E extends Comparable<E>> extends AbstractBinaryTree
             return this.value.hashCode();
         }
 
-        public boolean equals(Object value) {
-            if (this.value == value) {
         @Override
         public boolean equals(Object object) {
             if (this == object) {

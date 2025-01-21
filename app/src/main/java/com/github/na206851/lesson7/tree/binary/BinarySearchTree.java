@@ -9,8 +9,8 @@ import java.util.*;
  *
  * @param <E> element
  */
-public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTree<E> {
-    public Node<E> root;
+public class BinarySearchTree<E extends Comparable<E>> extends AbstractBinaryTree<E> {
+    Node<E> root;
     private int size = 0;
 
     /**
@@ -21,41 +21,65 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
      * @throws IllegalArgumentException
      */
     protected NodeImpl<E> validate(Node<E> n) throws IllegalArgumentException {
-        return (NodeImpl<E>) n;
+        return (BinarySearchTree.NodeImpl<E>) n;
     }
 
     @Override
     public Node<E> addRoot(E e) throws IllegalStateException {
         if (root == null) {
-            root = new NodeImpl<>(e);
             size++;
-            return root;
+            root = new NodeImpl<>(e);
         } else {
-            throw new IllegalStateException("корень уже установлен");
+            throw new IllegalStateException("root != null");
         }
+        return validate(root);
+    }
+
+    public List<Integer> inOrder(Node<E> root, List<Integer> list) {
+        if (root == null) {
+            return list;
+        } else {
+            inOrder(validate(root).left, list);
+            list.add((Integer) validate(root).value);
+            inOrder(validate(root).right, list);
+        }
+        return list;
+    }
+
+    public void printTree(Node<E> node, int space) {
+        if (node == null) {
+            return;
+        }
+        space += 10;
+        printTree(validate(node).right, space);
+        System.out.println();
+        for (int i = 10; i < space; i++) {
+            System.out.print(" ");
+        }
+        System.out.print(validate(node).value + "\n");
+        printTree(validate(node).left, space);
     }
 
     @Override
     public Node<E> add(Node<E> n, E e) throws IllegalArgumentException {
-        Node<E> newNode = new LinkedBinaryTree.NodeImpl<>(e);
+        Node<E> newNode = new NodeImpl<>(e);
         if (e == null) {
             throw new IllegalArgumentException("error e = null");
         }
         if (root == null) {
             return addRoot(e);
-        }
-
-        if (n == null) {
-            throw new IllegalArgumentException();
+        } else if (n == null) {
+            return null;
         } else if (e.compareTo(validate(n).value) > 0) {
             if (validate(n).right == null) {
+                size++;
                 return validate(n).right = newNode;
             } else {
-                n = validate(n).right;
-                return add(validate(n), e);
+                return add(validate(n).right, e);
             }
         } else if (e.compareTo(validate(n).value) < 0) {
             if (validate(n).left == null) {
+                size++;
                 return validate(n).left = newNode;
             } else {
                 return add(validate(n).left, e);
@@ -118,25 +142,24 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
      * @return replace element
      * @throws IllegalArgumentException
      */
-
     @Override
     public E remove(Node<E> n) throws IllegalArgumentException {
-        NodeImpl<E> removeNodeParent = (NodeImpl<E>) parent(n);
+        BinarySearchTree.NodeImpl<E> removeNodeParent = (BinarySearchTree.NodeImpl<E>) parent(n);
+        Node<E> child;
         if (left(n) == null && right(n) == null) {
-            if (removeNodeParent.left == n) {
+            if (removeNodeParent != null && removeNodeParent.left == n) {
                 removeNodeParent.left = null;
-            } else if (removeNodeParent.right == n) {
+            } else if (removeNodeParent != null && removeNodeParent.right == n) {
                 removeNodeParent.right = null;
             }
             size--;
         } else if (left(n) == null || right(n) == null) {
-            Node<E> child;
             if (left(n) == null) {
                 child = validate(right(n));
             } else {
                 child = validate(left(n));
             }
-            if (removeNodeParent.left == n) {
+            if (removeNodeParent.left == (n)) {
                 removeNodeParent.left = child;
             } else {
                 removeNodeParent.right = child;
@@ -147,14 +170,15 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
             set(n, validate(nodeWithIn).value);
             remove(nodeWithIn);
         }
-        return validate(n).value;
+        return n.getElement();
+
     }
 
-    public Node<E> getMinValueInRightSubtree(Node<E> n) {
-        while (validate(n).left != null) {
-            n = validate(n).left;
+    private Node<E> getMinValueInRightSubtree(Node<E> n) {
+        if (validate(n).left == null) {
+            return n;
         }
-        return n;
+        return getMinValueInRightSubtree(validate(n).left);
     }
 
     @Override
@@ -178,21 +202,20 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
     }
 
     private Node<E> searchParent(Node<E> parent, Node<E> child) {
-        if (child == null || parent == null) {
+        if (parent == null || child == null) {
             return null;
-        } else {
-            if (validate(parent).left == (child) || validate(parent).right == (child)) {
-                return parent;
-            } else {
-                Node<E> leftResult = searchParent(validate(parent).left, child);
-                Node<E> rightResult = searchParent(validate(parent).right, child);
+        }
+        if (validate(parent).left == child || validate(parent).right == child) {
+            return parent;
+        }
 
-                if (leftResult != null) {
-                    return leftResult;
-                } else {
-                    return rightResult;
-                }
-            }
+        Node<E> leftResult = searchParent(validate(parent).left, child);
+        Node<E> rightResult = searchParent(validate(parent).right, child);
+
+        if (leftResult != null) {
+            return leftResult;
+        } else {
+            return rightResult;
         }
     }
 
@@ -203,59 +226,37 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
 
     @Override
     public Iterator<E> iterator() {
-        return new iteratorTree(validate(root));
+        return new iteratorTree((NodeImpl<Integer>) validate(root));
     }
 
     @Override
     public Iterable<Node<E>> nodes() {
-        List<Node<E>> list = new LinkedList<>();
-        inOrderNodes(validate(root), list);
-        return list;
+        List<Node<E>> listNode = new LinkedList<>();
+        inOrderNodes(validate(root), listNode);
+        return listNode;
     }
 
     private void inOrderNodes(NodeImpl<E> root, List<Node<E>> listNode) {
         if (root != null) {
-            inOrderNodes((NodeImpl<E>) validate(root).left, listNode);
+            inOrderNodes((NodeImpl<E>) root.left, listNode);
             listNode.add(root);
             inOrderNodes((NodeImpl<E>) root.right, listNode);
         }
     }
 
-    public List<E> inOrder(NodeImpl<E> node, List<E> list) {
-        if (node != null) {
-            inOrder((NodeImpl<E>) node.left, list);
-            list.add(node.getElement());
-            inOrder((NodeImpl<E>) node.right, list);
-        }
-        return list;
-    }
-
-    /**
-     * метод для печати дерева в стиле ascii
-     */
-    public void printAscii(NodeImpl<E> node, int space) {
-        if (node == null) return;
-        space += 10;
-        printAscii((NodeImpl<E>) node.right, space);
-        System.out.print("\n");
-        for (int i = 10; i < space; i++) System.out.print(" ");
-        System.out.print(node.value + "\n");
-        printAscii((NodeImpl<E>) node.left, space);
-    }
-
     public static class iteratorTree implements Iterator {
-        Stack<NodeImpl> stackIterator = new Stack<>();
-        NodeImpl currentNode;
+        Stack<NodeImpl<Integer>> stackIterator = new Stack<>();
+        BinarySearchTree.NodeImpl<Integer> currentNode;
 
-        iteratorTree(NodeImpl root) {
+        private iteratorTree(BinarySearchTree.NodeImpl<Integer> root) {
             currentNode = root;
             pushLeft(currentNode);
         }
 
-        private void pushLeft(NodeImpl node) {
+        private void pushLeft(BinarySearchTree.NodeImpl<Integer> node) {
             while (node != null) {
                 stackIterator.push(node);
-                node = (NodeImpl) node.left;
+                node = (BinarySearchTree.NodeImpl<Integer>) node.left;
             }
         }
 
@@ -266,13 +267,13 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
 
         @Override
         public Object next() {
-            NodeImpl node = stackIterator.pop();
-            pushLeft((NodeImpl) node.right);
+            NodeImpl<Integer> node = stackIterator.pop();
+            pushLeft((NodeImpl<Integer>) node.right);
             return node.value;
         }
     }
 
-    public static class NodeImpl<E> implements Node<E> {
+    protected static class NodeImpl<E> implements Node<E> {
         private E value;
         public Node<E> left;
         public Node<E> right;
@@ -294,12 +295,19 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
             return this.value.toString();
         }
 
+        @Override
         public int hashCode() {
-            return (value != null) ? value.hashCode() : 0;
+            return this.value.hashCode();
         }
 
         @Override
         public boolean equals(Object object) {
+            //написать с удовлетворением четырем свойствам
+            //первое свойство рефлексивность x.equals(x)==true;
+            //второе свойство -  симметричность x.equals(y)==y.equals(x);
+            //транзитивность - x.equals(y) == y.equals(z) == z.equals(x)
+            //непротиворетиворечивость x.equals(y)  всегда -- это условие не удовлетворено , посмотреть как правильно реализовать
+
             if (this == object) {
                 return true;
             }
@@ -308,7 +316,7 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
                 return false;
             }
 
-            NodeImpl<E> other = (NodeImpl<E>) object;
+            BinarySearchTree.NodeImpl<E> other = (BinarySearchTree.NodeImpl<E>) object;
             return Objects.equals(this.value, other.value);
         }
     }

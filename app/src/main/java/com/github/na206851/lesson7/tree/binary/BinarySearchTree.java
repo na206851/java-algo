@@ -40,7 +40,7 @@ public class BinarySearchTree<E extends Comparable<E>> extends AbstractBinaryTre
             return list;
         } else {
             inOrder(validate(root).left, list);
-            list.add((int) validate(root).value);
+            list.add((Integer) validate(root).value);
             inOrder(validate(root).right, list);
         }
         return list;
@@ -291,6 +291,10 @@ public class BinarySearchTree<E extends Comparable<E>> extends AbstractBinaryTre
             return value;
         }
 
+        public String toString() {
+            return this.value.toString();
+        }
+
         @Override
         public int hashCode() {
             return this.value.hashCode();
@@ -298,6 +302,12 @@ public class BinarySearchTree<E extends Comparable<E>> extends AbstractBinaryTre
 
         @Override
         public boolean equals(Object object) {
+            //написать с удовлетворением четырем свойствам
+            //первое свойство рефлексивность x.equals(x)==true;
+            //второе свойство -  симметричность x.equals(y)==y.equals(x);
+            //транзитивность - x.equals(y) == y.equals(z) == z.equals(x)
+            //непротиворетиворечивость x.equals(y)  всегда -- это условие не удовлетворено , посмотреть как правильно реализовать
+
             if (this == object) {
                 return true;
             }

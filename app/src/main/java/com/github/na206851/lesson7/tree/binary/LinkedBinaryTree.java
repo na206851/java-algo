@@ -12,7 +12,6 @@ import java.util.*;
 public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTree<E> {
     public Node<E> root;
     private int size = 0;
-    // nonpublic utility
 
     /**
      * Validates the node is an instance of supported {@link NodeImpl} type and casts to it
@@ -32,7 +31,7 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
             size++;
             return root;
         } else {
-            throw new IllegalStateException("корень уже есть");
+            throw new IllegalStateException("корень уже установлен");
         }
     }
 

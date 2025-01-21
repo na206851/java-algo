@@ -11,7 +11,7 @@ import java.util.*;
  */
 public class ArrayBinaryTree<E extends Comparable<E>> extends AbstractBinaryTree<E> {
     Node<E> root;
-    public Node<E>[] data = new Node[8];
+    public Node[] data = new Node[8];
     int size = 0;
 
     private static Node[] increaseSize(Node[] data) {
@@ -80,22 +80,21 @@ public class ArrayBinaryTree<E extends Comparable<E>> extends AbstractBinaryTree
         if (root == null) {
             return addRoot(e);
         } else {
+            Node<E> newNode = new NodeImpl<>(e);
             if (validate(n).left == null) {
-                Node<E> newNode = new NodeImpl<>(e);
                 validate(n).right = newNode;
                 data[indexNode(validate(n)) * 2 + 2] = validate(n).right;
-
                 size++;
             } else {
                 return addRight(validate(n).right, e);
             }
-            return null;
+            return newNode;
         }
     }
 
     @Override
     public Node<E> root() {
-        return root == null ? null : data[0];
+        return root == null ? null : root;
     }
 
     @Override
@@ -155,7 +154,7 @@ public class ArrayBinaryTree<E extends Comparable<E>> extends AbstractBinaryTree
     @Override
     public E set(Node<E> n, E e) throws IllegalArgumentException {
         E oldValue = validate(n).getElement();
-        validate(n).value = (E) e;
+        validate(n).value = e;
         return oldValue;
     }
 

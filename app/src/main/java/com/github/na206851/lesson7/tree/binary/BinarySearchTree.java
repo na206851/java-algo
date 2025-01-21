@@ -290,5 +290,24 @@ public class BinarySearchTree<E extends Comparable<E>> extends AbstractBinaryTre
         public E getElement() {
             return value;
         }
+
+        @Override
+        public int hashCode() {
+            return this.value.hashCode();
+        }
+
+        @Override
+        public boolean equals(Object object) {
+            if (this == object) {
+                return true;
+            }
+
+            if (object == null || getClass() != object.getClass()) {
+                return false;
+            }
+
+            BinarySearchTree.NodeImpl<E> other = (BinarySearchTree.NodeImpl<E>) object;
+            return Objects.equals(this.value, other.value);
+        }
     }
 }

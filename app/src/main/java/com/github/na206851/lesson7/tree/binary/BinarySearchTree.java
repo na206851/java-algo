@@ -2,16 +2,14 @@ package com.github.na206851.lesson7.tree.binary;
 
 import com.github.na206851.lesson7.tree.Node;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * Concrete implementation of a binary tree using a node-based, linked structure
  *
  * @param <E> element
  */
-public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
+public class BinarySearchTree<E extends Comparable<E>> extends AbstractBinaryTree<E> {
     Node<E> root;
     private int size = 0;
 
@@ -72,14 +70,14 @@ public class BinarySearchTree<E> extends AbstractBinaryTree<E> {
             return addRoot(e);
         } else if (n == null) {
             return null;
-        } else if ((Integer) e > (Integer) validate(n).value) {
+        } else if (e.compareTo(validate(n).value) > 0) {
             if (validate(n).right == null) {
                 size++;
                 return validate(n).right = newNode;
             } else {
                 return add(validate(n).right, e);
             }
-        } else if ((Integer) e < (Integer) validate(n).value) {
+        } else if (e.compareTo(validate(n).value) < 0) {
             if (validate(n).left == null) {
                 size++;
                 return validate(n).left = newNode;

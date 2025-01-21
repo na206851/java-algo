@@ -57,18 +57,6 @@ class BinarySearchTreeTest {
     }
 
     @Test
-    void addBothLeftAndRightChildren() {
-        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
-        tree.addRoot(8);
-        tree.add(tree.root, 5);
-        tree.add(tree.root, 10);
-        List<Integer> expected = List.of(5, 8, 10);
-        System.out.println(tree.inOrder(tree.root, new ArrayList<>()));
-//        Assertions.assertIterableEquals(expected, tree.inOrder(tree.root, new ArrayList<>()));
-        //метод для проверки равенства листов assertIterableEquals
-    }
-
-    @Test
     void addTestYoutube() {
         BinarySearchTree<Integer> tree = new BinarySearchTree<>();
         tree.add(tree.root, 8);
@@ -99,7 +87,7 @@ class BinarySearchTreeTest {
         Assertions.assertIterableEquals(expected, tree.inOrder(tree.root, new ArrayList<>()));
 
         tree.addLeft(tree.root, 1);
-        List<Integer> expectedAfterUseAddLeftMethod = List.of(1, 6);
+        List<Integer> expectedAfterUseAddLeftMethod = List.of(1, 4, 5, 6);
         Assertions.assertIterableEquals(expectedAfterUseAddLeftMethod, tree.inOrder(tree.root, new ArrayList<>()));
 
     }
@@ -115,7 +103,7 @@ class BinarySearchTreeTest {
         Assertions.assertIterableEquals(expected, tree.inOrder(tree.root, new ArrayList<>()));
 
         tree.addRight(tree.root, 10);
-        List<Integer> expectedAfterUseAddLeftMethod = List.of(6, 10);
+        List<Integer> expectedAfterUseAddLeftMethod = List.of(6, 7, 8, 10);
         Assertions.assertIterableEquals(expectedAfterUseAddLeftMethod, tree.inOrder(tree.root, new ArrayList<>()));
 
     }

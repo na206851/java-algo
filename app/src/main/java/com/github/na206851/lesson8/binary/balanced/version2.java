@@ -4,39 +4,10 @@ import com.github.na206851.lesson7.tree.Node;
 import com.github.na206851.lesson7.tree.binary.LinkedBinaryTree;
 
 import java.util.List;
+import java.util.Objects;
 
 public class version2<E extends Comparable<E>> extends LinkedBinaryTree<E> {
     public NodeRBT<E> root;
-
-    public List<E> inOrder(NodeRBT<E> node, List<E> list) {
-        if (node != null) {
-            inOrder((NodeRBT<E>) node.left, list);
-            list.add(node.getElement());
-            inOrder((NodeRBT<E>) node.right, list);
-        }
-        return list;
-    }
-
-    public void printAscii(NodeRBT<E> node, int space) {
-        if (node == null) {
-            return;
-        }
-
-        space += 10;
-        if (node.right != null) {
-            printAscii((NodeRBT<E>) node.right, space);
-        }
-        System.out.print("\n");
-        for (int i = 10; i < space; i++) {
-            System.out.print(" ");
-        }
-
-        String color = node.isRed ? "R" : "B";
-        System.out.println("(" + node.getElement() + color + ")");
-        if (node.left != null) {
-            printAscii((NodeRBT<E>) node.left, space);
-        }
-    }
 
     public NodeRBT<E> findUncle(NodeRBT<E> node) {
         NodeRBT<E> parent = (NodeRBT<E>) node.parent;

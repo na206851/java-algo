@@ -25,7 +25,6 @@ public class version2<E extends Comparable<E>> extends LinkedBinaryTree<E> {
         } else {
             return null;
         }
-
     }
 
     public void fixInside(NodeRBT<E> node) {
@@ -310,6 +309,7 @@ public class version2<E extends Comparable<E>> extends LinkedBinaryTree<E> {
 
     public void leftTurn(NodeRBT<E> node) {
         if (node == null || node.right == null) return;
+
         NodeRBT<E> rightChild = (NodeRBT<E>) node.right;
         node.right = rightChild.left;
         if (rightChild.left != null) ((NodeRBT<E>) rightChild.left).parent = node;
@@ -391,9 +391,8 @@ public class version2<E extends Comparable<E>> extends LinkedBinaryTree<E> {
                 return false;
             }
 
-//            NodeRBT<E> other = (NodeRBT<E>) object;
-//            return Objects.equals(this.value, other.value);
-            return true;
+            NodeRBT<E> other = (NodeRBT<E>) object;
+            return Objects.equals(this.value, other.value);
         }
     }
 }

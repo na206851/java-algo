@@ -245,10 +245,11 @@ public class version2<E extends Comparable<E>> extends LinkedBinaryTree<E> {
         if (node.parent == null) {
             root = child;
         } else if (node == ((NodeRBT<E>) node.parent).left) {
-            ((NodeRBT<E>) node.parent).left = child;
+            relink((NodeRBT<E>) node.parent, child, true);
         } else {
-            ((NodeRBT<E>) node.parent).right = child;
+            relink((NodeRBT<E>) node.parent, child, false);
         }
+
         if (child != null) {
             child.parent = node.parent;
         }

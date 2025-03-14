@@ -68,15 +68,17 @@ public class version2<E extends Comparable<E>> extends LinkedBinaryTree<E> {
         root.isRed = false;
     }
 
-    public NodeRBT<E> search(E e) {
+    public NodeRBT<E> search(E e) throws NullPointerException {
         NodeRBT<E> currentNode = root;
         while (currentNode != null) {
             if (currentNode.value.compareTo(e) > 0) {
                 currentNode = (NodeRBT<E>) currentNode.left;
             } else if (currentNode.value.compareTo(e) < 0) {
                 currentNode = (NodeRBT<E>) currentNode.right;
-            } else {
+            } else if (currentNode.value.compareTo(e) == 0) {
                 return currentNode;
+            } else {
+                throw new NullPointerException();
             }
         }
         return null;

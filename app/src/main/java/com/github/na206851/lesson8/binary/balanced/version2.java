@@ -112,53 +112,10 @@ public class version2<E extends Comparable<E>> extends LinkedBinaryTree<E> {
         return newNode;
     }
 
-    public static void main(String[] args) {
-        version2<Integer> tree = new version2<>();
 
-        NodeRBT node10 = tree.add(tree.root, 10);
-        NodeRBT node8 = tree.add(tree.root, 8);
-        NodeRBT node5 = tree.add(tree.root, 5);
-        NodeRBT node1 = tree.add(tree.root, 1);
-
-        tree.printAscii(tree.root, 0);
-        System.out.println("___________________");
-        tree.remove(node8);
-        tree.printAscii(tree.root, 0);
-    }
-
-
-//    public void remove(E e) {
-//        NodeRBT<E> node = search(e);
-//        if (node == null) return; // Узел не найден
-//
-//        // Если у узла два потомка, ищем замену (наименьший в правом поддереве)
-//        if (node.left != null && node.right != null) {
-//            NodeRBT<E> successor = (NodeRBT<E>) getMinValueInRightSubtree(node.right);
-//            node.value = successor.value; // Заменяем значение
-//            node = successor; // Теперь нужно удалить successor
-//        }
-//
-//        // Теперь node имеет не более одного потомка
-//        NodeRBT<E> child = (NodeRBT<E>) ((node.left != null) ? node.left : node.right);
-//
-//        if (!node.isRed) {
-//            if (child != null && child.isRed) {
-//                child.isRed = false;
-//            } else {
-//                fixInside((NodeRBT<E>) node.parent);
-//            }
-//        }
-//
-//        replaceNode(node, child);
-//
-//        if (node.parent == null && child != null) {
-//            root = child;
-//        }
-//    }
-
-    public void remove(NodeRBT<E> node) {
+    public NodeRBT<E> remove(NodeRBT<E> node) {
         if (node == null) {
-            return;
+            NullPointerException exception;
         }
 
         NodeRBT<E> originalNode = node;
@@ -194,6 +151,7 @@ public class version2<E extends Comparable<E>> extends LinkedBinaryTree<E> {
                 fixAfterRemove(replacement, (NodeRBT<E>) node.parent);
             }
         }
+        return originalNode;
     }
 
     private void fixAfterRemove(NodeRBT<E> node, NodeRBT<E> parent) {

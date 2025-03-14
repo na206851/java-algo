@@ -278,13 +278,6 @@ public class version2<E extends Comparable<E>> extends LinkedBinaryTree<E> {
         }
 
         rightChild.parent = node.parent;
-        if (node.parent == null) root = rightChild;
-        else if (node == ((NodeRBT<E>) node.parent).left)
-            ((NodeRBT<E>) node.parent).left = rightChild;
-        else ((NodeRBT<E>) node.parent).right = rightChild;
-        rightChild.left = node;
-        node.parent = rightChild;
-    }
         if (node.parent == null) {
             root = rightChild;
         } else if (node == ((NodeRBT<E>) node.parent).left) {
@@ -312,14 +305,25 @@ public class version2<E extends Comparable<E>> extends LinkedBinaryTree<E> {
         } else if (node == ((NodeRBT<E>) node.parent).left) {
             relink((NodeRBT<E>) node.parent, leftChild, true);
         } else {
-            if (nodeSwap.isRed) {
-                nodeSwap.isRed = false;
-            }
             relink((NodeRBT<E>) node.parent, leftChild, false);
         }
 
         relink(leftChild, node, false);
     }
+
+    public NodeRBT<E> validate(Node<E> n) throws IllegalArgumentException {
+        return (NodeRBT<E>) n;
+    }
+
+    public List<E> inOrder(NodeRBT<E> node, List<E> list) {
+        if (node != null) {
+            inOrder((NodeRBT<E>) node.left, list);
+            list.add(node.getElement());
+            inOrder((NodeRBT<E>) node.right, list);
+        }
+        return list;
+    }
+
         }
     }
 

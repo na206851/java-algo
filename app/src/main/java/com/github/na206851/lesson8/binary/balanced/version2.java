@@ -273,7 +273,10 @@ public class version2<E extends Comparable<E>> extends LinkedBinaryTree<E> {
 
         NodeRBT<E> rightChild = (NodeRBT<E>) node.right;
         node.right = rightChild.left;
-        if (rightChild.left != null) ((NodeRBT<E>) rightChild.left).parent = node;
+        if (rightChild.left != null) {
+            validate(rightChild.left).parent = node;
+        }
+
         rightChild.parent = node.parent;
         if (node.parent == null) root = rightChild;
         else if (node == ((NodeRBT<E>) node.parent).left)
@@ -282,30 +285,41 @@ public class version2<E extends Comparable<E>> extends LinkedBinaryTree<E> {
         rightChild.left = node;
         node.parent = rightChild;
     }
+        if (node.parent == null) {
+            root = rightChild;
+        } else if (node == ((NodeRBT<E>) node.parent).left) {
+            relink((NodeRBT<E>) node.parent, rightChild, true);
+        } else {
+            relink((NodeRBT<E>) node.parent, rightChild, false);
+        }
+
+        relink(rightChild, node, true);
+    }
+
 
     public void rightTurn(NodeRBT<E> node) {
         if (node == null || node.left == null) return;
+
         NodeRBT<E> leftChild = (NodeRBT<E>) node.left;
         node.left = leftChild.right;
-        if (leftChild.right != null) ((NodeRBT<E>) leftChild.right).parent = node;
-        leftChild.parent = node.parent;
-        if (node.parent == null) root = leftChild;
-        else if (node == ((NodeRBT<E>) node.parent).left)
-            ((NodeRBT<E>) node.parent).left = leftChild;
-        else ((NodeRBT<E>) node.parent).right = leftChild;
-        leftChild.right = node;
-        node.parent = leftChild;
-    }
+        if (leftChild.right != null) {
+            validate(leftChild.right).parent = node;
+        }
 
-    public void swapColor(Node<E> node) {
-        NodeRBT<E> nodeSwap = (NodeRBT<E>) node;
-        //меняем цвет переданного узла
-        if (node == root) {
-            ((NodeRBT<E>) node).isRed = false;
+        leftChild.parent = node.parent;
+        if (node.parent == null) {
+            root = leftChild;
+        } else if (node == ((NodeRBT<E>) node.parent).left) {
+            relink((NodeRBT<E>) node.parent, leftChild, true);
         } else {
             if (nodeSwap.isRed) {
                 nodeSwap.isRed = false;
             }
+            relink((NodeRBT<E>) node.parent, leftChild, false);
+        }
+
+        relink(leftChild, node, false);
+    }
         }
     }
 

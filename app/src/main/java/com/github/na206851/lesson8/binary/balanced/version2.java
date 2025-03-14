@@ -155,14 +155,14 @@ public class version2<E extends Comparable<E>> extends LinkedBinaryTree<E> {
     }
 
     private void fixAfterRemove(NodeRBT<E> node, NodeRBT<E> parent) {
-        // Проверяем, что родитель не null (иначе не сможем работать с его полями)
+        // Проверяем, что родитель не null
         while ((node != root) && (node == null || !node.isRed)) {
             if (parent == null) break;  // Если родитель null, выходим из цикла
 
             if (node == parent.left) {  // Если узел - левый потомок
                 NodeRBT<E> sibling = (NodeRBT<E>) parent.right;
 
-                if (sibling != null && sibling.isRed) {  // Проверка на null для sibling
+                if (sibling != null && sibling.isRed) {
                     sibling.isRed = false;
                     parent.isRed = true;
                     leftTurn(parent);
@@ -177,26 +177,26 @@ public class version2<E extends Comparable<E>> extends LinkedBinaryTree<E> {
                     parent = (NodeRBT<E>) node.parent;
                 } else {
                     if (sibling.right == null || !((NodeRBT<E>) sibling.right).isRed) {
-                        if (sibling.left != null)  // Проверка на null для sibling.left
+                        if (sibling.left != null)
                             ((NodeRBT<E>) sibling.left).isRed = false;
                         sibling.isRed = true;
                         rightTurn(sibling);
                         sibling = (NodeRBT<E>) parent.right;
                     }
 
-                    if (sibling != null) {  // Проверка на null для sibling
+                    if (sibling != null) {
                         sibling.isRed = parent.isRed;
-                        if (sibling.right != null)  // Проверка на null для sibling.right
+                        if (sibling.right != null)
                             ((NodeRBT<E>) sibling.right).isRed = false;
                     }
                     parent.isRed = false;
                     leftTurn(parent);
                     node = root;
                 }
-            } else {  // Если узел - правый потомок (симметричная обработка)
+            } else {  // Если узел - правый потомок
                 NodeRBT<E> sibling = (NodeRBT<E>) parent.left;
 
-                if (sibling != null && sibling.isRed) {  // Проверка на null для sibling
+                if (sibling != null && sibling.isRed) {
                     sibling.isRed = false;
                     parent.isRed = true;
                     rightTurn(parent);
@@ -206,21 +206,21 @@ public class version2<E extends Comparable<E>> extends LinkedBinaryTree<E> {
                 if (sibling == null ||
                         ((sibling.left == null || !((NodeRBT<E>) sibling.left).isRed) &&
                                 (sibling.right == null || !((NodeRBT<E>) sibling.right).isRed))) {
-                    if (sibling != null) sibling.isRed = true;  // Проверка на null
+                    if (sibling != null) sibling.isRed = true;
                     node = parent;
                     parent = (NodeRBT<E>) node.parent;
                 } else {
                     if (sibling.left == null || !((NodeRBT<E>) sibling.left).isRed) {
-                        if (sibling.right != null)  // Проверка на null для sibling.right
+                        if (sibling.right != null)
                             ((NodeRBT<E>) sibling.right).isRed = false;
                         sibling.isRed = true;
                         leftTurn(sibling);
                         sibling = (NodeRBT<E>) parent.left;
                     }
 
-                    if (sibling != null) {  // Проверка на null для sibling
+                    if (sibling != null) {
                         sibling.isRed = parent.isRed;
-                        if (sibling.left != null)  // Проверка на null для sibling.left
+                        if (sibling.left != null)
                             ((NodeRBT<E>) sibling.left).isRed = false;
                     }
                     parent.isRed = false;

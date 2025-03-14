@@ -324,6 +324,24 @@ public class version2<E extends Comparable<E>> extends LinkedBinaryTree<E> {
         return list;
     }
 
+    public void printAscii(NodeRBT<E> node, int space) {
+        if (node == null) {
+            return;
+        }
+
+        space += 10;
+        if (node.right != null) {
+            printAscii((NodeRBT<E>) node.right, space);
+        }
+        System.out.print("\n");
+        for (int i = 10; i < space; i++) {
+            System.out.print(" ");
+        }
+
+        String color = node.isRed ? "R" : "B";
+        System.out.println("(" + node.getElement() + color + ")");
+        if (node.left != null) {
+            printAscii((NodeRBT<E>) node.left, space);
         }
     }
 

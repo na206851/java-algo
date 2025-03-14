@@ -95,18 +95,18 @@ public class version2<E extends Comparable<E>> extends LinkedBinaryTree<E> {
         NodeRBT<E> parent = (NodeRBT<E>) node;
         if (e.compareTo(parent.getElement()) < 0) {
             if (parent.left == null) {
-                parent.left = newNode;
-                newNode.parent = parent;
+                relink(parent, newNode, true);
             } else {
                 return add(parent.left, e);
             }
-        } else {
+        } else if (e.compareTo(parent.getElement()) > 0) {
             if (parent.right == null) {
-                parent.right = newNode;
-                newNode.parent = parent;
+                relink(parent, newNode, false);
             } else {
                 return add(parent.right, e);
             }
+        } else {
+            return null;
         }
         fixInside(newNode);
         return newNode;

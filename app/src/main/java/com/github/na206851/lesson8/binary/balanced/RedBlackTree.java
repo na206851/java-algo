@@ -6,7 +6,7 @@ import com.github.na206851.lesson7.tree.binary.LinkedBinaryTree;
 import java.util.List;
 import java.util.Objects;
 
-public class version2<E extends Comparable<E>> extends LinkedBinaryTree<E> {
+public class RedBlackTree<E extends Comparable<E>> extends LinkedBinaryTree<E> {
     public NodeRBT<E> root;
 
     public NodeRBT<E> findUncle(NodeRBT<E> node) {
@@ -256,7 +256,6 @@ public class version2<E extends Comparable<E>> extends LinkedBinaryTree<E> {
     }
 
 
-    //перевязывает родителя и ребенка
     public void relink(NodeRBT<E> parent, NodeRBT<E> child, boolean makeLeftChild) {
         if (makeLeftChild) {
             parent.left = child;
@@ -358,8 +357,9 @@ public class version2<E extends Comparable<E>> extends LinkedBinaryTree<E> {
             parent = left = right = null;
         }
 
-        public NodeRBT(boolean isRed) {
+        public NodeRBT(boolean isRed, E value) {
             this.isRed = isRed;
+            this.value = value;
         }
 
         public NodeRBT() {

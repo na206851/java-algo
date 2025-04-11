@@ -1,4 +1,4 @@
-package com.github.na206851.lesson7.tree;
+package com.github.na206851.lesson8;
 
 import java.util.Iterator;
 
@@ -21,7 +21,7 @@ public interface Tree<E> extends Iterable<E> {
      * @return the node of the parent of the tree (or null if empty)
      * @throws IllegalArgumentException
      */
-    Node<E> parentNodes(Node<E> n) throws IllegalArgumentException;
+    Node<E> parent(Node<E> n) throws IllegalArgumentException;
 
     /**
      * @param n node
@@ -122,5 +122,6 @@ public interface Tree<E> extends Iterable<E> {
      * @return an iterable collection of all nodes of the tree
      */
     Iterable<Node<E>> nodes();
+
 
 }

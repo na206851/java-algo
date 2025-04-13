@@ -25,7 +25,7 @@ public abstract class AbstractTree<E> implements Tree<E> {
 
     @Override
     public boolean isEmpty() {
-        return size() == 0;
+        return false;
     }
 
     @Override

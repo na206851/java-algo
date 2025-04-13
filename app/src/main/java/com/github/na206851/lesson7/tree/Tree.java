@@ -21,7 +21,7 @@ public interface Tree<E> extends Iterable<E> {
      * @return the node of the parent of the tree (or null if empty)
      * @throws IllegalArgumentException
      */
-    Node<E> parentNodes(Node<E> n) throws IllegalArgumentException;
+    Node<E> parent(Node<E> n) throws IllegalArgumentException;
 
     /**
      * @param n node

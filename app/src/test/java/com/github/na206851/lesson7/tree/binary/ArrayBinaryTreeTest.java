@@ -23,17 +23,14 @@ class ArrayBinaryTreeTest {
         Node<Integer> node8 = tree.add(tree.root, 8);
         Node<Integer> node10 = tree.add(tree.root, 10);
         Node<Integer> node5 = tree.add(tree.root, 5);
-        Node<Integer> node12 = tree.add(tree.root, 12);
         Node<Integer> node3 = tree.add(tree.root, 3);
         Node<Integer> node7 = tree.add(tree.root, 7);
-        Node<Integer> node9 = tree.add(tree.root, 9);
-        Node<Integer> node11 = tree.add(tree.root, 11);
+
         assertEquals(1, tree.indexNode(tree.validate(node5)));
         assertEquals(2, tree.indexNode(tree.validate(node10)));
         assertEquals(3, tree.indexNode(tree.validate(node3)));
         assertEquals(4, tree.indexNode(tree.validate(node7)));
         assertEquals(0, tree.indexNode(tree.validate(node8)));
-        //попробовать провести тесты через set
     }
 
     @Test
@@ -60,7 +57,6 @@ class ArrayBinaryTreeTest {
         Consumer<BinaryTree<Integer>> treeConsumer = (BinaryTree<Integer> tree) -> {
             Node<Integer> node8 = tree.add(tree.root(), 8);
             Node<Integer> node10 = tree.add(tree.root(), 10);
-            Node<Integer> node5 = tree.add(tree.root(), 5);
 
             assertEquals(node10, tree.right(node8));
         };
@@ -72,11 +68,6 @@ class ArrayBinaryTreeTest {
     void root() {
         Consumer<Tree<Integer>> treeConsumer = (Tree<Integer> tree) -> {
             Node<Integer> node8 = tree.add(tree.root(), 8);
-            Node<Integer> node10 = tree.add(tree.root(), 10);
-            Node<Integer> node5 = tree.add(tree.root(), 5);
-            Node<Integer> node7 = tree.add(tree.root(), 7);
-            Node<Integer> node4 = tree.add(tree.root(), 4);
-            Node<Integer> node1 = tree.add(tree.root(), 1);
 
             assertEquals(node8, tree.root());
         };
@@ -85,7 +76,7 @@ class ArrayBinaryTreeTest {
     }
 
     @Test
-    void parent() {
+    void parentNode() {
         Consumer<BinaryTree<Integer>> treeConsumer = (BinaryTree<Integer> tree) -> {
             Node<Integer> node8 = tree.add(tree.root(), 8);
             Node<Integer> node10 = tree.add(tree.root(), 10);
@@ -157,7 +148,6 @@ class ArrayBinaryTreeTest {
     void set() {
         Consumer<BinaryTree<Integer>> treeConsumer = (BinaryTree<Integer> tree) -> {
             Node<Integer> node8 = tree.add(tree.root(), 8);
-            Node<Integer> node10 = tree.add(tree.root(), 10);
             Node<Integer> node5 = tree.add(tree.root(), 5);
 
             tree.set(node8, -1);
@@ -236,10 +226,8 @@ class ArrayBinaryTreeTest {
     @Test
     void removeNodeHasTwoChild() {
         Consumer<BinaryTree<Integer>> treeConsumer = (BinaryTree<Integer> tree) -> {
-            Node<Integer> node8 = tree.add(tree.root(), 8);
+            tree.add(tree.root(), 8);
             Node<Integer> node5 = tree.add(tree.root(), 5);
-            Node<Integer> node6 = tree.add(tree.root(), 6);
-            Node<Integer> node3 = tree.add(tree.root(), 3);
 
             tree.remove(node5);
 

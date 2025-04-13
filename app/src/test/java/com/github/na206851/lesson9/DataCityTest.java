@@ -1,5 +1,7 @@
 package com.github.na206851.lesson9;
 
+import com.sun.source.tree.AssertTree;
+import org.assertj.core.api.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -40,7 +42,6 @@ class DataCityTest {
         assertLinesMatch(exp, act);
     }
 
-
     @Test
     public void positiveCase1() {
         DataCity data = createData();
@@ -49,6 +50,13 @@ class DataCityTest {
         Assertions.assertLinesMatch(exp, act);
     }
 
+    @Test
+    public void positiveCase2() {
+        DataCity data = createData();
+        List<String> exp = List.of("будапешт", "будва");
+        List<String> act = data.searchCity("буд");
+        Assertions.assertLinesMatch(exp, act);
+    }
 
     @Test
     public void missCity0() {

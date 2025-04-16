@@ -115,7 +115,7 @@ class DataCityTest {
     }
 
     @Test
-    public void charArray() {
+    public void charArrayNotEquals() {
         String first = "moscow";
         String second = "moscod";
         int[] arrFirst = new int[first.length()];
@@ -131,4 +131,47 @@ class DataCityTest {
         }
         assertNotEquals(arrFirst, arrSecond);
     }
+
+    @Test
+    public void testEqualsString() {
+        String first = "будва";
+        String second = "будапешт";
+        int countFirst = 0;
+        int countSecond = 0;
+        String result = "";
+        while (countFirst != first.length() && countSecond != second.length()) {
+            if (first.charAt(countFirst) != second.charAt(countSecond)) {
+                result = "строки не равны";
+            } else {
+                result = "строки равны";
+            }
+            countSecond++;
+            countFirst++;
+        }
+        assertEquals("строки не равны", result);
+    }
+
+    @Test
+    public void testEqualsString2() {
+        String first = "будва";
+        String second = "будапешт";
+        assertNotEquals(first, second);
+    }
+
+    @Test
+    public void testEqualsString3() {
+        String prefix = "byd";
+
+        List<String> list = List.of("b", "byd", "bydwa", "moscow", " buffalo");
+        List<String> expected = List.of("byd", "bydwa");
+        List<String> act = new ArrayList<>();
+
+        for (String str : list) {
+            if (prefix.compareTo(str) <= 0 && (prefix + Character.MAX_VALUE).compareTo(str) > 0) {
+                act.add(str);
+            }
+        }
+        assertLinesMatch(expected, act);
+    }
+
 }

@@ -1,7 +1,5 @@
 package com.github.na206851.lesson9;
 
-import com.sun.source.tree.AssertTree;
-import org.assertj.core.api.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -171,21 +169,6 @@ class DataCityTest {
                 act.add(str);
             }
         }
-
-        System.out.println(prefix.compareTo("b") + " b");
-        System.out.println(prefix.compareTo("byd") + " byd");
-        System.out.println(prefix.compareTo("bydwa") + " bydwa");
-        System.out.println(prefix.compareTo("moscow") + " moscow");
-        System.out.println(prefix.compareTo("buffalo") + " buffalo");
-        System.out.println(prefix.compareTo("buffalobydwaforever") + " buffalobydwaforever");
-        System.out.println("\n" + "(prefix + Character.MAX_VALUE).compareTo(str)");
-        System.out.println((prefix + Character.MAX_VALUE).compareTo("b") + " b");
-        System.out.println((prefix + Character.MAX_VALUE).compareTo("byd") + " byd");
-        System.out.println((prefix + Character.MAX_VALUE).compareTo("bydwa") + " bydwa");
-        System.out.println((prefix + Character.MAX_VALUE).compareTo("moscow") + " moscow");
-        System.out.println((prefix + Character.MAX_VALUE).compareTo("buffalo") + " buffalo");
-        System.out.println((prefix + Character.MAX_VALUE).compareTo("buffalobydwaforevero") + " buffalobydwaforever");
-        System.out.println("\n" + act);
         assertLinesMatch(expected, act);
     }
 

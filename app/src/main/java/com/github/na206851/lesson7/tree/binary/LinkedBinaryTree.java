@@ -37,31 +37,43 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
 
     @Override
     public Node<E> add(Node<E> n, E e) throws IllegalArgumentException {
-        Node<E> newNode = new LinkedBinaryTree.NodeImpl<>(e);
         if (e == null) {
-            throw new IllegalArgumentException("error e = null");
+            throw new IllegalArgumentException("Ошибка: e = null");
         }
+
+        NodeImpl<E> newNode = new NodeImpl<>(e);
+
         if (root == null) {
-            return addRoot(e);
+            root = newNode;
+            size++;
+            return root;
         }
 
         if (n == null) {
-            throw new IllegalArgumentException();
-        } else if (e.compareTo(validate(n).value) > 0) {
+            throw new IllegalArgumentException("Указан null в качестве родителя");
+        }
+
+        if (e.compareTo(validate(n).value) > 0) {
             if (validate(n).right == null) {
-                return validate(n).right = newNode;
+                validate(n).right = newNode;
+                newNode.parent = n; // Устанавливаем родителя
+                size++;
+                return newNode;
             } else {
-                n = validate(n).right;
-                return add(validate(n), e);
+                return add(validate(n).right, e);
             }
         } else if (e.compareTo(validate(n).value) < 0) {
             if (validate(n).left == null) {
-                return validate(n).left = newNode;
+                validate(n).left = newNode;
+                newNode.parent = n; // Устанавливаем родителя
+                size++;
+                return newNode;
             } else {
                 return add(validate(n).left, e);
             }
         }
-        return newNode;
+
+        return n;
     }
 
     @Override
@@ -121,33 +133,44 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
 
     @Override
     public E remove(Node<E> n) throws IllegalArgumentException {
-        NodeImpl<E> removeNodeParent = (NodeImpl<E>) parent(n);
-        if (left(n) == null && right(n) == null) {
-            if (removeNodeParent.left == n) {
-                removeNodeParent.left = null;
-            } else if (removeNodeParent.right == n) {
-                removeNodeParent.right = null;
-            }
-            size--;
-        } else if (left(n) == null || right(n) == null) {
-            Node<E> child;
-            if (left(n) == null) {
-                child = validate(right(n));
-            } else {
-                child = validate(left(n));
-            }
-            if (removeNodeParent.left == n) {
-                removeNodeParent.left = child;
-            } else {
-                removeNodeParent.right = child;
-            }
-            size--;
-        } else if (left(n) != null && right(n) != null) {
-            Node<E> nodeWithIn = getMinValueInRightSubtree(right(n));
-            set(n, validate(nodeWithIn).value);
-            remove(nodeWithIn);
+        if (n == null) {
+            throw new IllegalArgumentException("Удаляемый узел не может быть null");
         }
-        return validate(n).value;
+
+        NodeImpl<E> node = validate(n);
+        NodeImpl<E> parent = (NodeImpl<E>) parent(n);
+
+        // Удаление листа
+        if (node.left == null && node.right == null) {
+            if (parent == null) {
+                root = null; // Удаление корня
+            } else if (parent.left == node) {
+                parent.left = null;
+            } else {
+                parent.right = null;
+            }
+        }
+        // Узел с одним потомком
+        else if (node.left == null || node.right == null) {
+            NodeImpl<E> child = (NodeImpl<E>) (node.left != null ? node.left : node.right);
+            if (parent == null) {
+                root = child; // Удаление корня
+            } else if (parent.left == node) {
+                parent.left = child;
+            } else {
+                parent.right = child;
+            }
+            child.parent = parent;
+        }
+        // Узел с двумя потомками
+        else {
+            Node<E> successor = getMinValueInRightSubtree(node.right);
+            node.value = successor.getElement();
+            remove(successor);
+        }
+
+        size--;
+        return node.value;
     }
 
     public Node<E> getMinValueInRightSubtree(Node<E> n) {
@@ -234,12 +257,19 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
      * метод для печати дерева в стиле ascii
      */
     public void printAscii(NodeImpl<E> node, int space) {
+        if (root == null) {
+            System.out.println("Дерево пустое");
+            return;
+        }
         if (node == null) return;
+
         space += 10;
         printAscii((NodeImpl<E>) node.right, space);
+
         System.out.print("\n");
         for (int i = 10; i < space; i++) System.out.print(" ");
         System.out.print(node.value + "\n");
+
         printAscii((NodeImpl<E>) node.left, space);
     }
 
@@ -273,7 +303,8 @@ public class LinkedBinaryTree<E extends Comparable<E>> extends AbstractBinaryTre
     }
 
     public static class NodeImpl<E> implements Node<E> {
-        private E value;
+        public E value;
+        public Node<E> parent;
         public Node<E> left;
         public Node<E> right;
 

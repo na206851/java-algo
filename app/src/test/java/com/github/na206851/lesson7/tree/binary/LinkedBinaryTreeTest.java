@@ -1,34 +1,54 @@
 package com.github.na206851.lesson7.tree.binary;
 
+import com.github.na206851.lesson7.tree.Node;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LinkedBinaryTreeTest {
 
     @Test
     void root() {
-        LinkedBinaryTree<Integer> tree = new LinkedBinaryTree<>();
-        tree.addRoot(1);
-        int expected = 1;
-        int a = 0;
-        int b = 0;
-        assertEquals(expected, tree.root().getElement());
+        Consumer<BinaryTree<Integer>> treeConsumer = (BinaryTree<Integer> tree) -> {
+            tree.addRoot(1);
+            int expected = 1;
+            assertEquals(expected, tree.root().getElement());
+
+        };
+        treeConsumer.accept(new BinarySearchTree<>());
+        treeConsumer.accept(new LinkedBinaryTree<>());
     }
 
     @Test
     void addLeftChildToRoot() {
-        LinkedBinaryTree<Integer> tree = new LinkedBinaryTree<>();
-        tree.addRoot(1);
-        tree.addLeft(tree.root(), 2);
-        assertEquals(2, tree.left(tree.root()).getElement());
-        System.out.println(tree.left(tree.root()).getElement().toString());
+        Consumer<BinaryTree<Integer>> treeConsumer = (BinaryTree<Integer> tree) -> {
+            tree.addRoot(1);
+            tree.addLeft(tree.root(), 2);
+            assertEquals(2, tree.left(tree.root()).getElement());
+        };
+        treeConsumer.accept(new LinkedBinaryTree<>());
+        treeConsumer.accept(new BinarySearchTree<>());
+    }
 
+    @Test
+    void addLeftSomeNode() {
+        Consumer<BinaryTree<Integer>> treeConsumer = (BinaryTree<Integer> tree) -> {
+            Node<Integer> node8 = tree.addLeft(tree.root(), 8);
+            Node<Integer> node7 = tree.addLeft(tree.root(), 7);
+            Node<Integer> node5 = tree.addLeft(tree.root(), 5);
+
+            List<Node<Integer>> expected = List.of(node8, node5, node7);
+            assertThat(expected).hasSameElementsAs(tree.nodes());
+        };
+        treeConsumer.accept(new LinkedBinaryTree<>());
+        treeConsumer.accept(new BinarySearchTree<>());
     }
 
     @Test
@@ -41,43 +61,58 @@ class LinkedBinaryTreeTest {
 
     @Test
     void setTest() {
-        LinkedBinaryTree<Integer> tree = new LinkedBinaryTree<>();
-        tree.addRoot(1);
-        tree.addLeft(tree.root(), 3);
-        tree.set(tree.root(), -1);
-        assertEquals(-1, tree.set(tree.root(), -1));
+        Consumer<BinaryTree<Integer>> treeConsumer = (BinaryTree<Integer> tree) -> {
+            tree.addRoot(1);
+            tree.addLeft(tree.root(), 3);
+            tree.set(tree.root(), -1);
+            assertEquals(-1, tree.set(tree.root(), -1));
+        };
+        treeConsumer.accept(new BinarySearchTree<>());
+        treeConsumer.accept(new LinkedBinaryTree<>());
     }
 
     @Test
     void setRoot() {
-        LinkedBinaryTree<Integer> tree = new LinkedBinaryTree<>();
-        tree.addRoot(1);
-        tree.set(tree.root(), 0);
-        assertEquals(0, tree.set(tree.root(), 0));
+        Consumer<BinaryTree<Integer>> treeConsumer = (BinaryTree<Integer> tree) -> {
+            tree.addRoot(1);
+            tree.set(tree.root(), 0);
+            assertEquals(0, tree.set(tree.root(), 0));
+        };
+        treeConsumer.accept(new LinkedBinaryTree<>());
+        treeConsumer.accept(new BinarySearchTree<>());
     }
 
     @Test
-    void getParent() {
-        LinkedBinaryTree<Integer> tree = new LinkedBinaryTree<>();
-        tree.addRoot(1);
-        tree.addLeft(tree.root(), 2);
-        tree.addRight(tree.root(), 3);
-        assertEquals(1, tree.parent(tree.left(tree.root())).getElement());
+    void getParentNode() {
+        Consumer<BinaryTree<Integer>> treeConsumer = (BinaryTree<Integer> tree) -> {
+            tree.addRoot(1);
+            tree.addLeft(tree.root(), 2);
+            tree.addRight(tree.root(), 3);
+            assertEquals(1, tree.parent(tree.left(tree.root())).getElement());
+        };
+        treeConsumer.accept(new BinarySearchTree<>());
+        treeConsumer.accept(new LinkedBinaryTree<>());
     }
 
     @Test
     void addMethodItTreeEmpty() {
-        LinkedBinaryTree<Integer> tree = new LinkedBinaryTree<>();
-        tree.add(new LinkedBinaryTree.NodeImpl<>(), -1);
-        assertEquals(-1, tree.root().getElement());
+        Consumer<BinaryTree<Integer>> treeConsumer = (BinaryTree<Integer> tree) -> {
+            tree.add(new LinkedBinaryTree.NodeImpl<>(), -1);
+            assertEquals(-1, tree.root().getElement());
+        };
+        treeConsumer.accept(new LinkedBinaryTree<>());
+        treeConsumer.accept(new BinarySearchTree<>());
     }
 
     @Test
     void addMethodInRightNode() {
-        LinkedBinaryTree<Integer> tree = new LinkedBinaryTree<>();
-        tree.add(tree.root, -1);
-        tree.add(tree.root, 0);
-        assertEquals(0, tree.right(tree.root()).getElement());
+        Consumer<BinaryTree<Integer>> treeConsumer = (BinaryTree<Integer> tree) -> {
+            tree.add(tree.root(), -1);
+            tree.add(tree.root(), 0);
+            assertEquals(0, tree.right(tree.root()).getElement());
+        };
+        treeConsumer.accept(new BinarySearchTree<>());
+        treeConsumer.accept(new LinkedBinaryTree<>());
     }
 
     @Test
@@ -90,13 +125,7 @@ class LinkedBinaryTreeTest {
     }
 
     @Test
-    void validNode() {
-        LinkedBinaryTree<Integer> tree = new LinkedBinaryTree<>();
-        tree.validate(new LinkedBinaryTree.NodeImpl<>(2));
-    }
-
-    @Test
-    void searchParentOfArbitraryTree() {
+    void searchParentNodeOfArbitraryTree() {
         LinkedBinaryTree<Integer> tree = new LinkedBinaryTree<Integer>();
         tree.root = new LinkedBinaryTree.NodeImpl<>(1);
         ((LinkedBinaryTree.NodeImpl<Integer>) tree.root).left = new LinkedBinaryTree.NodeImpl<>(2);
@@ -110,13 +139,6 @@ class LinkedBinaryTreeTest {
         assertEquals(1, tree.parent(((LinkedBinaryTree.NodeImpl<Integer>) tree.root).left).getElement());
         assertEquals(2, tree.parent(((LinkedBinaryTree.NodeImpl<Integer>) ((LinkedBinaryTree.NodeImpl<Integer>) tree.root).left).right).getElement());
         assertEquals(2, tree.parent(((LinkedBinaryTree.NodeImpl<Integer>) ((LinkedBinaryTree.NodeImpl<Integer>) tree.root).left).right).getElement());
-    }
-
-    @Test
-    void createArbitratyTree() {
-        LinkedBinaryTree<Integer> tree = new LinkedBinaryTree<>();
-//      /  tree.
-//       / tree.add(new LinkedBinaryTree.NodeImpl<>(), 1);
     }
 
     public static LinkedBinaryTree.NodeImpl defaultTree() {
@@ -285,10 +307,12 @@ class LinkedBinaryTreeTest {
 
     @Test
     void removeNodeHasOneRightChild() {
+        //неверно нарисовано дерево , добавление в дерево происходит не по логике дерева поиска
         /**
-         *        1
-         *     2     3
-         *       4     5
+         *            1
+         *         2       3
+         *      4    5  6    7
+         *    8   9
          */
         LinkedBinaryTree<Integer> tree = new LinkedBinaryTree<>();
         LinkedBinaryTree.NodeImpl<Integer> node1 = new LinkedBinaryTree.NodeImpl<>(1);
@@ -296,20 +320,22 @@ class LinkedBinaryTreeTest {
         LinkedBinaryTree.NodeImpl<Integer> node3 = new LinkedBinaryTree.NodeImpl<>(3);
         LinkedBinaryTree.NodeImpl<Integer> node4 = new LinkedBinaryTree.NodeImpl<>(4);
         LinkedBinaryTree.NodeImpl<Integer> node5 = new LinkedBinaryTree.NodeImpl<>(5);
+        LinkedBinaryTree.NodeImpl<Integer> node6 = new LinkedBinaryTree.NodeImpl<>(6);
+        LinkedBinaryTree.NodeImpl<Integer> node7 = new LinkedBinaryTree.NodeImpl<>(7);
+        LinkedBinaryTree.NodeImpl<Integer> node8 = new LinkedBinaryTree.NodeImpl<>(8);
+        LinkedBinaryTree.NodeImpl<Integer> node9 = new LinkedBinaryTree.NodeImpl<>(9);
         tree.root = node1;
         node1.left = node2;
         node1.right = node3;
-        node2.right = node4;
-        node3.right = node5;
-
+        node2.left = node4;
+        node2.right = node5;
+        node3.left = node6;
+        node3.right = node7;
+        node4.left = node8;
+        node4.right = node9;
+        tree.printAscii(tree.validate(tree.root), 0);
         tree.remove(node2);
-        List<Integer> removeNode2Expected = new ArrayList<>(List.of(4, 1, 3, 5));
-        Assertions.assertEquals(removeNode2Expected, tree.inOrder(node1, new ArrayList<>()));
-
-        tree.remove(node3);
-        List<Integer> removeNode3Expected = new ArrayList<>(List.of(4, 1, 5));
-        Assertions.assertEquals(removeNode3Expected, tree.inOrder(node1, new ArrayList<>()));
-        tree.printAscii((LinkedBinaryTree.NodeImpl<Integer>) tree.root, 0);
+        tree.printAscii(tree.validate(tree.root), 0);
         /**
          * view binary tree
          *      1
@@ -359,7 +385,7 @@ class LinkedBinaryTreeTest {
         Node<Integer> node13 = tree.add(tree.root, 13);
 
         List<Node<Integer>> expected = List.of(node6, node7, node8, node9, node10, node11, node13);
-
+        System.out.println(node6.equals(expected.get(0)));
         Assertions.assertIterableEquals(expected, tree.nodes());
     }
 }

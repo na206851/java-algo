@@ -4,7 +4,7 @@ import com.github.na206851.lesson7.tree.binary.LinkedBinaryTree;
 import com.github.na206851.lesson8.Node;
 import com.github.na206851.lesson8.binary.BinarySearchTree;
 
-public class BalanceableTree<E extends Comparable<E>> extends BinarySearchTree<E> {
+public abstract class BalanceableTree<E extends Comparable<E>> extends BinarySearchTree<E> {
 
     /**
      * Relinks a parent with child node

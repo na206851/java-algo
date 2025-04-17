@@ -26,7 +26,6 @@ class BinarySearchTreeTest {
         tree.add(tree.root, 5);
         tree.add(tree.root, 6);
         List<Integer> expected = List.of(5, 6, 8);
-        System.out.println(tree.inOrder(tree.root, new ArrayList<>()));
         Assertions.assertIterableEquals(expected, tree.inOrder(tree.root, new ArrayList<>()));
     }
 
@@ -141,7 +140,7 @@ class BinarySearchTreeTest {
     }
 
     @Test
-    void parent() {
+    void parentNode() {
         BinarySearchTree<Integer> tree = new BinarySearchTree<>();
         tree.add(tree.root, 5);
         tree.add(tree.root, 6);
@@ -201,7 +200,7 @@ class BinarySearchTreeTest {
     }
 
     @Test
-    void RemoveParentOneChildLeft() {
+    void RemoveParentNodeOneChildLeft() {
         /*
                 8
              5     10
@@ -221,7 +220,7 @@ class BinarySearchTreeTest {
     }
 
     @Test
-    void RemoveParentOneChildRight() {
+    void RemoveParentNodeOneChildRight() {
         /*
                 8
              5     10
@@ -241,20 +240,20 @@ class BinarySearchTreeTest {
     }
 
     @Test
-    void RemoveLeftParentHasTwoChild() {
+    void RemoveLeftParentNodeHasTwoChild() {
         /*
                 8
              5     10
           4   6   9   11
         */
         BinarySearchTree<Integer> tree = new BinarySearchTree<>();
-        Node<Integer> treeRoot = tree.add(tree.root, 8);
+        tree.add(tree.root, 8);
         Node<Integer> node5 = tree.add(tree.root, 5);
         Node<Integer> node10 = tree.add(tree.root, 10);
-        Node<Integer> node4 = tree.add(tree.root, 4);
-        Node<Integer> node6 = tree.add(tree.root, 6);
-        Node<Integer> node9 = tree.add(tree.root, 9);
-        Node<Integer> node11 = tree.add(tree.root, 11);
+        tree.add(tree.root, 4);
+        tree.add(tree.root, 6);
+        tree.add(tree.root, 9);
+        tree.add(tree.root, 11);
 
         tree.remove(node10);
         List<Integer> expectedBeforeRemoveNode10 = List.of(4, 5, 6, 8, 9, 11);
@@ -266,7 +265,7 @@ class BinarySearchTreeTest {
     }
 
     @Test
-    void searchParentIsRoot() {
+    void searchParentNodeIsRoot() {
         BinarySearchTree<Integer> tree = new BinarySearchTree<>();
         tree.add(tree.root, 8);
         tree.add(tree.root, 10);
@@ -278,7 +277,7 @@ class BinarySearchTreeTest {
     }
 
     @Test
-    void searchParentThreeLevel() {
+    void searchParentNodeThreeLevel() {
         /*
                    8
               5        10

@@ -10,7 +10,7 @@ import java.util.*;
  * @param <E> element
  */
 public class BinarySearchTree<E extends Comparable<E>> extends AbstractBinaryTree<E> {
-    Node<E> root;
+    public Node<E> root;
     private int size = 0;
 
     /**
@@ -20,7 +20,7 @@ public class BinarySearchTree<E extends Comparable<E>> extends AbstractBinaryTre
      * @return casted {@link NodeImpl} node
      * @throws IllegalArgumentException
      */
-    protected NodeImpl<E> validate(Node<E> n) throws IllegalArgumentException {
+    public NodeImpl<E> validate(Node<E> n) throws IllegalArgumentException {
         return (BinarySearchTree.NodeImpl<E>) n;
     }
 
@@ -46,7 +46,7 @@ public class BinarySearchTree<E extends Comparable<E>> extends AbstractBinaryTre
         return list;
     }
 
-    public void printTree(Node<E> node, int space) {
+    private void printTree(Node<E> node, int space) {
         if (node == null) {
             return;
         }

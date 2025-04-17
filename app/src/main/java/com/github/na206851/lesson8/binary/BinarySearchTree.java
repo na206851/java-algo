@@ -5,14 +5,10 @@ import com.github.na206851.lesson7.tree.binary.LinkedBinaryTree;
 
 import java.util.Comparator;
 
-public class BinarySearchTree<E extends Comparable<E>> extends LinkedBinaryTree<E> {
+public abstract class BinarySearchTree<E extends Comparable<E>> extends LinkedBinaryTree<E> {
     private Comparator<E> comparator;
 
     public BinarySearchTree() {
-    }
-
-    public BinarySearchTree(Comparator<E> comparator) {
-        this.comparator = comparator;
     }
 
     /**
@@ -23,8 +19,7 @@ public class BinarySearchTree<E extends Comparable<E>> extends LinkedBinaryTree<
      * @return
      */
     protected int compare(E val1, E val2) {
-        // todo
-        return 0;
+        return -1;
     }
 
     /**
@@ -35,7 +30,6 @@ public class BinarySearchTree<E extends Comparable<E>> extends LinkedBinaryTree<
      * @return
      */
     public Node<E> treeSearch(Node<E> n, E val) {
-        // todo
         return null;
     }
 }

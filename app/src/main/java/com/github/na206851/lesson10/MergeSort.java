@@ -11,23 +11,23 @@ public class MergeSort {
 
     }
 
-    public int[] installIndex(int[] arr) {
+    public E[] installIndex(E[] arr) {
         if (arr.length <= 1) {
             return arr;
         }
-        int[] left = Arrays.copyOfRange(arr, 0, arr.length / 2);
-        int[] right = Arrays.copyOfRange(arr, arr.length / 2, arr.length);
+        E[] left = Arrays.copyOfRange(arr, 0, arr.length / 2);
+        E[] right = Arrays.copyOfRange(arr, arr.length / 2, arr.length);
         installIndex(left);
         installIndex(right);
         return merge(arr, left, right);
     }
 
-    public int[] merge(int[] result, int[] left, int[] right) {
+    public E[] merge(E[] result, E[] left, E[] right) {
         int leftIndex = 0;
         int rightIndex = 0;
         int resultIndex = 0;
         while (leftIndex < left.length && rightIndex < right.length) {
-            if (left[leftIndex] < right[rightIndex]) {
+            if (left[leftIndex].compareTo(right[rightIndex]) < 0) {
                 result[resultIndex] = left[leftIndex++];
             } else {
                 result[resultIndex] = right[rightIndex++];

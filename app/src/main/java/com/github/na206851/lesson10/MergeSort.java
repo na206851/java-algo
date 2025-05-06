@@ -2,13 +2,16 @@ package com.github.na206851.lesson10;
 
 import java.util.Arrays;
 
-public class MergeSort {
+public class MergeSort<E extends Comparable<E>> implements Sort<E> {
     public static void main(String[] args) {
         MergeSort test = new MergeSort();
         int[] arr = new int[]{3, 1, 2, 5, 4};
         test.installIndex(arr);
         System.out.println(Arrays.toString(arr));
 
+    @Override
+    public E[] sort(E[] arr) {
+        return installIndex(arr);
     }
 
     public E[] installIndex(E[] arr) {

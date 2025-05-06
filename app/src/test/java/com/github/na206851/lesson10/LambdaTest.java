@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.function.Consumer;
 
 public class LambdaTest {
@@ -67,7 +66,56 @@ public class LambdaTest {
     @Test
     public void testDuplicateNumber() {
         Consumer<Sort<Integer>> SortConsumer = (Sort<Integer> testSort) -> {
+            Integer[] exp = new Integer[]{1, 1, 2, 2, 3, 3, 4, 4, 5, 5};
+            Integer[] act = testSort.sort(new Integer[]{5, 4, 5, 4, 1, 1, 2, 3, 2, 3});
 
+            Assertions.assertArrayEquals(exp, act);
         };
+        SortConsumer.accept(new BubbleSort<>());
+        SortConsumer.accept(new InsertionSort<>());
+        SortConsumer.accept(new MergeSort<>());
+        SortConsumer.accept(new QuickSort<>());
+    }
+
+    @Test
+    public void testIdenticalNumber() {
+        Consumer<Sort<Integer>> SortConsumer = (Sort<Integer> testSort) -> {
+            Integer[] exp = new Integer[]{5, 5, 5, 5, 5, 5, 5, 5};
+            Integer[] act = testSort.sort(new Integer[]{5, 5, 5, 5, 5, 5, 5, 5});
+
+            Assertions.assertArrayEquals(exp, act);
+        };
+        SortConsumer.accept(new BubbleSort<>());
+        SortConsumer.accept(new InsertionSort<>());
+        SortConsumer.accept(new MergeSort<>());
+        SortConsumer.accept(new QuickSort<>());
+    }
+
+    @Test
+    public void testString() {
+        Consumer<Sort<String>> SortConsumer = (Sort<String> testSort) -> {
+            String[] exp = new String[]{"a", "b", "c", "d", "e"};
+            String[] act = testSort.sort(new String[]{"e", "d", "b", "c", "a"});
+
+            Assertions.assertArrayEquals(exp, act);
+        };
+        SortConsumer.accept(new BubbleSort<>());
+        SortConsumer.accept(new InsertionSort<>());
+        SortConsumer.accept(new MergeSort<>());
+        SortConsumer.accept(new QuickSort<>());
+    }
+
+    @Test
+    public void testIntegerInViewString() {
+        Consumer<Sort<String>> SortConsumer = (Sort<String> testSort) -> {
+            String[] exp = new String[]{"1", "2", "3", "4", "5"};
+            String[] act = testSort.sort(new String[]{"5", "3", "4", "1", "2"});
+
+            Assertions.assertArrayEquals(exp, act);
+        };
+        SortConsumer.accept(new BubbleSort<>());
+        SortConsumer.accept(new InsertionSort<>());
+        SortConsumer.accept(new MergeSort<>());
+        SortConsumer.accept(new QuickSort<>());
     }
 }

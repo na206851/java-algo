@@ -5,6 +5,12 @@ public class QuickSort {
         int indexInsertion = -1;
         int j = 0;
         return fastSort(arr, indexInsertion, j);
+import java.util.Arrays;
+
+public class QuickSort<E extends Comparable<E>> implements Sort<E> {
+    @Override
+    public E[] sort(E[] arr) {
+        return fastSort(arr, 0, arr.length - 1);
     }
 
     public E[] fastSort(E[] arr, int indexInsertion, int j) {

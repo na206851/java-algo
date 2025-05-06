@@ -7,7 +7,7 @@ public class QuickSort {
         return fastSort(arr, indexInsertion, j);
     }
 
-    public int[] fastSort(int[] arr, int indexInsertion, int j) {
+    public E[] fastSort(E[] arr, int indexInsertion, int j) {
         if (indexInsertion < j) {
             int pivotIndex = division(arr, indexInsertion, j);
             fastSort(arr, indexInsertion, pivotIndex - 1);
@@ -17,11 +17,11 @@ public class QuickSort {
 
     }
 
-    public int division(int[] arr, int left, int right) {
-        int pivot = arr[right];
-        int indexInsertion = -1;
-        for (int j = 0; j < right; j++) {
-            if (arr[j] <= pivot) {
+    public int division(E[] arr, int left, int right) {
+        E pivot = arr[right];
+        int indexInsertion = left - 1;
+        for (int j = left; j < right; j++) {
+            if (arr[j].compareTo(pivot) <= 0) {
                 indexInsertion++;
                 swap(arr, indexInsertion, j);
             }
@@ -30,8 +30,8 @@ public class QuickSort {
         return ++indexInsertion;
     }
 
-    public static void swap(int[] arr, int indexInsertion, int j) {
-        int tmp = arr[indexInsertion];
+    public void swap(E[] arr, int indexInsertion, int j) {
+        E tmp = arr[indexInsertion];
         arr[indexInsertion] = arr[j];
         arr[j] = tmp;
     }

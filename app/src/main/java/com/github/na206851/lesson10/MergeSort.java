@@ -9,6 +9,10 @@ public class MergeSort<E extends Comparable<E>> implements Sort<E> {
         test.installIndex(arr);
         System.out.println(Arrays.toString(arr));
 
+        Integer[] arr = new Integer[]{3, 1, 2, 5, 4};
+        System.out.println(Arrays.toString(test.sort(arr)));
+    }
+
     @Override
     public E[] sort(E[] arr) {
         return installIndex(arr);

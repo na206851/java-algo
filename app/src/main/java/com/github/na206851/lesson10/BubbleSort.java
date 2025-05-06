@@ -1,13 +1,10 @@
 package com.github.na206851.lesson10;
 
-import java.util.Arrays;
+public class BubbleSort<E extends Comparable<E>> implements Sort<E> {
 
-public class BubbleSort {
-    public static void main(String[] args) {
-        int[] arr = new int[]{1, 2, 4, 3, 5};
-        int[] arr1 = new int[]{5, 4, 3, 2, 1};
-        System.out.println(Arrays.toString(bubbleSort(arr)));
-        System.out.println(Arrays.toString(bubbleSort(arr1)));
+    @Override
+    public E[] sort(E[] arr) {
+        return bubbleSort(arr);
     }
 
     public static int[] bubbleSort(int[] arr) {

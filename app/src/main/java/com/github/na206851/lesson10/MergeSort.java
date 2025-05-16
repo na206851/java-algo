@@ -3,22 +3,13 @@ package com.github.na206851.lesson10;
 import java.util.Arrays;
 
 public class MergeSort<E extends Comparable<E>> implements Sort<E> {
-    public static void main(String[] args) {
-        MergeSort test = new MergeSort();
-        int[] arr = new int[]{3, 1, 2, 5, 4};
-        test.installIndex(arr);
-        System.out.println(Arrays.toString(arr));
-
-        Integer[] arr = new Integer[]{3, 1, 2, 5, 4};
-        System.out.println(Arrays.toString(test.sort(arr)));
-    }
 
     @Override
     public E[] sort(E[] arr) {
         return installIndex(arr);
     }
 
-    public E[] installIndex(E[] arr) {
+    private E[] installIndex(E[] arr) {
         if (arr.length <= 1) {
             return arr;
         }
@@ -29,7 +20,7 @@ public class MergeSort<E extends Comparable<E>> implements Sort<E> {
         return merge(arr, left, right);
     }
 
-    public E[] merge(E[] result, E[] left, E[] right) {
+    private E[] merge(E[] result, E[] left, E[] right) {
         int leftIndex = 0;
         int rightIndex = 0;
         int resultIndex = 0;

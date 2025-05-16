@@ -8,27 +8,29 @@ public class QuickSort {
 import java.util.Arrays;
 
 public class QuickSort<E extends Comparable<E>> implements Sort<E> {
+
     @Override
     public E[] sort(E[] arr) {
-        return fastSort(arr, 0, arr.length - 1);
+        return quickSort(arr, 0, arr.length - 1);
     }
 
     private E[] quickSort(E[] arr, int indexInsertion, int j) {
         if (indexInsertion < j) {
             int pivotIndex = division(arr, indexInsertion, j);
-            fastSort(arr, indexInsertion, pivotIndex - 1);
-            fastSort(arr, pivotIndex + 1, arr.length - 1);
+            quickSort(arr, indexInsertion, pivotIndex - 1);
+            quickSort(arr, pivotIndex + 1, j);
         }
         return arr;
 
     }
 
-    public int division(E[] arr, int left, int right) {
-        E pivot = arr[right];
     private int division(E[] arr, int left, int right) {
+        int pivotIndex = left + (right - left) / 2;
+        E pivot = arr[pivotIndex];
+        swap(arr, pivotIndex, right);
         int indexInsertion = left - 1;
         for (int j = left; j < right; j++) {
-            if (arr[j].compareTo(pivot) <= 0) {
+            if (arr[j].compareTo(pivot) < 0) {
                 indexInsertion++;
                 swap(arr, indexInsertion, j);
             }

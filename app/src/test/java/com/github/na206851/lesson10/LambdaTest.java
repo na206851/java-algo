@@ -52,10 +52,10 @@ public class LambdaTest {
     @Test
     public void testPartSortedArray() {
         Consumer<Sort<Integer>> SortConsumer = (Sort<Integer> testSort) -> {
-            Integer[] exp = new Integer[]{1, 2, 3, 9, 8, 5, 7, 4, 6};
-            Integer[] act = testSort.sort(new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9});
+            Integer[] exp = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9};
+            Integer[] act = testSort.sort(new Integer[]{1, 2, 3, 9, 8, 5, 7, 4, 6});
 
-            Assertions.assertArrayEquals(exp, act);
+            Assertions.assertArrayEquals(exp, testSort.sort(act));
         };
         SortConsumer.accept(new BubbleSort<>());
         SortConsumer.accept(new InsertionSort<>());
@@ -118,4 +118,19 @@ public class LambdaTest {
         SortConsumer.accept(new MergeSort<>());
         SortConsumer.accept(new QuickSort<>());
     }
+
+    @Test
+    public void testIntegerInViewString2() {
+        Consumer<Sort<String>> SortConsumer = (Sort<String> testSort) -> {
+            String[] exp = new String[]{"aa", "bb", "cc", "dd", "ee"};
+            String[] act = testSort.sort(new String[]{"aa", "ee", "bb", "cc", "dd"});
+            Assertions.assertArrayEquals(exp, act);
+        };
+        SortConsumer.accept(new BubbleSort<>());
+        SortConsumer.accept(new InsertionSort<>());
+        SortConsumer.accept(new MergeSort<>());
+        SortConsumer.accept(new QuickSort<>());
+    }
+
+
 }

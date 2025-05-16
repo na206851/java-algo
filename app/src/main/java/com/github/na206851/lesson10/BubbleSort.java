@@ -4,29 +4,20 @@ public class BubbleSort<E extends Comparable<E>> implements Sort<E> {
 
     @Override
     public E[] sort(E[] arr) {
-        return bubbleSort(arr);
+        return bubble(arr);
     }
 
-    public E[] bubbleSort(E[] arr) {
-        boolean replacement = true;
-        while (replacement != false) {
-            replacement = false;
-            for (int i = 1; i < arr.length; i++) {
-                if (arr[i - 1].compareTo(arr[i]) > 0) {
-                    swap(arr, i);
-                    replacement = true;
+    private E[] bubble(E[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[i].compareTo(arr[j]) > 0) {
+                    E tmp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = tmp;
                 }
             }
         }
         return arr;
-    }
-
-    public void swap(E[] arr, int i) {
-        E tmp = arr[i - 1];
-        arr[i - 1] = arr[i];
-        arr[i] = tmp;
-    }
-
     }
 }
 

@@ -1,12 +1,5 @@
 package com.github.na206851.lesson10;
 
-public class QuickSort {
-    public int[] sort(int[] arr) {
-        int indexInsertion = -1;
-        int j = 0;
-        return fastSort(arr, indexInsertion, j);
-import java.util.Arrays;
-
 public class QuickSort<E extends Comparable<E>> implements Sort<E> {
 
     @Override
@@ -24,18 +17,18 @@ public class QuickSort<E extends Comparable<E>> implements Sort<E> {
 
     }
 
-    private int division(E[] arr, int left, int right) {
-        int pivotIndex = left + (right - left) / 2;
+    private int division(E[] arr, int leftIndex, int rightIndex) {
+        int pivotIndex = leftIndex + (rightIndex - leftIndex) / 2;
         E pivot = arr[pivotIndex];
-        swap(arr, pivotIndex, right);
-        int indexInsertion = left - 1;
-        for (int j = left; j < right; j++) {
+        swap(arr, pivotIndex, rightIndex);
+        int indexInsertion = leftIndex - 1;
+        for (int j = leftIndex; j < rightIndex; j++) {
             if (arr[j].compareTo(pivot) < 0) {
                 indexInsertion++;
                 swap(arr, indexInsertion, j);
             }
         }
-        swap(arr, indexInsertion + 1, right);
+        swap(arr, indexInsertion + 1, rightIndex);
         return ++indexInsertion;
     }
 

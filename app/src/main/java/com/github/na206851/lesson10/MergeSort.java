@@ -25,7 +25,7 @@ public class MergeSort<E extends Comparable<E>> implements Sort<E> {
         int rightIndex = 0;
         int resultIndex = 0;
         while (leftIndex < left.length && rightIndex < right.length) {
-            if (left[leftIndex].compareTo(right[rightIndex]) < 0) {
+            if (left[leftIndex].compareTo(right[rightIndex]) <= 0) {
                 result[resultIndex] = left[leftIndex++];
             } else {
                 result[resultIndex] = right[rightIndex++];

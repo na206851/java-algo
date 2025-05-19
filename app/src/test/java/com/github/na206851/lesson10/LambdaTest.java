@@ -3,7 +3,6 @@ package com.github.na206851.lesson10;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.function.Consumer;
 
 public class LambdaTest {
@@ -108,8 +107,8 @@ public class LambdaTest {
     @Test
     public void testIntegerInViewString() {
         Consumer<Sort<String>> SortConsumer = (Sort<String> testSort) -> {
-            String[] exp = new String[]{"1", "2", "3", "4", "5"};
-            String[] act = testSort.sort(new String[]{"5", "3", "4", "1", "2"});
+            String[] exp = new String[]{"-1", "2", "3", "4", "5"};
+            String[] act = testSort.sort(new String[]{"5", "3", "4", "-1", "2"});
 
             Assertions.assertArrayEquals(exp, act);
         };
@@ -124,6 +123,7 @@ public class LambdaTest {
         Consumer<Sort<String>> SortConsumer = (Sort<String> testSort) -> {
             String[] exp = new String[]{"aa", "bb", "cc", "dd", "ee"};
             String[] act = testSort.sort(new String[]{"aa", "ee", "bb", "cc", "dd"});
+
             Assertions.assertArrayEquals(exp, act);
         };
         SortConsumer.accept(new BubbleSort<>());
@@ -131,6 +131,4 @@ public class LambdaTest {
         SortConsumer.accept(new MergeSort<>());
         SortConsumer.accept(new QuickSort<>());
     }
-
-
 }

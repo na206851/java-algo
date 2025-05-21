@@ -14,7 +14,6 @@ public class QuickSort<E extends Comparable<E>> implements Sort<E> {
             quickSort(arr, pivotIndex + 1, j);
         }
         return arr;
-
     }
 
     private int division(E[] arr, int leftIndex, int rightIndex) {
